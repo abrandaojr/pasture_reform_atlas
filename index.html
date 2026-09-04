@@ -2146,9 +2146,29 @@ function parseAtlasCsv(text){
 }
 async function carregarDadosGoogleSheets(){
   const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
-  const response=await fetch(url,{cache:'default'});
+  const cacheName='atlas-google-sheets-v1';
+  const valid=text=>text.startsWith('codigo_ibge,')&&text.length>1000000;
+  let cache=null,cached=null;
+  if('caches' in window){
+    try{cache=await caches.open(cacheName);cached=await cache.match(url);}catch(_){cache=null;}
+  }
+  if(cached){
+    const text=await cached.text();
+    if(valid(text)){
+      fetch(url,{cache:'no-store'}).then(r=>r.ok?r.text():null).then(fresh=>{
+        if(fresh&&valid(fresh)&&cache)cache.put(url,new Response(fresh,{headers:{'Content-Type':'text/csv;charset=utf-8'}}));
+      }).catch(()=>{});
+      window.ATLAS_CACHE_STATUS='cached-google-sheets';
+      return parseAtlasCsv(text);
+    }
+  }
+  const response=await fetch(url,{cache:'no-store'});
   if(!response.ok)throw new Error('Google Sheets could not be reached.');
-  return parseAtlasCsv(await response.text());
+  const text=await response.text();
+  if(!valid(text))throw new Error('Google Sheets returned an invalid municipal table.');
+  if(cache)try{await cache.put(url,new Response(text,{headers:{'Content-Type':'text/csv;charset=utf-8'}}));}catch(_){}
+  window.ATLAS_CACHE_STATUS='live-google-sheets';
+  return parseAtlasCsv(text);
 }
 
 function carregarTabelaGoogleSheets(){
@@ -2254,7 +2274,7 @@ function aplicarMetodologiaV3(){
   });
 }
 
-/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
+/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
 function normalize(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
 function classLabel(label){
   const value=String(label || 'Dados insuficientes').trim();
@@ -2653,7 +2673,7 @@ function geoJSONGeometry(polygons){
 
 function initLeafletMap(containerId){
   if(leafletMap) return;
-  leafletMap = L.map(containerId, {scrollWheelZoom:true, zoomControl:false, minZoom:3, maxZoom:12, attributionControl:false, preferCanvas:false}).setView([-13.5,-51.5], 4);
+  leafletMap = L.map(containerId, {scrollWheelZoom:true, zoomControl:false, minZoom:3, maxZoom:12, attributionControl:false, preferCanvas:true}).setView([-13.5,-51.5], 4);
 
   leafletStateLayer = L.geoJSON(null, { style: () => ({color:'#A8BBB5', weight:1.15, opacity:0.72, fillOpacity:0.72}) }).addTo(leafletMap);
   leafletMuniLayer = L.geoJSON(null, { style: () => ({color:'#F4EBDD', weight:0, opacity:0, fillOpacity:0.85}) }).addTo(leafletMap);
