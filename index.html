@@ -2121,6 +2121,27 @@ function linhaParaMunicipio(obj){
   };
 }
 
+function parseAtlasCsv(text){
+  const rows=[];let row=[],field='',quoted=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(quoted){if(c==='"'&&text[i+1]==='"'){field+='"';i++;}else if(c==='"')quoted=false;else field+=c;}
+    else if(c==='"')quoted=true;
+    else if(c===','){row.push(field);field='';}
+    else if(c==='\n'){row.push(field.replace(/\r$/,''));rows.push(row);row=[];field='';}
+    else field+=c;
+  }
+  if(field||row.length){row.push(field.replace(/\r$/,''));rows.push(row);}
+  const headers=rows.shift().map(x=>x.trim());
+  return rows.filter(r=>r.some(Boolean)).map(values=>Object.fromEntries(headers.map((h,i)=>[h,values[i]??''])));
+}
+async function carregarDadosGoogleSheets(){
+  const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
+  const response=await fetch(url,{cache:'default'});
+  if(!response.ok)throw new Error('Google Sheets could not be reached.');
+  return parseAtlasCsv(await response.text());
+}
+
 function carregarTabelaGoogleSheets(){
   return new Promise((resolve, reject) => {
     const callbackName = '__atlasSheetsCallback';
@@ -2178,8 +2199,7 @@ async function carregarGeometriaMunicipal(){
 }
 
 async function carregarMunicipios(){
-  const table=await carregarTabelaGoogleSheets();
-  const rows=tabelaGoogleParaObjetos(table);
+  const rows=await carregarDadosGoogleSheets();
   if(!rows.length) throw new Error('Google Sheets returned no municipal rows.');
   MUNICIPIOS=rows.map(linhaParaMunicipio);
   window.ATLAS_DATA_SOURCE='google-sheets';
@@ -2225,7 +2245,7 @@ function aplicarMetodologiaV3(){
   });
 }
 
-/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
+/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
 function normalize(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
 function classLabel(label){
   const value=String(label || 'Dados insuficientes').trim();
@@ -2963,7 +2983,7 @@ function spiderDiagram(m){
   return `<section class="spider-card profile-comparison"><div class="profile-comparison-head"><div><h3>${en?'Municipal profile at a glance':'Perfil municipal em uma visão'}</h3><p class="desc">${en?'Automatic comparison with the biome and Brazil. Values are relative positions from 0 to 100; farther right is better.':'Comparação automática com o bioma e o Brasil. Os valores são posições relativas de 0 a 100; mais à direita é melhor.'}</p></div><label>${en?'Compare another municipality':'Comparar com outro município'}<input list="profile-peer-options" placeholder="${en?'Type a municipality':'Digite um município'}" value="${peer?`${peer.nome} — ${peer.uf}`:''}" onchange="setProfilePeer(this.value,'${m.codigo}')"><datalist id="profile-peer-options">${options}</datalist></label></div><div class="spider-legend"><span><i class="legend-dot municipal"></i>${m.nome}</span><span><i class="legend-dot biome"></i>${m.bioma}</span><span><i class="legend-dot brazil"></i>${en?'Brazil':'Brasil'}</span>${peer?`<span><i class="legend-dot peer"></i>${peer.nome} — ${peer.uf}</span>`:''}</div><div class="profile-scale"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div><div class="profile-axis-list">${rows}</div></section>`;
 }
 
-function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){
+function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){function interpretationText(m){
   const parts = [];
   parts.push(`${m.nome} (${m.uf}) possui ${fmtHa(m.oportunidade)} de pastagens de baixo e médio vigor no bioma ${m.bioma}.`);
   parts.push(`A oportunidade observada é ${m.qualidade.toLowerCase()} e as condições para produzir são ${m.condicoes.toLowerCase()}, conforme a Metodologia V3.`);
@@ -3606,7 +3626,8 @@ async function iniciar(){
   const overlay = document.getElementById('loading-overlay');
   try {
     setLoadingStage(22,'Loading validated data from Google Sheets…');
-    await Promise.all([carregarMunicipios(),carregarGeometriaMunicipal()]);
+    const geometryPromise=carregarGeometriaMunicipal();
+    await carregarMunicipios();
     setLoadingStage(68,'Validating 5,573 municipal records…');
     calcularDerivados();
     setLoadingStage(84,'Building indicators and territorial comparisons…');
@@ -3614,6 +3635,7 @@ async function iniciar(){
       + new Intl.DateTimeFormat('pt-BR', {dateStyle:'short', timeStyle:'medium'}).format(new Date())
       + ' · ' + MUNICIPIOS.length.toLocaleString('pt-BR') + ' municípios · 28 de 44 campos canônicos disponíveis';
     renderHome();
+    geometryPromise.then(()=>{if(leafletMap)renderLeafletLayers('main-map-leaflet',currentLayer);}).catch(error=>console.warn('Map geometry unavailable.',error));
     renderTypologyFullTable();
     setAtlasLanguage('en');
     setLoadingStage(100,'Atlas ready');
