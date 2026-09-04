@@ -2145,7 +2145,7 @@ function parseAtlasCsv(text){
   return rows.filter(r=>r.some(Boolean)).map(values=>Object.fromEntries(headers.map((h,i)=>[h,values[i]??''])));
 }
 async function carregarDadosGoogleSheets(){
-  const version=new URLSearchParams(location.search).get('v')||'current';
+  const version=window.ATLAS_BUILD_VERSION||'current';
   const response=await fetch(`atlas_data.json?v=${version}`,{cache:'force-cache'});
   if(!response.ok)throw new Error('The Google Sheets JSON snapshot could not be reached.');
   const payload=await response.json();
@@ -2206,7 +2206,7 @@ function tabelaGoogleParaObjetos(table){
 }
 
 async function carregarGeometriaMunicipal(){
-  const response=await fetch(`municipal_geometry.json?v=${new URLSearchParams(location.search).get('v')||'current'}`,{cache:'force-cache'});
+  const response=await fetch(`municipal_geometry.json?v=${window.ATLAS_BUILD_VERSION||'current'}`,{cache:'force-cache'});
   if(!response.ok) throw new Error('Municipal map geometry could not be loaded.');
   MUNI_GEOM=await response.json();
 }
@@ -2649,7 +2649,7 @@ let leafletOSMLayer = null;
 let leafletMuniLabelLayer = null;
 
 const AtlasMunicipalCanvas=L.Layer.extend({
-  initialize:function(){this._features=[];this._frame=0;},
+  initialize:function(){this._features=[];this._frame=0;this._bboxCache=new Map();},
   onAdd:function(map){
     this._map=map;this._canvas=L.DomUtil.create('canvas','atlas-municipal-canvas');
     this._canvas.style.pointerEvents='none';map.getPanes().overlayPane.appendChild(this._canvas);
@@ -2658,10 +2658,16 @@ const AtlasMunicipalCanvas=L.Layer.extend({
   onRemove:function(map){map.off('moveend resize',this.redraw,this);map.off('click',this._onMapClick,this);this._canvas.remove();},
   clearLayers:function(){this._features=[];this.redraw();return this;},
   setData:function(features){this._features=features||[];for(const f of this._features){
-    if(f.properties._bbox)continue;let west=Infinity,south=Infinity,east=-Infinity,north=-Infinity;
+    // renderLeafletLayers() builds a fresh properties object per feature on
+    // every call, so f.properties._bbox never survives across redraws; key
+    // the cache by the stable municipality code instead of the object.
+    const cached=this._bboxCache.get(f.properties.codigo);
+    if(cached){f.properties._bbox=cached;continue;}
+    let west=Infinity,south=Infinity,east=-Infinity,north=-Infinity;
     const polys=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;
     for(const poly of polys)for(const ring of poly)for(const p of ring){if(p[0]<west)west=p[0];if(p[0]>east)east=p[0];if(p[1]<south)south=p[1];if(p[1]>north)north=p[1];}
     f.properties._bbox=[west,south,east,north];
+    this._bboxCache.set(f.properties.codigo,f.properties._bbox);
   }this.redraw();return this;},
   addData:function(collection){return this.setData((collection&&collection.features)||[]);},
   eachLayer:function(){return this;},
@@ -3021,18 +3027,33 @@ function setProfilePeer(label,currentCode){
 }
 function spiderDiagram(m){
   const en=ATLAS_LANGUAGE==='en', peers=biomaPeers(m), national=MUNICIPIOS;
+  const sortedField=k=>national.map(y=>y[k]).filter(Number.isFinite).sort((a,b)=>a-b);
+  const oportSorted=sortedField('participacaoOportunidade'), rebanhoSorted=sortedField('rebanho'),
+    distSorted=sortedField('distanciaP80Qualquer'), aterSorted=sortedField('ater'),
+    escolSorted=sortedField('escolaridade'), creditoSorted=sortedField('credito');
+  const rankIn=(value,sorted)=>{
+    if(!Number.isFinite(value)||!sorted.length) return null;
+    let count=0; while(count<sorted.length&&sorted[count]<=value) count++;
+    return Math.max(0,Math.min(100,count/sorted.length*100));
+  };
   const riskScore=x=>({Verde:100,Amarelo:50,Vermelho:0})[x.risco];
   const localScore=x=>{
-    const values=['ater','escolaridade','credito'].map(k=>percentilePosition(x[k],national.map(y=>y[k]))).filter(Number.isFinite);
+    const values=[rankIn(x.ater,aterSorted),rankIn(x.escolaridade,escolSorted),rankIn(x.credito,creditoSorted)].filter(Number.isFinite);
     return values.length?values.reduce((a,b)=>a+b,0)/values.length:null;
   };
-  const score=x=>[
-    percentilePosition(x.participacaoOportunidade,national.map(y=>y.participacaoOportunidade)),
-    percentilePosition(x.rebanho,national.map(y=>y.rebanho)),
-    Number.isFinite(x.distanciaP80Qualquer)?100-percentilePosition(x.distanciaP80Qualquer,national.map(y=>y.distanciaP80Qualquer)):null,
-    Number.isFinite(x.secaFreq)?Math.max(0,100-x.secaFreq):null,
-    localScore(x),riskScore(x)
-  ];
+  const scoreCache=new Map();
+  const score=x=>{
+    if(scoreCache.has(x.codigo)) return scoreCache.get(x.codigo);
+    const s=[
+      rankIn(x.participacaoOportunidade,oportSorted),
+      rankIn(x.rebanho,rebanhoSorted),
+      Number.isFinite(x.distanciaP80Qualquer)?100-rankIn(x.distanciaP80Qualquer,distSorted):null,
+      Number.isFinite(x.secaFreq)?Math.max(0,100-x.secaFreq):null,
+      localScore(x),riskScore(x)
+    ];
+    scoreCache.set(x.codigo,s);
+    return s;
+  };
   const municipal=score(m), groupMedian=(rows,i)=>median(rows.map(x=>score(x)[i]).filter(Number.isFinite));
   const biome=municipal.map((_,i)=>groupMedian(peers,i)), brazil=municipal.map((_,i)=>groupMedian(national,i));
   const peer=MUNICIPIOS.find(x=>x.codigo===PROFILE_PEER_CODE), peerValues=peer?score(peer):null;
@@ -3717,18 +3738,19 @@ async function iniciar(){
   if(overlay) overlay.remove();
 }
 (async()=>{
+  // Resolve the build version in memory and pass it straight to iniciar();
+  // a location.replace() redirect here would force a second full download
+  // and re-execution of this entire page on every cold visit to the
+  // unversioned Pages URL, doubling index.html, CSS and inline-JS cost.
+  let atlasVersion=new URLSearchParams(location.search).get('v')||'current';
   try{
     const response=await fetch(`version.json?t=${Date.now()}`,{cache:'no-store'});
     if(response.ok){
       const {version}=await response.json();
-      const url=new URL(location.href);
-      if(version&&url.searchParams.get('v')!==version){
-        url.searchParams.set('v',version);
-        location.replace(url.href);
-        return;
-      }
+      if(version) atlasVersion=version;
     }
   }catch(_){/* Continue with the locally available published assets. */}
+  window.ATLAS_BUILD_VERSION=atlasVersion;
   await iniciar();
 })();
 </script>
