@@ -1474,13 +1474,13 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{overflow-x:hidden
       <div class="tilemap-wrap">
         <div id="main-map-leaflet" role="application" aria-label="Mapa interativo do Brasil com limites estaduais e municipais incorporados"></div>
         <div class="geo-view-tools" role="toolbar" aria-label="Visão geográfica">
-          <button class="geo-view-btn" id="geo-municipio" type="button" onclick="setGeoView('municipio')" aria-pressed="true" title="Resultados municipais">
+          <button class="geo-view-btn" id="geo-municipio" type="button" onclick="setGeoView('municipio')" aria-pressed="false" title="Resultados municipais">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg><span>Município</span>
           </button>
           <button class="geo-view-btn" id="geo-bioma" type="button" onclick="setGeoView('bioma')" aria-pressed="false" title="Resultados por bioma">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4C11 4 5 8 5 15c0 3 2 5 5 5 7 0 10-8 10-16Z"/><path d="M4 21c2-6 6-10 12-13"/></svg><span>Bioma</span>
           </button>
-          <button class="geo-view-btn" id="geo-uf" type="button" onclick="setGeoView('uf')" aria-pressed="false" title="Resultados por UF">
+          <button class="geo-view-btn" id="geo-uf" type="button" onclick="setGeoView('uf')" aria-pressed="true" title="Resultados por UF">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg><span>UF</span>
           </button>
         </div>
@@ -2274,7 +2274,7 @@ function aplicarMetodologiaV3(){
   });
 }
 
-/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
+/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
 function normalize(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
 function classLabel(label){
   const value=String(label || 'Dados insuficientes').trim();
@@ -2523,7 +2523,7 @@ const LAYERS = [
   {id:"risco", label:"Risco ambiental"},
 ];
 let currentLayer = "qualidade";
-let currentGeoView = "municipio";
+let currentGeoView = "uf";
 let currentFilters = {estado:"", bioma:"", categoria:"", busca:""};
 let selectedUF = null;
 
@@ -2746,7 +2746,7 @@ function renderLeafletLayers(containerId, layer){
     const isSelected = selectedUF === p.uf;
     lyr.setStyle({
       fillColor: p.hasData ? p.bg : '#DAD2BC',
-      fillOpacity: currentGeoView==='uf' ? (osmOn ? 0.42 : (p.hasData ? (p.opacity!==undefined ? p.opacity : 0.78) : 0.92)) : 0,
+      fillOpacity: (currentGeoView==='uf'||(!selectedUF&&!currentFilters.bioma)) ? (osmOn ? 0.42 : (p.hasData ? (p.opacity!==undefined ? p.opacity : 0.78) : 0.92)) : 0,
       color: isSelected ? '#F4C95D' : '#6F7C77',
       opacity: isSelected ? 1 : 0.52,
       weight: isSelected ? 3.4 : 1.05,
@@ -2763,7 +2763,8 @@ function renderLeafletLayers(containerId, layer){
   });
 
   const filtered = new Set(filteredMunicipios().map(m=>m.codigo));
-  const muniFeatures = MUNICIPIOS.filter(m=>MUNI_GEOM[m.codigo]).map(m=>({
+  const muniCandidates=currentGeoView==='uf' ? [] : (selectedUF ? MUNICIPIOS.filter(m=>m.uf===selectedUF) : (currentFilters.bioma ? MUNICIPIOS.filter(m=>m.bioma===currentFilters.bioma) : []));
+  const muniFeatures = muniCandidates.filter(m=>MUNI_GEOM[m.codigo]).map(m=>({
     type:"Feature", properties:{codigo:m.codigo, match: filtered.has(m.codigo)}, geometry: geoJSONGeometry(MUNI_GEOM[m.codigo])
   }));
   leafletMuniLayer.clearLayers();
@@ -2857,6 +2858,10 @@ function renderMapLegend(){
 
 function selectState(uf){
   selectedUF = uf;
+  currentGeoView='municipio';
+  ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
+  currentGeoView='municipio';
+  ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
   document.getElementById('f-estado').value = uf;
   currentFilters.estado = uf;
   renderLeafletLayers('main-map-leaflet', currentLayer);
@@ -2904,6 +2909,7 @@ function applyFilters(){
   currentFilters.categoria = document.getElementById('f-categoria').value;
   currentFilters.busca = document.getElementById('hero-search').value;
   selectedUF = currentFilters.estado || null;
+  if(selectedUF) currentGeoView='municipio';
   renderLeafletLayers('main-map-leaflet', currentLayer); renderStateDetail();
 }
 function resetFilters(){
