@@ -2258,7 +2258,7 @@ function aplicarMetodologiaV3(){
   });
 }
 
-/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
+/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
 function normalize(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
 function classLabel(label){
   const value=String(label || 'Dados insuficientes').trim();
@@ -2832,6 +2832,8 @@ function renderMapLegend(){
 
 function selectState(uf){
   selectedUF = uf;
+  currentGeoView='municipio';
+  ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
   currentGeoView='municipio';
   ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
   currentGeoView='municipio';
@@ -3668,17 +3670,21 @@ async function iniciar(){
   }
   if(overlay) overlay.remove();
 }
-iniciar();
-</script>
-
-<script id="atlas-version-guard">
-(async()=>{try{
-  const response=await fetch(`version.json?t=${Date.now()}`,{cache:'no-store'});
-  if(!response.ok)return;
-  const {version}=await response.json();
-  const url=new URL(location.href);
-  if(version&&url.searchParams.get('v')!==version){url.searchParams.set('v',version);location.replace(url.href);}
-}catch(_){/* The Atlas remains usable offline or if the manifest is unavailable. */}})();
+(async()=>{
+  try{
+    const response=await fetch(`version.json?t=${Date.now()}`,{cache:'no-store'});
+    if(response.ok){
+      const {version}=await response.json();
+      const url=new URL(location.href);
+      if(version&&url.searchParams.get('v')!==version){
+        url.searchParams.set('v',version);
+        location.replace(url.href);
+        return;
+      }
+    }
+  }catch(_){/* Continue with the locally available published assets. */}
+  await iniciar();
+})();
 </script>
 </body>
 </html>
