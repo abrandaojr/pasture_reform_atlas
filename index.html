@@ -2258,7 +2258,7 @@ function aplicarMetodologiaV3(){
   });
 }
 
-/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
+/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
 function normalize(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
 function classLabel(label){
   const value=String(label || 'Dados insuficientes').trim();
@@ -2648,6 +2648,38 @@ let leafletStateHighlightLayer = null;
 let leafletOSMLayer = null;
 let leafletMuniLabelLayer = null;
 
+const AtlasMunicipalCanvas=L.Layer.extend({
+  initialize:function(){this._features=[];this._frame=0;},
+  onAdd:function(map){
+    this._map=map;this._canvas=L.DomUtil.create('canvas','atlas-municipal-canvas');
+    this._canvas.style.pointerEvents='none';map.getPanes().overlayPane.appendChild(this._canvas);
+    map.on('moveend resize',this.redraw,this);this.redraw();
+  },
+  onRemove:function(map){map.off('moveend resize',this.redraw,this);this._canvas.remove();},
+  clearLayers:function(){this._features=[];this.redraw();return this;},
+  setData:function(features){this._features=features||[];this.redraw();return this;},
+  addData:function(collection){return this.setData((collection&&collection.features)||[]);},
+  eachLayer:function(){return this;},
+  redraw:function(){
+    if(!this._map||!this._canvas)return this;
+    cancelAnimationFrame(this._frame);this._frame=requestAnimationFrame(()=>this._draw());return this;
+  },
+  _draw:function(){
+    const map=this._map,size=map.getSize(),ratio=Math.min(window.devicePixelRatio||1,1.5),canvas=this._canvas;
+    L.DomUtil.setPosition(canvas,map.containerPointToLayerPoint([0,0]));
+    canvas.style.width=size.x+'px';canvas.style.height=size.y+'px';canvas.width=Math.ceil(size.x*ratio);canvas.height=Math.ceil(size.y*ratio);
+    const ctx=canvas.getContext('2d',{alpha:true});ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,size.x,size.y);
+    const ring=coords=>{for(let i=0;i<coords.length;i++){const p=map.latLngToContainerPoint([coords[i][1],coords[i][0]]);i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);}};
+    for(const f of this._features){
+      const p=f.properties,g=f.geometry,polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;ctx.beginPath();
+      for(const poly of polys)for(const r of poly){ring(r);ctx.closePath();}
+      ctx.fillStyle=p.fill;ctx.globalAlpha=p.fillOpacity;ctx.fill('evenodd');
+      if(p.weight>0){ctx.strokeStyle=p.stroke;ctx.lineWidth=p.weight;ctx.globalAlpha=p.strokeOpacity;ctx.stroke();}
+    }
+    ctx.globalAlpha=1;
+  }
+});
+
 function geoJSONGeometry(polygons){
   // polygons: array de polígonos > array de anéis > array de [lon,lat] (mesma estrutura do GeoJSON)
   return polygons.length === 1
@@ -2660,7 +2692,7 @@ function initLeafletMap(containerId){
   leafletMap = L.map(containerId, {scrollWheelZoom:true, zoomControl:false, minZoom:3, maxZoom:12, attributionControl:false, preferCanvas:true}).setView([-13.5,-51.5], 4);
 
   leafletStateLayer = L.geoJSON(null, { style: () => ({color:'#A8BBB5', weight:1.15, opacity:0.72, fillOpacity:0.72}) }).addTo(leafletMap);
-  leafletMuniLayer = L.geoJSON(null, { style: () => ({color:'#F4EBDD', weight:0, opacity:0, fillOpacity:0.85}) }).addTo(leafletMap);
+  leafletMuniLayer = new AtlasMunicipalCanvas().addTo(leafletMap);
   leafletStateHighlightLayer = L.geoJSON(null,{interactive:false,style:()=>({color:'#F4C95D',weight:4,opacity:1,fillOpacity:0,lineJoin:'round'})}).addTo(leafletMap);
   leafletMuniLabelLayer = L.layerGroup().addTo(leafletMap);
   L.control.scale({imperial:false,maxWidth:120,position:'bottomleft'}).addTo(leafletMap);
@@ -2748,35 +2780,16 @@ function renderLeafletLayers(containerId, layer){
 
   const filtered = new Set(filteredMunicipios().map(m=>m.codigo));
   const muniCandidates=currentGeoView==='uf' ? [] : (selectedUF ? MUNICIPIOS.filter(m=>m.uf===selectedUF) : (currentFilters.bioma ? MUNICIPIOS.filter(m=>m.bioma===currentFilters.bioma) : MUNICIPIOS));
-  const muniFeatures = muniCandidates.filter(m=>MUNI_GEOM[m.codigo]).map(m=>({
-    type:"Feature", properties:{codigo:m.codigo, match: filtered.has(m.codigo)}, geometry: geoJSONGeometry(MUNI_GEOM[m.codigo])
-  }));
-  leafletMuniLayer.clearLayers();
-  leafletMuniLayer.addData({type:"FeatureCollection", features: muniFeatures});
-  leafletMuniLayer.eachLayer(lyr=>{
-    const codigo = lyr.feature.properties.codigo;
-    const m = MUNICIPIOS_BY_CODE.get(codigo);
-    const match = lyr.feature.properties.match;
-    const displayAgg=currentGeoView==='bioma' ? biomeAggregate(m.bioma) : m;
-    const t = tileColor(layer, displayAgg);
-    const resolvedFill=mapCanvasColor(t.bg);
-    const layerOpacity = t.opacity !== undefined ? t.opacity : 0.88;
-    const showMuni=currentGeoView!=='uf';
-    const sealNationalSeams=showMuni && !osmOn && !detailedZoom;
-    lyr.setStyle({
-      fillColor:resolvedFill,
-      fillOpacity:showMuni ? (match ? (osmOn ? Math.min(layerOpacity,0.46) : layerOpacity) : (osmOn ? 0.025 : 0.08)) : 0,
-      stroke:showMuni,
-      color:sealNationalSeams ? resolvedFill : (osmOn ? '#F7F1E4' : '#40514C'),
-      weight:showMuni ? (sealNationalSeams ? 0.9 : (osmOn ? 0.52 : 0.34)) : 0,
-      opacity:showMuni ? (sealNationalSeams ? (match ? 1 : 0.10) : (match ? (osmOn ? 0.72 : 0.34) : (osmOn ? 0.24 : 0.10))) : 0,
-      lineJoin:'round',
-      lineCap:'round'
-    });
-    lyr.unbindTooltip();
-    lyr.off('click'); lyr.off('mouseover'); lyr.off('mouseout');
-    lyr.on('click',(e)=>{L.DomEvent.stopPropagation(e);openFicha(m.codigo);});
+  const showMuni=currentGeoView!=='uf',sealNationalSeams=showMuni&&!osmOn&&!detailedZoom;
+  const muniFeatures=muniCandidates.filter(m=>MUNI_GEOM[m.codigo]).map(m=>{
+    const match=filtered.has(m.codigo),displayAgg=currentGeoView==='bioma'?biomeAggregate(m.bioma):m,t=tileColor(layer,displayAgg);
+    const fill=mapCanvasColor(t.bg),opacity=t.opacity!==undefined?t.opacity:.88;
+    return {type:'Feature',geometry:geoJSONGeometry(MUNI_GEOM[m.codigo]),properties:{codigo:m.codigo,fill,
+      fillOpacity:showMuni?(match?(osmOn?Math.min(opacity,.46):opacity):(osmOn?.025:.08)):0,
+      stroke:sealNationalSeams?fill:(osmOn?'#F7F1E4':'#40514C'),weight:showMuni?(sealNationalSeams?.9:(osmOn?.52:.34)):0,
+      strokeOpacity:showMuni?(sealNationalSeams?(match?1:.1):(match?(osmOn?.72:.34):(osmOn?.24:.1))):0}};
   });
+  leafletMuniLayer.setData(muniFeatures);
   updateMunicipalityLabels();
   renderGeoViewSummary();
 }
@@ -2832,6 +2845,8 @@ function renderMapLegend(){
 
 function selectState(uf){
   selectedUF = uf;
+  currentGeoView='municipio';
+  ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
   currentGeoView='municipio';
   ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
   currentGeoView='municipio';
