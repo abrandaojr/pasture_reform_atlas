@@ -2258,7 +2258,7 @@ function aplicarMetodologiaV3(){
   });
 }
 
-/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
+/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
 function normalize(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
 function classLabel(label){
   const value=String(label || 'Dados insuficientes').trim();
@@ -2652,11 +2652,10 @@ const AtlasMunicipalCanvas=L.Layer.extend({
   initialize:function(){this._features=[];this._frame=0;},
   onAdd:function(map){
     this._map=map;this._canvas=L.DomUtil.create('canvas','atlas-municipal-canvas');
-    this._canvas.style.pointerEvents='auto';this._canvas.style.cursor='pointer';map.getPanes().overlayPane.appendChild(this._canvas);
-    this._onClickBound=this._onClick.bind(this);this._canvas.addEventListener('click',this._onClickBound);
-    map.on('moveend resize',this.redraw,this);this.redraw();
+    this._canvas.style.pointerEvents='none';map.getPanes().overlayPane.appendChild(this._canvas);
+    map.on('moveend resize',this.redraw,this);map.on('click',this._onMapClick,this);this.redraw();
   },
-  onRemove:function(map){map.off('moveend resize',this.redraw,this);this._canvas.removeEventListener('click',this._onClickBound);this._canvas.remove();},
+  onRemove:function(map){map.off('moveend resize',this.redraw,this);map.off('click',this._onMapClick,this);this._canvas.remove();},
   clearLayers:function(){this._features=[];this.redraw();return this;},
   setData:function(features){this._features=features||[];this.redraw();return this;},
   addData:function(collection){return this.setData((collection&&collection.features)||[]);},
@@ -2672,10 +2671,10 @@ const AtlasMunicipalCanvas=L.Layer.extend({
       if(!hole)return true;
     }}return false;
   },
-  _onClick:function(event){
-    if(!this._map)return;const ll=this._map.mouseEventToLatLng(event);
+  _onMapClick:function(event){
+    if(!this._map||currentGeoView==='uf'||!event.latlng)return;const ll=event.latlng;
     for(let i=this._features.length-1;i>=0;i--){const f=this._features[i];
-      if(this._contains(ll.lng,ll.lat,f.geometry)){L.DomEvent.stopPropagation(event);openFicha(f.properties.codigo);return;}
+      if(this._contains(ll.lng,ll.lat,f.geometry)){openFicha(f.properties.codigo);return;}
     }
   },
   redraw:function(){
@@ -2791,7 +2790,7 @@ function renderLeafletLayers(containerId, layer){
       : `${ATLAS_LANGUAGE==='en'?'Environmental warning':'Alerta ambiental'}: <strong>${p.val}</strong>`;
     lyr.bindTooltip(`<strong>${UF_NOME[p.uf]}</strong><br>${stateMeaning}<br><small>${ATLAS_LANGUAGE==='en'?'Click to explore its municipalities.':'Clique para explorar seus municípios.'}</small>`, {sticky:true, direction:'top',className:'atlas-map-tooltip'});
     lyr.off('click'); lyr.off('mouseover'); lyr.off('mouseout');
-    lyr.on('click', ()=> selectState(p.uf));
+    lyr.on('click', ()=>{if(currentGeoView==='uf')selectState(p.uf);});
     lyr.on('mouseover', function(){ this.setStyle({color:'#F4C95D', opacity:1, weight:3.4}); });
     lyr.on('mouseout', function(){ if(selectedUF!==p.uf) this.setStyle({color:'#6F7C77', opacity:0.52, weight:1.05}); });
   });
@@ -2863,6 +2862,8 @@ function renderMapLegend(){
 
 function selectState(uf){
   selectedUF = uf;
+  currentGeoView='municipio';
+  ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
   currentGeoView='municipio';
   ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
   currentGeoView='municipio';
@@ -3687,7 +3688,7 @@ async function iniciar(){
       + new Intl.DateTimeFormat('pt-BR', {dateStyle:'short', timeStyle:'medium'}).format(new Date())
       + ' · ' + MUNICIPIOS.length.toLocaleString('pt-BR') + ' municípios · 28 de 44 campos canônicos disponíveis';
     renderHome();
-    geometryPromise.then(()=>{if(leafletMap)renderLeafletLayers('main-map-leaflet',currentLayer);}).catch(error=>console.warn('Map geometry unavailable.',error));
+    geometryPromise.then(()=>{if(leafletMap){renderLeafletLayers('main-map-leaflet',currentLayer);const testCode=new URLSearchParams(location.search).get('atlasClickTest');const testMunicipality=testCode&&MUNICIPIOS_BY_CODE.get(testCode);if(testMunicipality)leafletMap.fire('click',{latlng:L.latLng(testMunicipality.lat,testMunicipality.lon)});}}).catch(error=>console.warn('Map geometry unavailable.',error));
     renderTypologyFullTable();
     setAtlasLanguage('en');
     setLoadingStage(100,'Atlas ready');
