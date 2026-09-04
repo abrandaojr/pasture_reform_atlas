@@ -2258,7 +2258,7 @@ function aplicarMetodologiaV3(){
   });
 }
 
-/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
+/* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- *//* ---------------- utilities ---------------- */
 function normalize(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
 function classLabel(label){
   const value=String(label || 'Dados insuficientes').trim();
@@ -2652,14 +2652,32 @@ const AtlasMunicipalCanvas=L.Layer.extend({
   initialize:function(){this._features=[];this._frame=0;},
   onAdd:function(map){
     this._map=map;this._canvas=L.DomUtil.create('canvas','atlas-municipal-canvas');
-    this._canvas.style.pointerEvents='none';map.getPanes().overlayPane.appendChild(this._canvas);
+    this._canvas.style.pointerEvents='auto';this._canvas.style.cursor='pointer';map.getPanes().overlayPane.appendChild(this._canvas);
+    this._onClickBound=this._onClick.bind(this);this._canvas.addEventListener('click',this._onClickBound);
     map.on('moveend resize',this.redraw,this);this.redraw();
   },
-  onRemove:function(map){map.off('moveend resize',this.redraw,this);this._canvas.remove();},
+  onRemove:function(map){map.off('moveend resize',this.redraw,this);this._canvas.removeEventListener('click',this._onClickBound);this._canvas.remove();},
   clearLayers:function(){this._features=[];this.redraw();return this;},
   setData:function(features){this._features=features||[];this.redraw();return this;},
   addData:function(collection){return this.setData((collection&&collection.features)||[]);},
   eachLayer:function(){return this;},
+  _pointInRing:function(x,y,ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+    const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];
+    if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))inside=!inside;
+  }return inside;},
+  _contains:function(x,y,geometry){
+    const polys=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
+    for(const poly of polys){if(poly[0]&&this._pointInRing(x,y,poly[0])){
+      let hole=false;for(let i=1;i<poly.length;i++)if(this._pointInRing(x,y,poly[i])){hole=true;break;}
+      if(!hole)return true;
+    }}return false;
+  },
+  _onClick:function(event){
+    if(!this._map)return;const ll=this._map.mouseEventToLatLng(event);
+    for(let i=this._features.length-1;i>=0;i--){const f=this._features[i];
+      if(this._contains(ll.lng,ll.lat,f.geometry)){L.DomEvent.stopPropagation(event);openFicha(f.properties.codigo);return;}
+    }
+  },
   redraw:function(){
     if(!this._map||!this._canvas)return this;
     cancelAnimationFrame(this._frame);this._frame=requestAnimationFrame(()=>this._draw());return this;
@@ -2845,6 +2863,8 @@ function renderMapLegend(){
 
 function selectState(uf){
   selectedUF = uf;
+  currentGeoView='municipio';
+  ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
   currentGeoView='municipio';
   ['municipio','bioma','uf'].forEach(id=>{const b=document.getElementById('geo-'+id);if(b)b.setAttribute('aria-pressed',String(id==='municipio'));});
   currentGeoView='municipio';
