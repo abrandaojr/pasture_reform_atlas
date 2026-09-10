@@ -1950,7 +1950,7 @@ window.__atlasLoaderWatchdog=setTimeout(()=>{
 /* Dados municipais reais incorporados ao HTML final. */
 
 const CATEGORIAS = [
-  {id:0, nome:"Dados insuficientes", acao:"Completar os indicadores essenciais antes de classificar o município.", cor:"#DAD2BC"},
+  {id:0, nome:"Classificação pendente", acao:"Consultar as regras de classificação e a disponibilidade dos indicadores.", cor:"#DAD2BC"},
   {id:1, nome:"Prioridade 1", acao:"Prospectar projetos e iniciar diligência no imóvel.", cor:"#2F6B3A"},
   {id:2, nome:"Prioridade 2", acao:"Combinar capital com assistência, capacitação, seguro, planejamento hídrico, infraestrutura ou mercado.", cor:"#3A7CA5"},
   {id:3, nome:"Potencial condicionado", acao:"Governança, controle, rastreabilidade e monitoramento antes do apoio focalizado.", cor:"#B07A2E"},
@@ -1964,14 +1964,18 @@ const TYPOLOGY_RULE_ROWS = [
   ["Baixa","Adequadas ou limitadas","Qualquer cor",4],
 ];
 
-const CONDICOES = ["Adequadas","Limitadas","Dados insuficientes"];
+const CONDICOES = ["Adequadas","Intermediárias","Limitadas","Regra de classificação pendente","Dados insuficientes"];
 const CONDICOES_COR = {"Adequadas":"#2F6B3A","Limitadas":"#D98C4A","Dados insuficientes":"#DAD2BC"};
 const RISCOS = ["Verde","Amarelo","Vermelho","Dados insuficientes"];
 const RISCO_COR = {"Verde":"#3B7A57","Amarelo":"#C9A227","Vermelho":"#8C2F2F","Dados insuficientes":"#DAD2BC"};
-const QUALIDADES = ["Alta","Média","Baixa","Dados insuficientes"];
+const QUALIDADES = ["Alta","Média","Baixa","Fora da faixa de classificação","Dados insuficientes"];
 // Oportunidade usa escala ocre própria: verde permanece reservado a vegetação.
 // A maior oportunidade recebe a maior intensidade visual.
 const QUALIDADE_COR = {"Alta":"#9A6418","Média":"#C99A2E","Baixa":"#E7D39D","Dados insuficientes":"#DAD2BC"};
+CONDICOES_COR["Regra de classificação pendente"]="#BDBDBD";
+CONDICOES_COR["Intermediárias"]="#A4C5D8";
+QUALIDADE_COR["Fora da faixa de classificação"]="#BDBDBD";
+
 
 const UF_NOME = {AC:"Acre",AL:"Alagoas",AP:"Amapá",AM:"Amazonas",BA:"Bahia",CE:"Ceará",DF:"Distrito Federal",ES:"Espírito Santo",GO:"Goiás",MA:"Maranhão",MT:"Mato Grosso",MS:"Mato Grosso do Sul",MG:"Minas Gerais",PA:"Pará",PB:"Paraíba",PR:"Paraná",PE:"Pernambuco",PI:"Piauí",RJ:"Rio de Janeiro",RN:"Rio Grande do Norte",RS:"Rio Grande do Sul",RO:"Rondônia",RR:"Roraima",SC:"Santa Catarina",SP:"São Paulo",SE:"Sergipe",TO:"Tocantins"};
 
@@ -2080,6 +2084,9 @@ function linhaParaMunicipio(obj){
     persistenciaInicio:toNum(obj.ano_inicio_melhoria),
     persistenciaConfirmacao:toNum(obj.ano_confirmacao_melhoria),
     rebanho:toNum(obj.rebanho_bovino_cab),
+    contextoFonte:String(obj.ind01_classe_rebanho || "Dados insuficientes").trim(),
+    regraMercado:String(obj.ind03_classe_mercado || "").trim(),
+    regraSeca:String(obj.ind04_classe_seca || "").trim(),
     condicoesFonte:String(obj.classe_condicoes_doc || "Dados insuficientes").trim(),
     condicoes:"Dados insuficientes",
     risco:"Dados insuficientes",
@@ -2102,7 +2109,7 @@ function linhaParaMunicipio(obj){
     distanciaP80Sim:toNum(obj.distancia_p80_sim_km), distanciaP80Consorcio:toNum(obj.distancia_p80_consorcio_km),
     distanciaP80China:toNum(obj.distancia_p80_china_km), distanciaP80Eu:toNum(obj.distancia_p80_eu_km),
     supressaoHaAno:toNum(obj.supressao_media_ha_ano), desmat:toNum(obj.ind07_variacao_nativa_pct_ano),
-    secaFreq:toNum(obj.seca_freq_pct), secaExtensao:toNum(obj.seca_extensao_media_pct),
+    secaFreq:toNum(obj.seca_freq_pct),
     secaPontos:toNum(obj.seca_percentil_bioma),
     secaCobertura:toNum(obj.seca_cobertura_valida_pct_doc),
     secaStatus:String(obj.seca_status_qualidade || '').trim(),
@@ -2115,11 +2122,6 @@ function linhaParaMunicipio(obj){
     vigorP80BaixoAltoConsorcio:toNum(obj.persistent_low_high_p80_consorcio_km), vigorP80MedioAltoConsorcio:toNum(obj.persistent_medium_high_p80_consorcio_km), faoHdfArea0:toNum(obj.fao_hdf_zero_area_ha), faoHdfArea1:toNum(obj.fao_hdf_gt0_le20_area_ha),
     faoHdfArea2:toNum(obj.fao_hdf_gt20_le40_area_ha), faoHdfArea3:toNum(obj.fao_hdf_gt40_le60_area_ha),
     faoHdfArea4:toNum(obj.fao_hdf_gt60_le80_area_ha), faoHdfArea5:toNum(obj.fao_hdf_gt80_le100_area_ha),
-    monitorSecaClasse:toNum(obj.monitor_seca_classe_num),
-    monitorSecaArea:toNum(obj.monitor_seca_area_ha),
-    monitorSecaPt:String(obj.monitor_seca_classe_pt || '').trim(),
-    monitorSecaEn:String(obj.monitor_seca_classe_en || '').trim(),
-    monitorSecaAno:toNum(obj.monitor_seca_ano), monitorSecaMes:toNum(obj.monitor_seca_mes),
     conversaoHa:toNum(obj.conversao_pastagem_ha), conversaoPct:toNum(obj.conversao_pct_supressao),
     pressaoFlorestaHa:toNum(obj.pressao_floresta_publica_ha), pressaoFlorestaPct:toNum(obj.pressao_floresta_publica_pct),
     embargoNumero:toNum(obj.embargos_numero), embargo:toNum(obj.embargo_area_ha), embargoPct:toNum(obj.embargo_pct_pastagem),
@@ -2151,6 +2153,9 @@ async function carregarDadosGoogleSheets(){
   const payload=await response.json();
   if(!payload||!Array.isArray(payload.columns)||!Array.isArray(payload.rows)||payload.rows.length!==5571)
     throw new Error('The Google Sheets JSON snapshot is invalid.');
+  const requiredDetails=["pasture_area_2025_ha", "distancia_p80_qualquer_km", "distancia_p80_sif_km", "distancia_p80_sie_km", "distancia_p80_sim_km", "distancia_p80_consorcio_km", "distancia_p80_china_km", "distancia_p80_eu_km", "persistent_low_high_area_ha", "persistent_low_high_p80_any_km", "persistent_low_high_p80_sif_km", "persistent_low_high_p80_sie_km", "persistent_low_high_p80_sim_km", "persistent_low_high_p80_consorcio_km", "persistent_medium_high_area_ha", "persistent_medium_high_p80_any_km", "persistent_medium_high_p80_sif_km", "persistent_medium_high_p80_sie_km", "persistent_medium_high_p80_sim_km", "persistent_medium_high_p80_consorcio_km", "fao_hdf_zero_area_ha", "fao_hdf_gt0_le20_area_ha", "fao_hdf_gt20_le40_area_ha", "fao_hdf_gt40_le60_area_ha", "fao_hdf_gt60_le80_area_ha", "fao_hdf_gt80_le100_area_ha"];
+  const missingDetails=requiredDetails.filter(name=>!payload.columns.includes(name));
+  if(missingDetails.length) throw new Error('A tabela do Atlas está incompleta: '+missingDetails.join(', '));
   window.ATLAS_CACHE_STATUS='published-google-sheets-json';
   return payload.rows.map(values=>Object.fromEntries(payload.columns.map((name,index)=>[name,values[index]??''])));
 }
@@ -2249,6 +2254,12 @@ function aplicarMetodologiaV3(){
     m.qualidade=m.qualidadeFonte || 'Dados insuficientes';
     m.condicoes=m.condicoesFonte || 'Dados insuficientes';
     m.risco=m.riscoFonte || 'Dados insuficientes';
+    if(m.condicoes==='Dados insuficientes' &&
+       [m.regraMercado,m.regraSeca].some(rule=>rule==='Regra não definida no documento'))
+      m.condicoes='Regra de classificação pendente';
+    if(m.qualidade==='Dados insuficientes' && Number.isFinite(m.baixo) && Number.isFinite(m.medio) && m.baixo+m.medio>0)
+      m.qualidade='Fora da faixa de classificação';
+
 
     if(m.qualidade==='Baixa') m.categoriaId=4;
     else if((m.qualidade==='Alta'||m.qualidade==='Média')&&(m.risco==='Amarelo'||m.risco==='Vermelho')) m.categoriaId=3;
@@ -2263,7 +2274,7 @@ function normalize(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/
 function classLabel(label){
   const value=String(label || 'Dados insuficientes').trim();
   if(ATLAS_LANGUAGE!=='en') return value;
-  return ({'Verde':'Green','Amarelo':'Yellow','Vermelho':'Red','Dados insuficientes':'Insufficient data','Não aplicável':'Not applicable','Adequadas':'Adequate','Limitadas':'Limited','Críticas':'Critical'})[value] || value;
+  return ({'Verde':'Green','Amarelo':'Yellow','Vermelho':'Red','Dados insuficientes':'Insufficient data','Não aplicável':'Not applicable','Adequadas':'Adequate','Limitadas':'Limited','Críticas':'Critical','Regra de classificação pendente':'Classification rule pending','Fora da faixa de classificação':'Outside classification range','Classificação pendente':'Classification pending'})[value] || value;
 }
 function riskItemPill(label){
   const value=String(label || 'Dados insuficientes').trim();
@@ -2271,7 +2282,27 @@ function riskItemPill(label){
   const shown=classLabel(value);
   return `<span class="risk-item-pill" style="background:${color}" aria-label="${ATLAS_LANGUAGE==='en'?'Risk flag':'Semáforo'}: ${shown}">${shown}</span>`;
 }
-function fmtHa(n){ return Number.isFinite(n) ? new Intl.NumberFormat(ATLAS_LANGUAGE).format(Math.round(n)) + " ha" : (ATLAS_LANGUAGE==='en'?'Insufficient data':'Dados insuficientes'); }
+
+// Data availability and classification eligibility are different states.
+function conditionsNote(m){
+  return m.condicoes==='Regra de classificação pendente'
+    ? (ATLAS_LANGUAGE==='en'?'Market and drought classification thresholds are not defined in the methodology. Available measurements are shown below.':'A metodologia não define os limites de classificação de mercado e seca. As medidas disponíveis aparecem abaixo.')
+    : (ATLAS_LANGUAGE==='en'?'Classification follows the documented rules.':'Classificação conforme as regras documentadas.');
+}
+function opportunityNote(m){
+  return m.qualidade==='Fora da faixa de classificação'
+    ? (ATLAS_LANGUAGE==='en'?'Data available. Outside the cumulative 95% opportunity classification range; no score is assigned.':'Dado disponível. Fora da faixa de classificação de oportunidade de 95% acumulados; sem atribuição de pontos.')
+    : '';
+}
+function fmtTransitionDistance(value, area){
+  return area===0 ? classLabel('Não aplicável') : fmtNum(value,' km');
+}
+function publicForestMetric(m){
+  if(m.riscoFloresta==='Não aplicável') return ATLAS_LANGUAGE==='en'?'No non-designated public forest in the reference data':'Sem floresta pública não destinada na base de referência';
+  return fmtPct(m.pressaoFlorestaPct)+(ATLAS_LANGUAGE==='en'?' of public forest · ':' da floresta pública · ')+fmtHa(m.pressaoFlorestaHa);
+}
+
+function fmtHa(n){ return Number.isFinite(n) ? new Intl.NumberFormat(ATLAS_LANGUAGE,{maximumFractionDigits:n>0&&n<1?2:0}).format(n) + " ha" : (ATLAS_LANGUAGE==='en'?'Insufficient data':'Dados insuficientes'); }
 function fmtMilHa(n){ return Number.isFinite(n) ? new Intl.NumberFormat(ATLAS_LANGUAGE,{maximumFractionDigits:1}).format(n/1000) + (ATLAS_LANGUAGE==='en'?" thousand ha":" mil ha") : (ATLAS_LANGUAGE==='en'?'Insufficient data':'Dados insuficientes'); }
 function fmtPct(n){ return Number.isFinite(n) ? new Intl.NumberFormat(ATLAS_LANGUAGE,{maximumFractionDigits:1}).format(n) + "%" : (ATLAS_LANGUAGE==='en'?'Insufficient data':'Dados insuficientes'); }
 function fmtNum(n, suffix=""){ return Number.isFinite(n) ? new Intl.NumberFormat(ATLAS_LANGUAGE,{maximumFractionDigits:1}).format(n)+suffix : (ATLAS_LANGUAGE==='en'?'Insufficient data':'Dados insuficientes'); }
@@ -2855,8 +2886,8 @@ function renderMapLegend(){
   let items = [];
   if(currentLayer==='tipologia'){
     const labels=ATLAS_LANGUAGE==='en'
-      ? {0:'Insufficient data',1:'Act first',2:'Invest + support',3:'Safeguards first',4:'Lower priority'}
-      : {0:'Dados insuficientes',1:'Agir primeiro',2:'Investir + apoiar',3:'Garantias primeiro',4:'Menor prioridade'};
+      ? {0:'Classification pending',1:'Act first',2:'Invest + support',3:'Safeguards first',4:'Lower priority'}
+      : {0:'Classificação pendente',1:'Agir primeiro',2:'Investir + apoiar',3:'Garantias primeiro',4:'Menor prioridade'};
     items = CATEGORIAS.map(c=>`<span class="legend-item"><span class="sw" style="background:${c.cor}"></span>${labels[c.id]}</span>`);
   } else if(currentLayer==='condicoes'){
     items = CONDICOES.map(c=>`<span class="legend-item"><span class="sw" style="background:${CONDICOES_COR[c]}"></span>${c}</span>`);
@@ -2975,8 +3006,8 @@ function toggleAltTable(){
 function renderMunicipiosList(){
   const q = normalize(document.getElementById('mun-list-search') ? document.getElementById('mun-list-search').value : "");
   const riscoOrdem={"Verde":0,"Amarelo":1,"Vermelho":2,"Dados insuficientes":3};
-  const condOrdem={"Adequadas":0,"Intermediárias":1,"Limitadas":2,"Dados insuficientes":3};
-  const oportunidadeOrdem={"Alta":0,"Média":1,"Baixa":2,"Dados insuficientes":3};
+  const condOrdem={"Adequadas":0,"Intermediárias":1,"Limitadas":2,"Regra de classificação pendente":3,"Dados insuficientes":4};
+  const oportunidadeOrdem={"Alta":0,"Média":1,"Baixa":2,"Fora da faixa de classificação":3,"Dados insuficientes":4};
   const ranked=[...MUNICIPIOS].sort((a,b)=>(
     (oportunidadeOrdem[a.qualidade]??9)-(oportunidadeOrdem[b.qualidade]??9) ||
     (b.oportunidade||0)-(a.oportunidade||0) ||
@@ -2993,9 +3024,9 @@ function renderMunicipiosList(){
     <tr onclick="openFicha('${m.codigo}')" tabindex="0" onkeydown="if(event.key==='Enter')openFicha('${m.codigo}')">
       <td><strong>${m.rankingPosicao}º</strong></td>
       <td><strong>${m.nome}</strong><br><span style="color:var(--ink-soft);font-size:11px">${m.uf} · ${m.bioma}</span></td>
-      <td>${m.qualidade}</td>
+      <td>${classLabel(m.qualidade)}</td>
       <td>${fmtHa(m.oportunidade)}</td>
-      <td><span class="class-pill" style="background:${CONDICOES_COR[m.condicoes]};color:${m.condicoes==='Adequadas'?'#FFF':'var(--ink)'}">${m.condicoes}</span></td>
+      <td><span class="class-pill" style="background:${CONDICOES_COR[m.condicoes]};color:${m.condicoes==='Adequadas'?'#FFF':'var(--ink)'}">${classLabel(m.condicoes)}</span></td>
       <td><span class="class-pill" style="background:${RISCO_COR[m.risco]}">${m.risco}</span></td>
     </tr>`).join('');
 }
@@ -3099,7 +3130,7 @@ function renderFicha(m){
           <span class="badge">Bioma: ${m.bioma}</span>
           <span class="badge">Código IBGE: ${m.codigo}</span>
           <span class="badge">Pastagem: 2024 · crédito: 2024</span>
-          <span class="badge"><span class="dot" style="background:${QUALIDADE_COR[m.qualidade]}"></span>Oportunidade ${m.qualidade}</span>
+          <span class="badge"><span class="dot" style="background:${QUALIDADE_COR[m.qualidade]}"></span>Oportunidade ${classLabel(m.qualidade)}</span>
         </div>
       </div>
       <div class="hero-herd"><span>${en?'Cattle herd':'Rebanho bovino'}</span><strong>${fmtNum(m.rebanho)}</strong><small>${en?'head':'cabeças'}</small></div>
@@ -3112,13 +3143,14 @@ function renderFicha(m){
     <div class="municipal-scorecard" aria-label="Resumo municipal">
       <div class="score-tile opportunity explainable" tabindex="0" data-help="${en?'Pasture with low or medium plant vigour. It indicates room for improvement, not guaranteed production.':'Pastagem com vigor baixo ou médio. Indica espaço para melhorar, não produção garantida.'}"><div class="score-head"><div class="score-kicker">Oportunidade</div><div class="score-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c8 0 14-5 16-16-9 1-15 5-16 16Z"/><path d="M4 20c3-6 7-10 12-13"/></svg></div></div><div class="score-value">${fmtHa(m.oportunidade)}</div><div class="score-note">${fmtPct(m.participacaoOportunidade)} ${en?'of pasture could improve':'da pastagem pode melhorar'}</div></div>
       
-      <div class="score-tile pending explainable" tabindex="0" data-help="${en?'This class combines cattle scale and market access with drought, extension services, education, productive credit and persistent pasture improvement.':'Esta classe combina escala do rebanho e acesso ao mercado com seca, assistência, escolaridade, crédito produtivo e melhoria persistente do pasto.'}"><div class="score-head"><div class="score-kicker">Condições para produzir</div><div class="score-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2M16 3h5v5"/></svg></div></div><div class="score-value">${classLabel(m.condicoes)}</div><div class="score-note">${en?`${m.condicoesSuportes??0} of 5 supporting signals`:`${m.condicoesSuportes??0} de 5 sinais de suporte`}</div></div>
+      <div class="score-tile pending explainable" tabindex="0" data-help="${en?'This class combines cattle scale and market access with drought, extension services, education, productive credit and persistent pasture improvement.':'Esta classe combina escala do rebanho e acesso ao mercado com seca, assistência, escolaridade, crédito produtivo e melhoria persistente do pasto.'}"><div class="score-head"><div class="score-kicker">Condições para produzir</div><div class="score-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2M16 3h5v5"/></svg></div></div><div class="score-value">${classLabel(m.condicoes)}</div><div class="score-note">${conditionsNote(m)}</div></div>
       <div class="score-tile risk explainable" tabindex="0" data-help="${en?'A municipal warning based on recent environmental pressures. It does not judge every farm in the municipality.':'Alerta municipal baseado em pressões ambientais recentes. Não avalia cada imóvel do município.'}"><div class="score-head"><div class="score-kicker">Risco ambiental</div><div class="score-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 20h18Z"/><path d="M12 9v5M12 18h.01"/></svg></div></div><div class="score-value">${classLabel(m.risco)}</div><div class="score-note">${en?'Municipal screening; verify at farm level':'Triagem municipal; exige verificação no imóvel'}</div></div>
     </div>
 
     <div class="ficha-grid">
       <div class="block">
         <h3><span class="n">1</span>Opportunity <button class="help-trigger" data-help="Pastagens que podem produzir melhor." aria-label="Explicar oportunidade" aria-expanded="false">?</button></h3>
+        <p class="method-note">${opportunityNote(m)}</p>
         <div class="vigor-stack">
           <span class="explainable" tabindex="0" role="img" aria-label="${en?'Low-vigour pasture':'Pastagem de baixo vigor'}" data-help="${en?'Low vigour':'Baixo vigor'} · ${fmtHa(m.baixo)} · ${fmtPct(m.total?m.baixo/m.total*100:NaN)} ${en?'of the municipality’s mapped pasture':'da pastagem mapeada do município'}" style="width:${m.total ? m.baixo/m.total*100 : 0}%; background:var(--vigor-baixo)"></span>
           <span class="explainable" tabindex="0" role="img" aria-label="${en?'Medium-vigour pasture':'Pastagem de médio vigor'}" data-help="${en?'Medium vigour':'Médio vigor'} · ${fmtHa(m.medio)} · ${fmtPct(m.total?m.medio/m.total*100:NaN)} ${en?'of the municipality’s mapped pasture':'da pastagem mapeada do município'}" style="width:${m.total ? m.medio/m.total*100 : 0}%; background:var(--vigor-medio)"></span>
@@ -3146,17 +3178,17 @@ function renderFicha(m){
             <div class="stat-line"><span class="k">${en?'China-approved SIF':'SIF habilitado para a China'}</span><span class="v">${fmtNum(m.distanciaP80China,' km')}</span></div>
           </div>
         </details>
-        <details class="distance-menu transition-menu"><summary><span>${en?'Transitions to high vigour that persisted · 2020–2024':'Transições para alto vigor que permaneceram · 2020–2024'}</span><strong>${fmtHa((m.vigorBaixoAltoHa||0)+(m.vigorMedioAltoHa||0))}</strong></summary>
+        <details class="distance-menu transition-menu"><summary><span>${en?'Transitions to high vigour that persisted · 2020–2024':'Transições para alto vigor que permaneceram · 2020–2024'}</span><strong>${fmtHa([m.vigorBaixoAltoHa,m.vigorMedioAltoHa].every(Number.isFinite)?m.vigorBaixoAltoHa+m.vigorMedioAltoHa:null)}</strong></summary>
           <div class="distance-menu-body">
             <div class="stat-line"><span class="k">${en?'Low to high vigour':'Baixo para alto vigor'}</span><span class="v">${fmtHa(m.vigorBaixoAltoHa)}</span></div>
             <div class="stat-line"><span class="k">${en?'Medium to high vigour':'Médio para alto vigor'}</span><span class="v">${fmtHa(m.vigorMedioAltoHa)}</span></div>
             <div class="transition-distance-grid">
               <strong>${en?'Slaughterhouse scope':'Tipo de frigorífico'}</strong><strong>${en?'Low → high P80':'P80 baixo → alto'}</strong><strong>${en?'Medium → high P80':'P80 médio → alto'}</strong>
-              <span>${en?'Any slaughterhouse':'Qualquer frigorífico'}</span><span>${fmtNum(m.vigorP80BaixoAltoAny,' km')}</span><span>${fmtNum(m.vigorP80MedioAltoAny,' km')}</span>
-              <span>SIF</span><span>${fmtNum(m.vigorP80BaixoAltoSif,' km')}</span><span>${fmtNum(m.vigorP80MedioAltoSif,' km')}</span>
-              <span>SIE</span><span>${fmtNum(m.vigorP80BaixoAltoSie,' km')}</span><span>${fmtNum(m.vigorP80MedioAltoSie,' km')}</span>
-              <span>SIM</span><span>${fmtNum(m.vigorP80BaixoAltoSim,' km')}</span><span>${fmtNum(m.vigorP80MedioAltoSim,' km')}</span>
-              <span>${en?'Inspection consortium':'Consórcio de inspeção'}</span><span>${fmtNum(m.vigorP80BaixoAltoConsorcio,' km')}</span><span>${fmtNum(m.vigorP80MedioAltoConsorcio,' km')}</span>
+              <span>${en?'Any slaughterhouse':'Qualquer frigorífico'}</span><span>${fmtTransitionDistance(m.vigorP80BaixoAltoAny,m.vigorBaixoAltoHa)}</span><span>${fmtTransitionDistance(m.vigorP80MedioAltoAny,m.vigorMedioAltoHa)}</span>
+              <span>SIF</span><span>${fmtTransitionDistance(m.vigorP80BaixoAltoSif,m.vigorBaixoAltoHa)}</span><span>${fmtTransitionDistance(m.vigorP80MedioAltoSif,m.vigorMedioAltoHa)}</span>
+              <span>SIE</span><span>${fmtTransitionDistance(m.vigorP80BaixoAltoSie,m.vigorBaixoAltoHa)}</span><span>${fmtTransitionDistance(m.vigorP80MedioAltoSie,m.vigorMedioAltoHa)}</span>
+              <span>SIM</span><span>${fmtTransitionDistance(m.vigorP80BaixoAltoSim,m.vigorBaixoAltoHa)}</span><span>${fmtTransitionDistance(m.vigorP80MedioAltoSim,m.vigorMedioAltoHa)}</span>
+              <span>${en?'Inspection consortium':'Consórcio de inspeção'}</span><span>${fmtTransitionDistance(m.vigorP80BaixoAltoConsorcio,m.vigorBaixoAltoHa)}</span><span>${fmtTransitionDistance(m.vigorP80MedioAltoConsorcio,m.vigorMedioAltoHa)}</span>
             </div>
             <p>${en?'Includes transitions occurring from 2020 to 2024 that remained high through 2024. P80 values are upper limits of 25 km distance classes.':'Inclui transições ocorridas de 2020 a 2024 que permaneceram em alto vigor até 2024. Os P80 são limites superiores de classes de 25 km.'}</p>
           </div>
@@ -3179,7 +3211,7 @@ function renderFicha(m){
         <p style="margin-bottom:8px;">${en?'Risk flag:':'Semáforo:'} <span class="class-pill" style="background:${RISCO_COR[m.risco]}">${classLabel(m.risco)}</span></p>
         <div class="stat-line"><span class="k">Taxa anual de perda de vegetação <button class="help-trigger" data-help="Percentual anual do estoque inicial de vegetação nativa perdido; hectares aparecem como contexto." aria-label="Explicar perda de vegetação" aria-expanded="false">?</button></span><span class="risk-item-result">${riskItemPill(m.riscoVegetacao)}<span class="v">${Number.isFinite(m.desmat)?fmtPct(Math.abs(m.desmat))+(en?' / year · ':' / ano · ')+fmtNum(m.supressaoHaAno,en?' ha/year':' ha/ano'):fmtNum(m.supressaoHaAno,en?' ha/year':' ha/ano')}</span></span></div>
         <div class="stat-line"><span class="k">Vegetação convertida em pastagem <button class="help-trigger" data-help="Área que virou pastagem." aria-label="Explicar conversão" aria-expanded="false">?</button></span><span class="risk-item-result">${riskItemPill(m.riscoConversao)}<span class="v">${fmtPct(m.conversaoPct)} ${en?'of clearing':'da supressão'} · ${fmtHa(m.conversaoHa)}</span></span></div>
-        <div class="stat-line"><span class="k">Desmatamento em floresta pública <button class="help-trigger" data-help="Perda dentro de floresta pública." aria-label="Explicar floresta pública" aria-expanded="false">?</button></span><span class="risk-item-result">${riskItemPill(m.riscoFloresta)}<span class="v">${fmtPct(m.pressaoFlorestaPct)} ${en?'of public forest':'da floresta pública'} · ${fmtHa(m.pressaoFlorestaHa)}</span></span></div>
+        <div class="stat-line"><span class="k">Desmatamento em floresta pública <button class="help-trigger" data-help="Perda dentro de floresta pública." aria-label="Explicar floresta pública" aria-expanded="false">?</button></span><span class="risk-item-result">${riskItemPill(m.riscoFloresta)}<span class="v">${publicForestMetric(m)}</span></span></div>
         <div class="stat-line"><span class="k">Embargos por desmatamento <button class="help-trigger" data-help="Quantidade de embargos ativos." aria-label="Explicar embargos" aria-expanded="false">?</button></span><span class="risk-item-result">${riskItemPill(m.riscoEmbargos)}<span class="v">${fmtNum(m.embargoNumero)}</span></span></div>
         <div class="stat-line"><span class="k">Área embargada <button class="help-trigger" data-help="Área total com embargo ativo." aria-label="Explicar área embargada" aria-expanded="false">?</button></span><span class="risk-item-result">${riskItemPill(m.riscoAreaEmbargada)}<span class="v">${fmtPct(m.embargoPct)} ${en?'of pasture':'da pastagem'} · ${fmtHa(m.embargo)}</span></span></div>
         ${m.risco==="Vermelho" ? `<div class="warn-box">Ao menos um indicador direto está no quarto superior do bioma ou do Brasil. Isso não declara irregularidade de todos os imóveis.</div>` : ''}
@@ -3421,6 +3453,10 @@ function renderTypologyFullTable(){
 
 /* ================= BILINGUAL UI: EN DEFAULT / PT-BR OPTION ================= */
 const UI_EN = {
+  "Classificação pendente":"Classification pending",
+  "Regra de classificação pendente":"Classification rule pending",
+  "Fora da faixa de classificação":"Outside classification range",
+  "Consultar as regras de classificação e a disponibilidade dos indicadores.":"Check classification rules and indicator availability.",
   "Pular para o conteúdo principal":"Skip to main content",
   "Para leitores internacionais · EN":"For international readers · EN",
   "Para financiadores · EN":"For funders · EN",

@@ -2,7 +2,11 @@
 
 Static, bilingual Atlas dashboard published from `index.html`.
 
-The browser reads the current municipal table from the configured public Google Sheet. A validated embedded snapshot is used only as a resilience fallback when the sheet cannot be reached.
+The browser reads `atlas_data.json`. `sync_google_sheet.py` combines the configured public Google Sheet with `atlas_indicator_details.json`, joined by IBGE municipal code. The detail file supplies pasture distances, persistent vigour transitions and FAO class areas; its source paths and hashes are recorded inside the file.
+
+The sync applies the documented risk aggregation: sum available scores, assign 100 to non-applicable public forest, and leave an entirely missing score set undefined. It fails on invalid keys or missing columns. Undefined classification rules and exclusions from the opportunity range are identified separately from missing measurements in the interface.
+
+Rebuild indicator details locally with `../codes/repair_atlas_data_contract.py`. Validate with `python3 ../tests/validate_atlas_data_contract.py` and `node --v8-pool-size=1 ../tests/atlas_data_contract.test.cjs`. All data preparation uses one process and standard-library Python. Publishing remains a separate step through `publish_atlas.sh`.
 
 Public site: <https://abrandaojr.github.io/pasture_reform_atlas/>
 
