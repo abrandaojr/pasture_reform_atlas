@@ -21,9 +21,11 @@ jobs:
       - name: Convert Google Sheets CSV to compact JSON
         run: python3 sync_google_sheet.py
       - name: Validate municipal data before publishing
-        run: python3 -m unittest test_sync_google_sheet -v
+        run: python3 -m unittest discover -p 'test_*.py' -v
       - name: Validate profile in original units
         run: node --v8-pool-size=1 test_profile_real_values.cjs
+      - name: Validate variable queries
+        run: node --v8-pool-size=1 test_atlas_query.cjs
       - name: Refresh the public cache version
         run: |
           version="$(sha256sum index.html atlas_data.json municipal_geometry.json | sha256sum | cut -c1-12)"

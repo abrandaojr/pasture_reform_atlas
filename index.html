@@ -1396,6 +1396,30 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{overflow-x:hidden
 @media(max-width:1000px){.profile-real-grid{grid-template-columns:1fr}}
 @media(max-width:520px){.profile-real-row{grid-template-columns:minmax(72px,1fr) minmax(36px,.8fr) minmax(80px,1fr);gap:8px}.profile-real-metric{padding:12px}}
 </style>
+<style id="atlas-query-style">.atlas-query-controls{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:18px 0}
+.atlas-query-controls .btn.ochre{background:#9a6418!important;border-color:#9a6418!important;color:#fff!important}
+.atlas-query-controls label,.atlas-query-builder>label{display:grid;gap:6px;font-size:13px;font-weight:600}
+#atlas-query-root select,#atlas-query-root input{min-width:0;max-width:100%;padding:10px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font:inherit}
+.atlas-query-builder{padding:18px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.atlas-query-rule{display:grid;grid-template-columns:minmax(200px,2fr) minmax(90px,.6fr) minmax(120px,1fr) 44px;gap:12px;align-items:end;margin:15px 0}
+.atlas-query-rule label{display:grid;gap:6px;min-width:0;font-size:13px}
+.atlas-query-note{font-size:13px;line-height:1.5;color:var(--ink-soft);margin:12px 0}
+.atlas-query-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:18px 0}
+.atlas-query-kpis>div{display:grid;gap:6px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:10px}
+.atlas-query-kpis strong{font-size:23px}.atlas-query-kpis span{font-size:13px}
+.atlas-query-error{color:#8c2f2f;background:#fff0f0;padding:14px}
+.atlas-query-table-wrap{max-width:100%;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.atlas-query-table-wrap table{min-width:1100px;margin:0;background:#fff}
+.atlas-query-table-wrap th{white-space:normal;min-width:100px;font-size:12px;font-family:var(--font-ui);text-transform:none;letter-spacing:0;line-height:1.35;background:#183841}
+.atlas-query-table-wrap td{font-size:13px;text-align:right}
+.atlas-query-table-wrap td:nth-child(-n+3){text-align:left}
+.atlas-query-municipality{border:0;background:none;color:#235b78;padding:6px 0;cursor:pointer;text-align:left;font:inherit;text-decoration:underline}
+#query-share input{width:100%}#query-share label{display:grid;gap:8px}
+.conditions-method{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:8px;font-size:13px;line-height:1.5}.conditions-method summary{cursor:pointer;font-weight:700}.conditions-method ul{padding-left:20px}.conditions-method p{margin:10px 0}#conditions-method-reference{padding:18px;margin-bottom:20px;border:1px solid var(--line);border-radius:12px;background:#fff}#conditions-method-reference .data-table{min-width:520px}
+#view-metodologia>#conditions-method-reference{display:block!important}
+@media(max-width:760px){nav.main-nav{grid-template-columns:repeat(6,minmax(0,1fr))!important}.atlas-query-rule{grid-template-columns:minmax(0,1fr) 44px;gap:10px}.atlas-query-rule>label:first-child{grid-column:1/-1}.atlas-query-rule>label:nth-child(2){grid-column:1/-1}.atlas-query-kpis{grid-template-columns:1fr}.atlas-query-controls>label{width:100%}#atlas-query-root input,#atlas-query-root select{font-size:16px;min-height:44px}}
+@media(max-width:760px){.atlas-query-rule{grid-template-columns:minmax(65px,.6fr) minmax(0,1.4fr) 44px;gap:8px}.atlas-query-rule>label:nth-child(2){grid-column:auto}.atlas-query-builder{padding:12px}}
+</style>
 </head>
 <body>
 
@@ -1419,6 +1443,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{overflow-x:hidden
     <nav class="main-nav" aria-label="Navegação principal">
       <button id="nav-map" data-view="inicio" onclick="showView('inicio')">Mapa</button>
       <button id="nav-municipalities" data-view="municipios" onclick="showView('municipios')">Ranking</button>
+      <button id="nav-query" data-view="consulta" onclick="showView('consulta')">Consulta</button>
       <button id="nav-compare" data-view="comparar" onclick="showView('comparar')">Comparar</button>
       <button id="nav-markets" data-view="mercados" onclick="showView('mercados')">Mercados</button>
       <button id="nav-method" data-view="metodologia" onclick="showView('metodologia')">Como funciona</button>
@@ -1705,6 +1730,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{overflow-x:hidden
 </section>
 
 <!-- ======================= COMPARADOR ======================= -->
+<section class="view" id="view-consulta" hidden><div id="atlas-query-root"></div></section>
 <section class="view" id="view-comparar" hidden>
   <div class="section-head">
     <div>
@@ -1765,7 +1791,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{overflow-x:hidden
 </section>
 
 <!-- ======================= METODOLOGIA ======================= -->
-<section class="view" id="view-metodologia" hidden>
+<section class="view" id="view-metodologia" hidden><div id="conditions-method-reference"></div>
   <div class="simple-method">
     <h2 class="title-with-help">Como ler o Atlas <button class="help-trigger" data-help="Entenda o resultado em quatro passos." aria-label="Ajuda sobre como funciona" aria-expanded="false">?</button></h2>
     <p class="simple-intro">O Atlas ajuda a escolher onde estudar projetos de melhoria de pastagens. Ele não aprova propriedades nem substitui uma análise local.</p>
@@ -1984,8 +2010,8 @@ const TYPOLOGY_RULE_ROWS = [
   ["Baixa","Adequadas ou limitadas","Qualquer cor",4],
 ];
 
-const CONDICOES = ["Adequadas","Intermediárias","Limitadas","Regra de classificação pendente","Dados insuficientes"];
-const CONDICOES_COR = {"Adequadas":"#2F6B3A","Limitadas":"#D98C4A","Dados insuficientes":"#DAD2BC"};
+const CONDICOES = ["Adequadas","Intermediárias","Limitadas","Dados insuficientes"];
+const CONDICOES_COR = {"Adequadas":"#1F5F8A","Limitadas":"#D7E6EF","Dados insuficientes":"#DAD2BC"};
 const RISCOS = ["Verde","Amarelo","Vermelho","Dados insuficientes"];
 const RISCO_COR = {"Verde":"#3B7A57","Amarelo":"#C9A227","Vermelho":"#8C2F2F","Dados insuficientes":"#DAD2BC"};
 const QUALIDADES = ["Alta","Média","Baixa","Fora da faixa de classificação","Dados insuficientes"];
@@ -2107,6 +2133,8 @@ function linhaParaMunicipio(obj){
     contextoFonte:String(obj.ind01_classe_rebanho || "Dados insuficientes").trim(),
     regraMercado:String(obj.ind03_classe_mercado || "").trim(),
     regraSeca:String(obj.ind04_classe_seca || "").trim(),
+    condicoesCobertura:String(obj.condicoes_cobertura || "").trim(),
+    condicoesDisponiveis:toNum(obj.condicoes_indicadores_disponiveis),
     condicoesFonte:String(obj.classe_condicoes_doc || "Dados insuficientes").trim(),
     condicoes:"Dados insuficientes",
     risco:"Dados insuficientes",
@@ -2274,9 +2302,18 @@ function aplicarMetodologiaV3(){
     m.qualidade=m.qualidadeFonte || 'Dados insuficientes';
     m.condicoes=m.condicoesFonte || 'Dados insuficientes';
     m.risco=m.riscoFonte || 'Dados insuficientes';
-    if(m.condicoes==='Dados insuficientes' &&
-       [m.regraMercado,m.regraSeca].some(rule=>rule==='Regra não definida no documento'))
-      m.condicoes='Regra de classificação pendente';
+    if(m.qualidade==='Dados insuficientes' && Number.isFinite(m.baixo) && Number.isFinite(m.medio) && m.baixo+m.medio>0)
+      m.qualidade='Fora da faixa de classificação';
+
+    if(m.qualidade==='Dados insuficientes' && Number.isFinite(m.baixo) && Number.isFinite(m.medio) && m.baixo+m.medio>0)
+      m.qualidade='Fora da faixa de classificação';
+
+    if(m.qualidade==='Dados insuficientes' && Number.isFinite(m.baixo) && Number.isFinite(m.medio) && m.baixo+m.medio>0)
+      m.qualidade='Fora da faixa de classificação';
+
+    if(m.qualidade==='Dados insuficientes' && Number.isFinite(m.baixo) && Number.isFinite(m.medio) && m.baixo+m.medio>0)
+      m.qualidade='Fora da faixa de classificação';
+
     if(m.qualidade==='Dados insuficientes' && Number.isFinite(m.baixo) && Number.isFinite(m.medio) && m.baixo+m.medio>0)
       m.qualidade='Fora da faixa de classificação';
 
@@ -2294,7 +2331,7 @@ function normalize(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/
 function classLabel(label){
   const value=String(label || 'Dados insuficientes').trim();
   if(ATLAS_LANGUAGE!=='en') return value;
-  return ({'Verde':'Green','Amarelo':'Yellow','Vermelho':'Red','Dados insuficientes':'Insufficient data','Não aplicável':'Not applicable','Adequadas':'Adequate','Limitadas':'Limited','Críticas':'Critical','Regra de classificação pendente':'Classification rule pending','Fora da faixa de classificação':'Outside classification range','Classificação pendente':'Classification pending'})[value] || value;
+  return ({'Verde':'Green','Amarelo':'Yellow','Vermelho':'Red','Dados insuficientes':'Insufficient data','Não aplicável':'Not applicable','Adequadas':'Adequate','Limitadas':'Limited','Críticas':'Critical','Completa':'Complete','Parcial':'Partial','Insuficiente':'Insufficient','Intermediárias':'Intermediate','Regra de classificação pendente':'Classification rule pending','Fora da faixa de classificação':'Outside classification range','Classificação pendente':'Classification pending'})[value] || value;
 }
 function riskItemPill(label){
   const value=String(label || 'Dados insuficientes').trim();
@@ -2304,11 +2341,26 @@ function riskItemPill(label){
 }
 
 // Data availability and classification eligibility are different states.
+const ATLAS_CONDITIONS_METHOD={"version":"conditions_v2026_09_11","reference_date":"2026-09-11","reference_sha256":"4486aa561767750b137fb46e76961ec2aaff61b3ff920a7ae22a57751cdbeed3","quantile_method":"Linear interpolation at (n-1)*p; finite observed values; fixed thresholds for this edition","market_variable":"distancia_p80_qualquer_km","market_km":{"p50":38.6,"p75":65.5,"n":5461},"drought_variable":"seca_freq_pct","drought_percent_years_by_biome":{"Amazônia":{"p50":6.6046325,"p75":11.84966425,"n":482},"Caatinga":{"p50":11.878049,"p75":16.914773,"n":1101},"Cerrado":{"p50":5.0,"p75":10.017284,"n":1045},"Mata Atlântica":{"p50":1.877623,"p75":5.0,"n":2373},"Pantanal":{"p50":2.1077820000000003,"p75":7.665570000000001,"n":8}},"component_scoring":"value <= P50: 100; P50 < value <= P75: 50; value > P75: 0","aggregation":"(drought + existing extension + existing education scores) * market score / 100","classes":{"Adequadas":">240","Intermediárias":"150–240 inclusive","Limitadas":"<150"},"missing_policy":"Missing support contributes no points; all support missing or market missing leaves unclassified. Imputed drought is excluded. Partial coverage is explicitly labelled.","scope":"Municipal comparative screening; not farm certification or agronomic/transport viability thresholds; credit excluded as in the existing rules."};
 function conditionsNote(m){
-  return m.condicoes==='Regra de classificação pendente'
-    ? (ATLAS_LANGUAGE==='en'?'Market and drought classification thresholds are not defined in the methodology. Available measurements are shown below.':'A metodologia não define os limites de classificação de mercado e seca. As medidas disponíveis aparecem abaixo.')
-    : (ATLAS_LANGUAGE==='en'?'Classification follows the documented rules.':'Classificação conforme as regras documentadas.');
+ const en=ATLAS_LANGUAGE==='en';
+ const coverage=({Completa:en?'complete coverage':'cobertura completa',Parcial:en?'partial coverage':'cobertura parcial',Insuficiente:en?'insufficient coverage':'cobertura insuficiente'})[m.condicoesCobertura]||'';
+ return `${m.condicoesDisponiveis??0}/4 ${en?'indicators available':'indicadores disponíveis'} · ${coverage}. ${en?'See the classification rules below.':'Veja os critérios abaixo.'}`;
 }
+function conditionsMethodDetails(m){
+ const en=ATLAS_LANGUAGE==='en',method=ATLAS_CONDITIONS_METHOD;
+ const unitNumber=v=>new Intl.NumberFormat(ATLAS_LANGUAGE,{maximumFractionDigits:4}).format(v);
+ const drought=method.drought_percent_years_by_biome[m.bioma];
+ const droughtText=m.reference?(en?'Biome-specific thresholds in the table below':'Limites por bioma na tabela abaixo'):drought?`${unitNumber(drought.p50)}% / ${unitNumber(drought.p75)}% (${en?'years':'anos'}; n=${drought.n})`:(en?'No observed reference for this biome; drought contributes no points.':'Sem referência observada neste bioma; seca não soma pontos.');
+ return `<details class="conditions-method"><summary>${en?'How enabling conditions are classified':'Como as condições são classificadas'}</summary><p>${en?'Comparative municipal screening, with fixed thresholds for the 11 September 2026 edition. Lower market distance and lower drought frequency receive higher scores.':'Triagem comparativa municipal, com limites fixos na edição de 11 de setembro de 2026. Menor distância ao mercado e menor frequência de seca recebem mais pontos.'}</p><ul><li>${en?'Market distance (national reference):':'Distância ao mercado (referência nacional):'} ≤ ${unitNumber(method.market_km.p50)} km = 100; > ${unitNumber(method.market_km.p50)} ${en?'to':'até'} ${unitNumber(method.market_km.p75)} km = 50; > ${unitNumber(method.market_km.p75)} km = 0.</li><li>${en?'Drought in this biome, P50 / P75:':'Seca neste bioma, P50 / P75:'} ${droughtText}. ${en?'At or below P50: 100; above P50 to P75: 50; above P75: 0.':'Até P50: 100; acima de P50 até P75: 50; acima de P75: 0.'}</li><li>${en?'Extension and education retain the existing documented scores (0, 50 or 100). Credit is not included in this class.':'Assistência e escolaridade mantêm os pontos das regras documentadas (0, 50 ou 100). Crédito não integra esta classe.'}</li></ul><p><strong>${en?'Formula':'Fórmula'}:</strong> (${en?'drought + extension + education':'seca + assistência + escolaridade'}) × ${en?'market':'mercado'} / 100. ${en?'Adequate >240; intermediate 150–240; limited <150.':'Adequadas >240; intermediárias 150–240; limitadas <150.'}</p><p>${en?'A missing support indicator adds no points and makes coverage partial. Missing market data or all support data leaves the municipality unclassified. Drought values imputed from biome medians are excluded. Thresholds are comparative, not agronomic or transport viability limits.':'Um suporte ausente não soma pontos e torna a cobertura parcial. Sem mercado ou sem todos os suportes, o município fica sem classificação. Valores de seca imputados pela mediana do bioma são excluídos. Os limites são comparativos, não limites agronômicos ou de viabilidade de transporte.'}</p><p>${en?'Method':'Método'}: ${method.version}${m.condicoesDisponiveis!==undefined?` · ${en?'Available indicators':'Indicadores disponíveis'}: ${m.condicoesDisponiveis}/4`:''}.</p></details>`;
+}
+function conditionsReferenceHtml(){
+ const en=ATLAS_LANGUAGE==='en',config=ATLAS_CONDITIONS_METHOD;
+ const format=v=>new Intl.NumberFormat(ATLAS_LANGUAGE,{maximumFractionDigits:4}).format(v);
+ const rows=Object.entries(config.drought_percent_years_by_biome).map(([biome,t])=>`<tr><td>${biome}</td><td>${format(t.p50)}%</td><td>${format(t.p75)}%</td><td>${t.n}</td></tr>`).join('');
+ return `<h3>${en?'Enabling conditions: methodology defined for this edition':'Condições para produzir: metodologia definida nesta edição'}</h3>${conditionsMethodDetails({reference:true})}<div class="atlas-query-table-wrap"><table class="data-table"><thead><tr><th>${en?'Drought reference biome':'Bioma de referência da seca'}</th><th>P50 (% ${en?'of years':'dos anos'})</th><th>P75 (% ${en?'of years':'dos anos'})</th><th>n</th></tr></thead><tbody>${rows}</tbody></table></div><p>${en?'The Pampa has no directly observed municipal drought reference in this snapshot. The Pantanal reference has only 8 municipalities and must be interpreted cautiously. Displayed thresholds are rounded; the JSON contains the exact limits.':'O Pampa não possui referência municipal de seca diretamente observada nesta base. A referência do Pantanal tem apenas 8 municípios e exige cautela na interpretação. Os limites exibidos são arredondados; o JSON contém os valores exatos.'}</p><p><a href="conditions_methodology_${en?'en':'pt'}.md">${en?'Full methodology':'Metodologia completa'}</a> · <a href="conditions_methodology.json">${en?'Exact thresholds and version':'Limites exatos e versão'}</a></p>`;
+}
+
 function opportunityNote(m){
   return m.qualidade==='Fora da faixa de classificação'
     ? (ATLAS_LANGUAGE==='en'?'Data available. Outside the cumulative 95% opportunity classification range; no score is assigned.':'Dado disponível. Fora da faixa de classificação de oportunidade de 95% acumulados; sem atribuição de pontos.')
@@ -2344,6 +2396,7 @@ function showView(name){
   });
   window.scrollTo({top:0, behavior:'auto'});
   if(name==='inicio'){ if(leafletMap) setTimeout(()=>leafletMap.invalidateSize(), 60); }
+  if(name==='consulta'){ renderAtlasQuery(); }
   if(name==='municipios'){ renderMunicipiosList(); }
   if(name==='comparar'){ renderComparePicker(); }
   if(name==='mercados'){ renderBuyerMarkets(); }
@@ -3187,7 +3240,7 @@ function renderFicha(m){
     <div class="municipal-scorecard" aria-label="Resumo municipal">
       <div class="score-tile opportunity explainable" tabindex="0" data-help="${en?'Pasture with low or medium plant vigour. It indicates room for improvement, not guaranteed production.':'Pastagem com vigor baixo ou médio. Indica espaço para melhorar, não produção garantida.'}"><div class="score-head"><div class="score-kicker">Oportunidade</div><div class="score-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c8 0 14-5 16-16-9 1-15 5-16 16Z"/><path d="M4 20c3-6 7-10 12-13"/></svg></div></div><div class="score-value">${fmtHa(m.oportunidade)}</div><div class="score-note">${fmtPct(m.participacaoOportunidade)} ${en?'of pasture could improve':'da pastagem pode melhorar'}</div></div>
       
-      <div class="score-tile pending explainable" tabindex="0" data-help="${en?'This class combines cattle scale and market access with drought, extension services, education, productive credit and persistent pasture improvement.':'Esta classe combina escala do rebanho e acesso ao mercado com seca, assistência, escolaridade, crédito produtivo e melhoria persistente do pasto.'}"><div class="score-head"><div class="score-kicker">Condições para produzir</div><div class="score-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2M16 3h5v5"/></svg></div></div><div class="score-value">${classLabel(m.condicoes)}</div><div class="score-note">${conditionsNote(m)}</div></div>
+      <div class="score-tile pending explainable" tabindex="0" data-help="${en?'This class combines market access, drought, extension services and education under the versioned Atlas rules.':'Esta classe combina acesso ao mercado, seca, assistência técnica e escolaridade conforme as regras versionadas do Atlas.'}"><div class="score-head"><div class="score-kicker">Condições para produzir</div><div class="score-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2M16 3h5v5"/></svg></div></div><div class="score-value">${classLabel(m.condicoes)}</div><div class="score-note">${conditionsNote(m)}</div></div>
       <div class="score-tile risk explainable" tabindex="0" data-help="${en?'A municipal warning based on recent environmental pressures. It does not judge every farm in the municipality.':'Alerta municipal baseado em pressões ambientais recentes. Não avalia cada imóvel do município.'}"><div class="score-head"><div class="score-kicker">Risco ambiental</div><div class="score-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 20h18Z"/><path d="M12 9v5M12 18h.01"/></svg></div></div><div class="score-value">${classLabel(m.risco)}</div><div class="score-note">${en?'Municipal screening; verify at farm level':'Triagem municipal; exige verificação no imóvel'}</div></div>
     </div>
 
@@ -3212,6 +3265,7 @@ function renderFicha(m){
       <div class="block">
         <h3><span class="n">2</span>Enabling conditions <button class="help-trigger" data-help="Fatores que ajudam ou dificultam a produção." aria-label="Explicar condições" aria-expanded="false">?</button></h3>
         <p style="margin-bottom:8px;">Classificação: <span class="class-pill" style="background:${CONDICOES_COR[m.condicoes]};color:${m.condicoes==='Adequadas'?'#FFF':'var(--ink)'}">${classLabel(m.condicoes)}</span></p>
+        ${conditionsMethodDetails(m)}
         <div class="stat-line"><span class="k">${en?'Total pasture area · 2025':'Área total de pastagem · 2025'}</span><span class="v">${fmtHa(m.pastureArea2025)}</span></div>
         <details class="distance-menu"><summary><span>${en?'Pasture P80 distance to any slaughterhouse':'Distância P80 da pastagem a qualquer frigorífico'}</span><strong>${fmtNum(m.distanciaP80Qualquer,' km')}</strong></summary>
           <div class="distance-menu-body">
@@ -3779,6 +3833,173 @@ function updateAtlasTranslations(){
 
 _atlasTranslationObserver.observe(document.body,{childList:true,subtree:true});
 
+/* ATLAS QUERY START */
+// Municipal query engine: combine measured values without recomputing scores.
+const ATLAS_QUERY_FIELDS=[
+ ['pastureArea2025','Pastagem total','Total pasture','ha','2025'],
+ ['oportunidade','Pasto de baixo e médio vigor','Low- and medium-vigour pasture','ha','2024'],
+ ['participacaoOportunidade','Parcela de pasto que pode melhorar','Share of pasture that could improve','%','2024'],
+ ['baixo','Pasto de baixo vigor','Low-vigour pasture','ha','2024'],
+ ['medio','Pasto de médio vigor','Medium-vigour pasture','ha','2024'],
+ ['alto','Pasto de alto vigor','High-vigour pasture','ha','2024'],
+ ['rebanho','Rebanho bovino','Cattle herd','cabeças','2024'],
+ ['distanciaP80Qualquer','Distância P80 a qualquer frigorífico','P80 distance to any slaughterhouse','km','2025'],
+ ['distanciaP80Sif','Distância P80 a SIF','P80 distance to SIF','km','2025'],
+ ['distanciaP80China','Distância P80 a SIF habilitado para China','P80 distance to China-approved SIF','km','2025'],
+ ['distanciaP80Eu','Distância P80 a SIF habilitado para UE','P80 distance to EU-approved SIF','km','2025'],
+ ['ater','Estabelecimentos com assistência técnica','Farms with extension services','%','2017'],
+ ['escolaridade','Produtores com ensino médio ou mais','Producers with secondary education or higher','%','2017'],
+ ['credito','Crédito por hectare de pasto de baixo e médio vigor','Credit per low- and medium-vigour hectare','R$/ha','2024; R$ de 2025'],
+ ['secaFreq','Frequência histórica de seca','Historical drought frequency','% dos anos','1984–2025'],
+ ['desmat','Variação anual da vegetação nativa (negativo = perda)','Annual native vegetation change (negative = loss)','%/ano','2022–2025'],
+ ['conversaoHa','Vegetação convertida em pastagem','Vegetation converted to pasture','ha','2022–2025'],
+ ['conversaoPct','Conversão em pastagem sobre supressão','Conversion to pasture as share of clearing','%','2022–2025'],
+ ['embargo','Área embargada','Embargoed area','ha',''],
+ ['embargoNumero','Número de embargos','Number of embargoes','n',''],
+ ['embargoPct','Área embargada sobre pastagem','Embargoed area as share of pasture','%',''],
+ ['vigorBaixoAltoHa','Melhoria persistente de baixo para alto vigor','Persistent improvement from low to high vigour','ha','2020–2024'],
+ ['vigorMedioAltoHa','Melhoria persistente de médio para alto vigor','Persistent improvement from medium to high vigour','ha','2020–2024'],
+ ['risco','Classe de risco ambiental','Environmental risk class','category',''],
+ ['riscoVegetacao','Risco de perda de vegetação','Native vegetation loss risk','category',''],
+ ['riscoConversao','Risco de conversão em pastagem','Pasture conversion risk','category',''],
+ ['riscoFloresta','Risco em floresta pública','Public forest risk','category',''],
+ ['riscoEmbargos','Risco por número de embargos','Embargo count risk','category',''],
+ ['riscoAreaEmbargada','Risco por área embargada','Embargoed area risk','category',''],
+ ['qualidade','Classe de oportunidade','Opportunity class','category',''],
+ ['condicoes','Classe de condições','Enabling conditions class','category',''],
+ ['condicoesCobertura','Cobertura dos indicadores de condições','Conditions indicator coverage','category',''],['secaStatus','Origem/qualidade da seca','Drought origin/quality','category',''],
+ ['uf','UF','State','category',''],['bioma','Bioma','Biome','category','']
+].map(([key,pt,en,unit,period])=>({key,pt,en,unit,period}));
+const ATLAS_QUERY_FIELD_MAP=Object.fromEntries(ATLAS_QUERY_FIELDS.map(field=>[field.key,field]));
+let atlasQueryState={mode:'all',rules:[],sort:'pastureArea2025',direction:'desc'};
+let atlasQueryPage=0,atlasQueryInitialized=false;
+function queryText(pt,en){return ATLAS_LANGUAGE==='en'?en:pt;}
+function queryEscape(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function queryUnit(field){return ATLAS_LANGUAGE==='en'?({'cabeças':'head','% dos anos':'% of years','%/ano':'%/year'})[field.unit]||field.unit:field.unit;}
+function queryFieldLabel(field){return `${ATLAS_LANGUAGE==='en'?field.en:field.pt}${field.unit==='category'?'':` (${queryUnit(field)})`}${field.period?' · '+(ATLAS_LANGUAGE==='en'?field.period.replace('R$ de 2025','2025 BRL'):field.period):''}`;}
+function queryMissing(value){return value===null||value===undefined||value===''||(typeof value==='number'&&!Number.isFinite(value))||value==='Dados insuficientes';}
+function validateAtlasQuery(state){
+ if(!state||!['all','any'].includes(state.mode)||!Array.isArray(state.rules)||state.rules.length>30||!Object.hasOwn(ATLAS_QUERY_FIELD_MAP,state.sort)||!['asc','desc'].includes(state.direction))throw new Error(queryText('Consulta inválida.','Invalid query.'));
+ state.rules.forEach((rule,i)=>{
+  const field=Object.hasOwn(ATLAS_QUERY_FIELD_MAP,rule.field)?ATLAS_QUERY_FIELD_MAP[rule.field]:null;
+  const allowed=field?.unit==='category'?['eq','ne','missing','present']:['gte','lte','gt','lt','eq','ne','missing','present'];
+  if(!field||!allowed.includes(rule.op))throw new Error(queryText(`Filtro ${i+1}: variável ou operação inválida.`,`Filter ${i+1}: invalid field or operator.`));
+  if(!['missing','present'].includes(rule.op)){
+   if(field.unit==='category'){if(typeof rule.value!=='string'||!rule.value.trim())throw new Error(queryText(`Escolha o valor do filtro ${i+1}.`,`Choose a value for filter ${i+1}.`));}
+   else if(typeof rule.value!=='number'||!Number.isFinite(rule.value))throw new Error(queryText(`Informe um número válido no filtro ${i+1}.`,`Enter a valid number in filter ${i+1}.`));
+  }
+ });
+ return state;
+}
+function queryValue(row,key){return key==='secaFreq'&&String(row.secaStatus||'').toLowerCase().includes('mediana')?null:row[key];}
+function matchesAtlasRule(row,rule){
+ const value=queryValue(row,rule.field),missing=queryMissing(value);
+ if(rule.op==='missing')return missing;
+ if(rule.op==='present')return !missing;
+ if(missing)return false;
+ if(ATLAS_QUERY_FIELD_MAP[rule.field].unit!=='category'&&!Number.isFinite(value))return false;
+ switch(rule.op){case 'gte':return value>=rule.value;case 'lte':return value<=rule.value;case 'gt':return value>rule.value;case 'lt':return value<rule.value;case 'eq':return value===rule.value;case 'ne':return value!==rule.value;default:return false;}
+}
+function runAtlasQuery(rows,state){
+ validateAtlasQuery(state);
+ const matches=rows.filter(row=>!state.rules.length||(state.mode==='all'?state.rules.every(rule=>matchesAtlasRule(row,rule)):state.rules.some(rule=>matchesAtlasRule(row,rule))));
+ return matches.sort((a,b)=>{
+  const av=queryValue(a,state.sort),bv=queryValue(b,state.sort),am=queryMissing(av),bm=queryMissing(bv);
+  if(am!==bm)return am?1:-1;
+  const order=state.sort.startsWith('risco')?{Verde:0,Amarelo:1,Vermelho:2}:state.sort==='condicoes'?{Limitadas:0,'Intermediárias':1,Adequadas:2}:null;
+  const cmp=am?0:order&&Object.hasOwn(order,av)&&Object.hasOwn(order,bv)?order[av]-order[bv]:typeof av==='number'&&typeof bv==='number'?av-bv:String(av).localeCompare(String(bv),'pt-BR');
+  return (state.direction==='desc'?-cmp:cmp)||String(a.codigo).localeCompare(String(b.codigo));
+ });
+}
+function atlasQueryPreset(rows){
+ return {mode:'all',rules:[
+  {field:'pastureArea2025',op:'gte',value:profileActualMedian(rows,'pastureArea2025')},
+  {field:'condicoes',op:'eq',value:'Adequadas'},
+  {field:'condicoesCobertura',op:'eq',value:'Completa'},
+  {field:'risco',op:'eq',value:'Verde'}],sort:'pastureArea2025',direction:'desc'};
+}
+function atlasQueryCsv(rows,state){
+ const columns=['codigo','nome',...ATLAS_QUERY_FIELDS.map(field=>field.key)];
+ const cell=value=>{let text=String(value??'');if(typeof value==='string'&&/^[=+\-@\t\r]/.test(text))text="'"+text;return '"'+text.replace(/"/g,'""')+'"';};
+ const header=columns.map(key=>{const f=ATLAS_QUERY_FIELD_MAP[key];return f?`${key} [${f.unit}${f.period?'; '+f.period:''}]`:key;});
+ return '\ufeff'+[header,...rows.map(row=>columns.map(key=>queryValue(row,key)??''))].map(row=>row.map(cell).join(',')).join('\r\n');
+}
+function queryDownload(content,type,name){const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function queryDisplay(value,key){if(queryMissing(value))return queryText('Não disponível','Not available');const field=ATLAS_QUERY_FIELD_MAP[key];if(field?.unit==='category')return classLabel(String(value));return new Intl.NumberFormat(ATLAS_LANGUAGE,{maximumFractionDigits:2}).format(value);}
+function renderAtlasQuery(){
+ if(!MUNICIPIOS.length)return;
+ const host=document.getElementById('atlas-query-root');if(!host)return;
+ const label=f=>queryEscape(queryFieldLabel(f));
+ const operators={gte:'≥',lte:'≤',gt:'>',lt:'<',eq:'=',ne:'≠',missing:queryText('Sem dado','Missing'),present:queryText('Com dado','Available')};
+ const fieldOptions=selected=>ATLAS_QUERY_FIELDS.map(f=>`<option value="${f.key}"${f.key===selected?' selected':''}>${label(f)}</option>`).join('');
+ const rules=atlasQueryState.rules.map((rule,i)=>{
+  const field=ATLAS_QUERY_FIELD_MAP[rule.field];const categorical=field.unit==='category';
+  const ops=categorical?['eq','ne','missing','present']:Object.keys(operators);
+  const options=[...new Set(MUNICIPIOS.map(row=>row[rule.field]).filter(v=>!queryMissing(v)))].sort();
+  const valueInput=['missing','present'].includes(rule.op)?'<span></span>':categorical?`<select data-rule="${i}" data-part="value" aria-label="${queryText('Valor','Value')} ${i+1}">${options.map(v=>`<option value="${queryEscape(v)}"${v===rule.value?' selected':''}>${queryEscape(classLabel(v))}</option>`).join('')}</select>`:`<input type="number" step="any" value="${Number.isFinite(rule.value)?rule.value:''}" data-rule="${i}" data-part="value" aria-label="${queryText('Valor','Value')} ${i+1}">`;
+  return `<div class="atlas-query-rule"><label><span>${queryText('Variável','Variable')} ${i+1}</span><select data-rule="${i}" data-part="field">${fieldOptions(rule.field)}</select></label><label><span>${queryText('Operação','Operator')}</span><select data-rule="${i}" data-part="op">${ops.map(op=>`<option value="${op}"${op===rule.op?' selected':''}>${queryEscape(operators[op])}</option>`).join('')}</select></label><label><span>${queryText('Valor','Value')}${categorical?'':' · '+queryUnit(field)}</span>${valueInput}</label><button class="btn small" data-query-action="remove" data-index="${i}" aria-label="${queryText('Remover filtro','Remove filter')} ${i+1}">×</button></div>`;
+ }).join('');
+ let results=[],error='';try{results=runAtlasQuery(MUNICIPIOS,atlasQueryState);}catch(e){error=e.message;}
+ const pages=Math.max(1,Math.ceil(results.length/50));atlasQueryPage=Math.min(atlasQueryPage,pages-1);
+ const shown=results.slice(atlasQueryPage*50,(atlasQueryPage+1)*50);
+ const columns=[...new Set(['pastureArea2025','oportunidade','distanciaP80Qualquer','ater','secaFreq','risco',...atlasQueryState.rules.map(r=>r.field)])].filter(k=>!['uf','bioma'].includes(k));
+ const sum=key=>results.reduce((s,row)=>s+(Number.isFinite(row[key])?row[key]:0),0);
+ const missing=atlasQueryState.rules.length?MUNICIPIOS.filter(row=>atlasQueryState.rules.some(rule=>!['missing','present'].includes(rule.op)&&queryMissing(queryValue(row,rule.field)))).length:0;
+ host.innerHTML=`<div class="section-head"><div><h2>${queryText('Cruzar variáveis','Query variables')}</h2><p class="desc">${queryText('Selecione municípios combinando pastagem, condições de produção e risco. Ajuste os limites nas unidades reais.','Select municipalities by combining pasture, production conditions and risk. Set thresholds in original units.')}</p></div></div>
+ <div class="atlas-query-controls"><button class="btn ochre" data-query-action="preset">${queryText('Exemplo: pastagem + condições + risco','Example: pasture + conditions + risk')}</button><button class="btn" data-query-action="reset">${queryText('Limpar consulta','Clear query')}</button></div>
+ <p class="atlas-query-note">${queryText('O exemplo seleciona pastagem ≥ mediana nacional, condições Adequadas com cobertura completa e risco Verde. Os limites e as classes podem ser ajustados.','The example selects pasture ≥ national median, Adequate conditions with complete coverage, and Green risk. Thresholds and classes can be adjusted.')}</p>
+ <div class="atlas-query-builder"><label>${queryText('Combinar filtros','Combine filters')} <select id="query-mode"><option value="all"${atlasQueryState.mode==='all'?' selected':''}>${queryText('TODOS (E)','ALL (AND)')}</option><option value="any"${atlasQueryState.mode==='any'?' selected':''}>${queryText('QUALQUER (OU)','ANY (OR)')}</option></select></label>${rules||`<p>${queryText('Sem filtros: todos os municípios. Adicione uma variável ou use o exemplo.','No filters: all municipalities. Add a variable or use the example.')}</p>`}<button class="btn" data-query-action="add"${atlasQueryState.rules.length>=30?' disabled':''}>+ ${queryText('Adicionar filtro','Add filter')}</button></div>
+ <p class="atlas-query-note">${queryText('Valores ausentes não satisfazem comparações numéricas ou de classe. Use “Sem dado” para procurá-los. Condições seguem a metodologia versionada do Atlas. Valores de seca imputados não atendem aos filtros numéricos; a origem consta no CSV.','Missing values do not satisfy numeric or class comparisons. Use “Missing” to find them. Conditions follow the versioned Atlas methodology. Imputed drought does not match numeric filters; its origin is included in the CSV.')}</p>
+ ${error?`<p role="alert" class="atlas-query-error">${queryEscape(error)}</p>`:`<div class="atlas-query-kpis" role="status"><div><strong>${results.length.toLocaleString(ATLAS_LANGUAGE)}</strong><span>${queryText('municípios selecionados','municipalities selected')}</span></div><div><strong>${fmtHa(sum('pastureArea2025'))}</strong><span>${queryText('pastagem selecionada · 2025','selected pasture · 2025')}</span></div><div><strong>${fmtHa(sum('oportunidade'))}</strong><span>${queryText('baixo e médio vigor · 2024','low and medium vigour · 2024')}</span></div></div>`}
+ <p class="atlas-query-note">${queryText(`${missing.toLocaleString('pt-BR')} municípios têm ausência em pelo menos uma variável comparada; em consultas OU, podem satisfazer outro filtro.`,`${missing.toLocaleString('en')} municipalities lack at least one compared variable; in OR queries they may still satisfy another filter.`)}</p>
+ <div class="atlas-query-controls"><label>${queryText('Ordenar por','Sort by')}<select id="query-sort">${fieldOptions(atlasQueryState.sort)}</select></label><label>${queryText('Ordem','Order')}<select id="query-direction"><option value="desc"${atlasQueryState.direction==='desc'?' selected':''}>${queryText('Maior → menor','Largest → smallest')}</option><option value="asc"${atlasQueryState.direction==='asc'?' selected':''}>${queryText('Menor → maior','Smallest → largest')}</option></select></label><button class="btn" data-query-action="csv"${error||!results.length?' disabled':''}>${queryText('Exportar seleção CSV','Export selection CSV')}</button><button class="btn" data-query-action="share"${error?' disabled':''}>${queryText('Link da consulta','Query link')}</button></div>
+ <div id="query-share"></div><p>${queryText('Clique no município para abrir sua ficha.','Select a municipality to open its profile.')}</p>
+ <div class="atlas-query-table-wrap" tabindex="0" aria-label="${queryText('Resultados da consulta, tabela com rolagem horizontal','Query results, horizontally scrollable table')}"><table class="data-table"><thead><tr><th>${queryText('Município','Municipality')}</th><th>UF</th><th>${queryText('Bioma','Biome')}</th>${columns.map(k=>`<th>${label(ATLAS_QUERY_FIELD_MAP[k])}</th>`).join('')}</tr></thead><tbody>${shown.map(row=>`<tr><td><button class="atlas-query-municipality" data-query-action="profile" data-code="${row.codigo}">${queryEscape(row.nome)}</button></td><td>${queryEscape(row.uf)}</td><td>${queryEscape(row.bioma)}</td>${columns.map(k=>`<td>${queryEscape(queryDisplay(queryValue(row,k),k))}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${columns.length+3}">${error?queryText('Corrija os filtros para consultar.','Correct the filters to run the query.'):queryText('Nenhum município atende aos filtros. Revise os limites ou use OU.','No municipality matches the filters. Adjust thresholds or use OR.')}</td></tr>`}</tbody></table></div>
+ <div class="atlas-query-controls"><button class="btn" data-query-action="prev"${atlasQueryPage===0?' disabled':''}>${queryText('Anterior','Previous')}</button><span>${queryText('Página','Page')} ${atlasQueryPage+1} / ${pages} · ${queryText('50 por página; CSV exporta todos os resultados','50 per page; CSV exports every result')}</span><button class="btn" data-query-action="next"${atlasQueryPage>=pages-1?' disabled':''}>${queryText('Próxima','Next')}</button></div><p class="atlas-query-note">${queryText('Fonte: mesma base municipal publicada no Atlas. Períodos e unidades constam nas fichas e nos cabeçalhos do CSV. O link guarda os critérios; os resultados acompanham a atualização da base.','Source: the same municipal dataset published in the Atlas. Periods and units are listed in profiles and CSV headers. The link saves criteria; results follow dataset updates.')}</p>`;
+}
+function queryHandleChange(event){
+ const element=event.target;
+ if(element.dataset.rule!==undefined){
+  const rule=atlasQueryState.rules[Number(element.dataset.rule)],part=element.dataset.part;
+  if(part==='field'){rule.field=element.value;rule.op=ATLAS_QUERY_FIELD_MAP[rule.field].unit==='category'?'eq':'gte';rule.value=rule.op==='eq'?[...new Set(MUNICIPIOS.map(r=>r[rule.field]).filter(v=>!queryMissing(v)))].sort()[0]:0;}
+  else if(part==='op'){rule.op=element.value;}
+  else rule.value=ATLAS_QUERY_FIELD_MAP[rule.field].unit==='category'?element.value:element.value.trim()===''?null:Number(element.value);
+ }else if(element.id==='query-mode')atlasQueryState.mode=element.value;
+ else if(element.id==='query-sort')atlasQueryState.sort=element.value;
+ else if(element.id==='query-direction')atlasQueryState.direction=element.value;
+ atlasQueryPage=0;renderAtlasQuery();
+}
+function queryHandleClick(event){
+ const button=event.target.closest('[data-query-action]');if(!button)return;
+ const action=button.dataset.queryAction;
+ if(action==='profile'){openFicha(button.dataset.code);return;}
+ if(action==='csv'){const rows=runAtlasQuery(MUNICIPIOS,atlasQueryState);queryDownload(atlasQueryCsv(rows,atlasQueryState),'text/csv;charset=utf-8','atlas_consulta_municipios.csv');return;}
+ if(action==='share'){
+  const url=new URL(location.href);url.searchParams.delete('atlasClickTest');url.searchParams.set('view','consulta');url.searchParams.set('query',JSON.stringify(atlasQueryState));
+  document.getElementById('query-share').innerHTML=`<label>${queryText('Copie este link','Copy this link')}<input readonly value="${queryEscape(url.href)}" aria-label="${queryText('Link da consulta','Query link')}"></label>`;
+  document.querySelector('#query-share input').select();return;
+ }
+ if(action==='preset')atlasQueryState=atlasQueryPreset(MUNICIPIOS);
+ if(action==='reset')atlasQueryState={mode:'all',rules:[],sort:'pastureArea2025',direction:'desc'};
+ if(action==='add'&&atlasQueryState.rules.length<30)atlasQueryState.rules.push({field:'pastureArea2025',op:'gte',value:0});
+ if(action==='remove')atlasQueryState.rules.splice(Number(button.dataset.index),1);
+ if(action==='prev')atlasQueryPage--;else if(action==='next')atlasQueryPage++;else atlasQueryPage=0;
+ renderAtlasQuery();
+}
+document.getElementById('atlas-query-root').addEventListener('change',queryHandleChange);
+document.getElementById('atlas-query-root').addEventListener('click',queryHandleClick);
+document.addEventListener('atlaslanguagechange',()=>{
+ const reference=document.getElementById('conditions-method-reference');if(reference)reference.innerHTML=conditionsReferenceHtml();
+ document.getElementById('nav-query').textContent=queryText('Consulta','Query');
+ if(!atlasQueryInitialized&&MUNICIPIOS.length){
+  atlasQueryInitialized=true;const params=new URLSearchParams(location.search);
+  if(params.has('query')){try{atlasQueryState=validateAtlasQuery(JSON.parse(params.get('query')));}catch(e){toast(e.message);}}
+  if(params.get('view')==='consulta'){showView('consulta');return;}
+ }
+ if(!document.getElementById('view-consulta').hidden)renderAtlasQuery();
+});
+
+/* ATLAS QUERY END */
 /* ================= INIT ================= */
 function setLoadingStage(percent,message){
   const bar=document.getElementById('loading-progress'),label=document.getElementById('loading-percent'),text=document.getElementById('loading-message');

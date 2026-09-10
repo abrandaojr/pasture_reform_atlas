@@ -6,6 +6,7 @@ import json
 import urllib.request
 import argparse
 import math
+import importlib.util
 from pathlib import Path
 
 SHEET_ID = "14Av0SULxF866ru53EWmAAhOZmk8PLWP21mcP4oPMm9Y"
@@ -14,6 +15,9 @@ URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv&gid=
 OUT = Path(__file__).with_name("atlas_data.json")
 EXCLUDED = {"4300001", "4300002"}  # IBGE operational water areas, not municipalities
 SUPPLEMENT = OUT.with_name("atlas_indicator_details.json")
+_conditions_spec = importlib.util.spec_from_file_location("atlas_conditions_methodology", OUT.with_name("conditions_methodology.py"))
+_conditions = importlib.util.module_from_spec(_conditions_spec)
+_conditions_spec.loader.exec_module(_conditions)
 DETAIL_FIELDS = {"codigo_ibge", "pasture_area_2025_ha"}
 DETAIL_FIELDS.update(f"distancia_p80_{k}_km" for k in ("qualquer", "sif", "sie", "sim", "consorcio", "china", "eu"))
 DETAIL_FIELDS.update(f"persistent_{kind}_{suffix}" for kind in ("low_high", "medium_high")
@@ -34,7 +38,7 @@ def prepare_snapshot(columns, rows, supplement):
 
     A missing score contributes no points; all missing remains undefined.
     Non-applicable public forest receives 100, as in the canonical CSV.
-    No market/drought score or new classification threshold is invented.
+    Market/drought scores follow the versioned conditions methodology.
     """
     if len(columns) != len(set(columns)):
         raise ValueError("Duplicate source columns")
@@ -80,7 +84,7 @@ def prepare_snapshot(columns, rows, supplement):
         result.append([row.get(name, "") for name in output_columns])
     if len(result) != 5571:
         raise ValueError(f"Expected 5,571 municipalities, received {len(result):,}")
-    return {"columns": output_columns, "rows": result}
+    return _conditions.apply_conditions({"columns": output_columns, "rows": result})
 
 
 def main():

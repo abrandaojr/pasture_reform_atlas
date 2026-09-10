@@ -1,0 +1,23 @@
+.atlas-query-controls{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:18px 0}
+.atlas-query-controls .btn.ochre{background:#9a6418!important;border-color:#9a6418!important;color:#fff!important}
+.atlas-query-controls label,.atlas-query-builder>label{display:grid;gap:6px;font-size:13px;font-weight:600}
+#atlas-query-root select,#atlas-query-root input{min-width:0;max-width:100%;padding:10px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font:inherit}
+.atlas-query-builder{padding:18px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.atlas-query-rule{display:grid;grid-template-columns:minmax(200px,2fr) minmax(90px,.6fr) minmax(120px,1fr) 44px;gap:12px;align-items:end;margin:15px 0}
+.atlas-query-rule label{display:grid;gap:6px;min-width:0;font-size:13px}
+.atlas-query-note{font-size:13px;line-height:1.5;color:var(--ink-soft);margin:12px 0}
+.atlas-query-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:18px 0}
+.atlas-query-kpis>div{display:grid;gap:6px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:10px}
+.atlas-query-kpis strong{font-size:23px}.atlas-query-kpis span{font-size:13px}
+.atlas-query-error{color:#8c2f2f;background:#fff0f0;padding:14px}
+.atlas-query-table-wrap{max-width:100%;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.atlas-query-table-wrap table{min-width:1100px;margin:0;background:#fff}
+.atlas-query-table-wrap th{white-space:normal;min-width:100px;font-size:12px;font-family:var(--font-ui);text-transform:none;letter-spacing:0;line-height:1.35;background:#183841}
+.atlas-query-table-wrap td{font-size:13px;text-align:right}
+.atlas-query-table-wrap td:nth-child(-n+3){text-align:left}
+.atlas-query-municipality{border:0;background:none;color:#235b78;padding:6px 0;cursor:pointer;text-align:left;font:inherit;text-decoration:underline}
+#query-share input{width:100%}#query-share label{display:grid;gap:8px}
+.conditions-method{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:8px;font-size:13px;line-height:1.5}.conditions-method summary{cursor:pointer;font-weight:700}.conditions-method ul{padding-left:20px}.conditions-method p{margin:10px 0}#conditions-method-reference{padding:18px;margin-bottom:20px;border:1px solid var(--line);border-radius:12px;background:#fff}#conditions-method-reference .data-table{min-width:520px}
+#view-metodologia>#conditions-method-reference{display:block!important}
+@media(max-width:760px){nav.main-nav{grid-template-columns:repeat(6,minmax(0,1fr))!important}.atlas-query-rule{grid-template-columns:minmax(0,1fr) 44px;gap:10px}.atlas-query-rule>label:first-child{grid-column:1/-1}.atlas-query-rule>label:nth-child(2){grid-column:1/-1}.atlas-query-kpis{grid-template-columns:1fr}.atlas-query-controls>label{width:100%}#atlas-query-root input,#atlas-query-root select{font-size:16px;min-height:44px}}
+@media(max-width:760px){.atlas-query-rule{grid-template-columns:minmax(65px,.6fr) minmax(0,1.4fr) 44px;gap:8px}.atlas-query-rule>label:nth-child(2){grid-column:auto}.atlas-query-builder{padding:12px}}
