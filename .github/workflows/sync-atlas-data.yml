@@ -26,6 +26,8 @@ jobs:
         run: node --v8-pool-size=1 test_profile_real_values.cjs
       - name: Validate variable queries
         run: node --v8-pool-size=1 test_atlas_query.cjs
+      - name: Validate allocation scenarios
+        run: node --v8-pool-size=1 test_atlas_simulation.cjs
       - name: Refresh the public cache version
         run: |
           version="$(sha256sum index.html atlas_data.json municipal_geometry.json | sha256sum | cut -c1-12)"
