@@ -1376,6 +1376,26 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{overflow-x:hidden
 @media(hover:none){button:hover,a:hover{transform:none!important}.panel,.card,.score-tile{transition:none!important}}
 
 </style>
+<style id="profile-real-values-style">.profile-real-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}
+.profile-real-metric{min-width:0;padding:16px;background:#fff;border:1px solid var(--line);border-radius:10px}
+.profile-real-metric h4{margin:0 0 14px;font-size:14px;line-height:1.4}
+.profile-real-metric h4>small{display:block;font-size:12px;font-weight:400;color:var(--ink-soft)}
+.profile-real-row{display:grid;grid-template-columns:minmax(90px,1fr) minmax(60px,1.2fr) minmax(95px,1fr);align-items:center;gap:12px;margin:10px 0;font-size:12px}
+.profile-real-name{overflow-wrap:anywhere;line-height:1.3}
+.profile-real-row>strong{text-align:right;font-variant-numeric:tabular-nums;font-size:13px}
+.profile-real-row small{font-size:12px;font-weight:400}
+.profile-real-track{height:9px;background:#f0f1f0;border-left:1px solid #707775;position:relative}
+.profile-real-bar{height:100%;display:block;background:#9a6418}
+.profile-real-row.biome .profile-real-bar{background:#477b91}
+.profile-real-row.brazil .profile-real-bar{background:#7b827e}
+.profile-real-row.peer .profile-real-bar{background:#7c4a91}
+.profile-real-axis{display:flex;justify-content:space-between;gap:8px;margin-top:12px;color:var(--ink-soft);font-size:12px;border-top:1px solid var(--line);padding-top:6px}
+.profile-real-class{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:12px 0;font-size:13px}
+.profile-real-class>strong{text-align:right}
+.profile-real-note{font-size:12px!important;color:var(--ink-soft);line-height:1.5;margin-top:18px}
+@media(max-width:1000px){.profile-real-grid{grid-template-columns:1fr}}
+@media(max-width:520px){.profile-real-row{grid-template-columns:minmax(72px,1fr) minmax(36px,.8fr) minmax(80px,1fr);gap:8px}.profile-real-metric{padding:12px}}
+</style>
 </head>
 <body>
 
@@ -3056,43 +3076,67 @@ function setProfilePeer(label,currentCode){
   PROFILE_PEER_CODE=peer&&peer.codigo!==currentCode?peer.codigo:'';
   openFicha(currentCode);
 }
+function profileRealMetrics(en){
+  return [
+    {key:'oportunidade',label:en?'Low- and medium-vigour pasture':'Pastagem de baixo e médio vigor',unit:'ha',period:'2024',digits:0},
+    {key:'participacaoOportunidade',label:en?'Share of pasture that could improve':'Parcela da pastagem que pode melhorar',unit:'%',period:'2024',digits:1},
+    {key:'rebanho',label:en?'Cattle herd':'Rebanho bovino',unit:en?'head':'cabeças',period:'2024',digits:0},
+    {key:'distanciaP80Qualquer',label:en?'Pasture P80 distance to slaughterhouses':'Distância P80 da pastagem a frigoríficos',unit:'km',period:'2025',digits:1},
+    {key:'secaFreq',label:en?'Historical drought frequency':'Frequência histórica de seca',unit:en?'% of years':'% dos anos',period:'1984–2025',digits:1},
+    {key:'ater',label:en?'Farms with extension services':'Estabelecimentos com assistência técnica',unit:'%',period:'2017',digits:1},
+    {key:'escolaridade',label:en?'Producers with secondary education or higher':'Produtores com ensino médio ou mais',unit:'%',period:'2017',digits:1},
+    {key:'credito',label:en?'Credit per low- and medium-vigour hectare':'Crédito por hectare de pasto de baixo e médio vigor',unit:'R$/ha',period:en?'2024 · 2025 prices':'2024 · preços de 2025',digits:1}
+  ];
+}
+function profileActualMedian(rows,key){
+  const values=rows.map(row=>row[key]).filter(Number.isFinite).sort((a,b)=>a-b);
+  if(!values.length)return null;
+  const middle=Math.floor(values.length/2);
+  return values.length%2?values[middle]:(values[middle-1]+values[middle])/2;
+}
+function profileRiskClass(rows){
+  const counts=new Map();
+  rows.forEach(row=>{if(['Verde','Amarelo','Vermelho'].includes(row.risco))counts.set(row.risco,(counts.get(row.risco)||0)+1);});
+  if(!counts.size)return null;
+  const largest=Math.max(...counts.values());
+  return [...counts].filter(([,n])=>n===largest).map(([label])=>classLabel(label)).join(' / ');
+}
+function profileAxisMaximum(values){
+  const max=Math.max(0,...values.filter(Number.isFinite));
+  if(max===0)return null;
+  const power=10**Math.floor(Math.log10(max));
+  return Math.ceil(max/power)*power;
+}
+function profileRealNumber(value,metric){
+  if(!Number.isFinite(value))return ATLAS_LANGUAGE==='en'?'Not available':'Não disponível';
+  return new Intl.NumberFormat(ATLAS_LANGUAGE,{maximumFractionDigits:value!==0&&Math.abs(value)<1?2:metric.digits}).format(value);
+}
 function spiderDiagram(m){
-  const en=ATLAS_LANGUAGE==='en', peers=biomaPeers(m), national=MUNICIPIOS;
-  const sortedField=k=>national.map(y=>y[k]).filter(Number.isFinite).sort((a,b)=>a-b);
-  const oportSorted=sortedField('participacaoOportunidade'), rebanhoSorted=sortedField('rebanho'),
-    distSorted=sortedField('distanciaP80Qualquer'), aterSorted=sortedField('ater'),
-    escolSorted=sortedField('escolaridade'), creditoSorted=sortedField('credito');
-  const rankIn=(value,sorted)=>{
-    if(!Number.isFinite(value)||!sorted.length) return null;
-    let count=0; while(count<sorted.length&&sorted[count]<=value) count++;
-    return Math.max(0,Math.min(100,count/sorted.length*100));
-  };
-  const riskScore=x=>({Verde:100,Amarelo:50,Vermelho:0})[x.risco];
-  const localScore=x=>{
-    const values=[rankIn(x.ater,aterSorted),rankIn(x.escolaridade,escolSorted),rankIn(x.credito,creditoSorted)].filter(Number.isFinite);
-    return values.length?values.reduce((a,b)=>a+b,0)/values.length:null;
-  };
-  const scoreCache=new Map();
-  const score=x=>{
-    if(scoreCache.has(x.codigo)) return scoreCache.get(x.codigo);
-    const s=[
-      rankIn(x.participacaoOportunidade,oportSorted),
-      rankIn(x.rebanho,rebanhoSorted),
-      Number.isFinite(x.distanciaP80Qualquer)?100-rankIn(x.distanciaP80Qualquer,distSorted):null,
-      Number.isFinite(x.secaFreq)?Math.max(0,100-x.secaFreq):null,
-      localScore(x),riskScore(x)
-    ];
-    scoreCache.set(x.codigo,s);
-    return s;
-  };
-  const municipal=score(m), groupMedian=(rows,i)=>median(rows.map(x=>score(x)[i]).filter(Number.isFinite));
-  const biome=municipal.map((_,i)=>groupMedian(peers,i)), brazil=municipal.map((_,i)=>groupMedian(national,i));
-  const peer=MUNICIPIOS.find(x=>x.codigo===PROFILE_PEER_CODE), peerValues=peer?score(peer):null;
-  const labels=en?['Opportunity','Herd scale','Market access','Drought resilience','Local capacity','Environmental safety']:['Oportunidade','Escala do rebanho','Acesso ao mercado','Resiliência à seca','Capacidade local','Segurança ambiental'];
-  const value=(v,cls,label)=>Number.isFinite(v)?`<span class="profile-dot ${cls}" style="left:${Math.max(0,Math.min(100,v))}%" title="${label}: ${Math.round(v)}"><b>${Math.round(v)}</b></span>`:'';
-  const rows=labels.map((label,i)=>`<div class="profile-axis"><strong>${label}</strong><div class="profile-track">${value(brazil[i],'brazil',en?'Brazil':'Brasil')}${value(biome[i],'biome',m.bioma)}${value(municipal[i],'municipal',m.nome)}${peerValues?value(peerValues[i],'peer',peer.nome):''}</div></div>`).join('');
-  const options=MUNICIPIOS.filter(x=>x.codigo!==m.codigo).map(x=>`<option value="${x.nome} — ${x.uf}"></option>`).join('');
-  return `<section class="spider-card profile-comparison"><div class="profile-comparison-head"><div><h3>${en?'Municipal profile at a glance':'Perfil municipal em uma visão'}</h3><p class="desc">${en?'Automatic comparison with the biome and Brazil. Values are relative positions from 0 to 100; farther right is better.':'Comparação automática com o bioma e o Brasil. Os valores são posições relativas de 0 a 100; mais à direita é melhor.'}</p></div><label>${en?'Compare another municipality':'Comparar com outro município'}<input list="profile-peer-options" placeholder="${en?'Type a municipality':'Digite um município'}" value="${peer?`${peer.nome} — ${peer.uf}`:''}" onchange="setProfilePeer(this.value,'${m.codigo}')"><datalist id="profile-peer-options">${options}</datalist></label></div><div class="spider-legend"><span><i class="legend-dot municipal"></i>${m.nome}</span><span><i class="legend-dot biome"></i>${m.bioma}</span><span><i class="legend-dot brazil"></i>${en?'Brazil':'Brasil'}</span>${peer?`<span><i class="legend-dot peer"></i>${peer.nome} — ${peer.uf}</span>`:''}</div><div class="profile-scale"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div><div class="profile-axis-list">${rows}</div></section>`;
+  const en=ATLAS_LANGUAGE==='en', peers=biomaPeers(m);
+  const peer=MUNICIPIOS.find(x=>x.codigo===PROFILE_PEER_CODE);
+  const groups=[{name:m.nome,kind:'municipal',record:m},
+    {name:en?`${m.bioma} · median`:`${m.bioma} · mediana`,kind:'biome',members:peers},
+    {name:en?'Brazil · median':'Brasil · mediana',kind:'brazil',members:MUNICIPIOS}];
+  if(peer)groups.push({name:`${peer.nome} — ${peer.uf}`,kind:'peer',record:peer});
+  const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const cards=profileRealMetrics(en).map(metric=>{
+    const values=groups.map(group=>group.record?group.record[metric.key]:profileActualMedian(group.members,metric.key));
+    const maximum=profileAxisMaximum(values);
+    const rows=groups.map((group,i)=>{
+      const value=values[i],valid=Number.isFinite(value);
+      const position=valid&&maximum?value/maximum*100:0;
+      return `<div class="profile-real-row ${group.kind}" data-series="${group.kind}" data-value="${valid?value:''}"><span class="profile-real-name">${escape(group.name)}</span><div class="profile-real-track" aria-hidden="true">${valid?`<span class="profile-real-bar" style="width:${position}%"></span>`:''}</div><strong>${profileRealNumber(value,metric)}${valid?` <small>${metric.unit}</small>`:''}</strong></div>`;
+    }).join('');
+    const axis=maximum?`<div class="profile-real-axis">${en?'Bar scale':'Escala das barras'}: 0–${profileRealNumber(maximum,metric)} ${metric.unit}</div>`:'';
+    return `<article class="profile-real-metric" data-metric="${metric.key}" data-axis-max="${maximum??''}"><h4>${metric.label} <small>${metric.period}</small></h4>${rows}${axis}</article>`;
+  }).join('');
+  const risk=groups.map(group=>{
+    const label=group.record?classLabel(group.record.risco):profileRiskClass(group.members);
+    const name=group.record?group.name:group.kind==='brazil'?(en?'Brazil · most frequent class':'Brasil · classe mais frequente'):`${m.bioma} · ${en?'most frequent class':'classe mais frequente'}`;
+    return `<div class="profile-real-class ${group.kind}"><span>${escape(name)}</span><strong>${label|| (en?'Not available':'Não disponível')}</strong></div>`;
+  }).join('');
+  const options=MUNICIPIOS.filter(x=>x.codigo!==m.codigo).map(x=>`<option value="${escape(`${x.nome} — ${x.uf}`)}"></option>`).join('');
+  return `<section class="spider-card profile-comparison profile-real-values"><div class="profile-comparison-head"><div><h3>${en?'Municipal profile in original units':'Perfil municipal nas unidades originais'}</h3><p class="desc">${en?'Observed values compared with municipal medians for the biome and Brazil. Each indicator has its own scale and unit; larger values are not necessarily better.':'Valores observados comparados às medianas municipais do bioma e do Brasil. Cada indicador tem sua escala e unidade; valores maiores não são necessariamente melhores.'}</p></div><label>${en?'Compare another municipality':'Comparar com outro município'}<input list="profile-peer-options" placeholder="${en?'Type a municipality':'Digite um município'}" value="${peer?escape(`${peer.nome} — ${peer.uf}`):''}" onchange="setProfilePeer(this.value,'${m.codigo}')"><datalist id="profile-peer-options">${options}</datalist></label></div><div class="profile-real-grid">${cards}<article class="profile-real-metric profile-real-risk"><h4>${en?'Environmental risk class':'Classe de risco ambiental'}</h4>${risk}</article></div><p class="profile-real-note">${en?'Sources: Atlas municipal indicators (MapBiomas, IBGE, FAO, slaughterhouse registers and rural credit). Reference periods are shown for each indicator. Medians use municipalities with available values, without area weighting. Risk comparisons show the most frequent class; ties are shown together.':'Fontes: indicadores municipais do Atlas (MapBiomas, IBGE, FAO, cadastros de frigoríficos e crédito rural). Períodos indicados em cada indicador. Medianas dos municípios com valores disponíveis, sem ponderação por área. O risco mostra a classe mais frequente; empates aparecem juntos.'}</p></section>`;
 }
 
 function interpretationText(m){

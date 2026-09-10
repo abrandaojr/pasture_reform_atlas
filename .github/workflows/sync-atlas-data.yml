@@ -22,6 +22,8 @@ jobs:
         run: python3 sync_google_sheet.py
       - name: Validate municipal data before publishing
         run: python3 -m unittest test_sync_google_sheet -v
+      - name: Validate profile in original units
+        run: node --v8-pool-size=1 test_profile_real_values.cjs
       - name: Refresh the public cache version
         run: |
           version="$(sha256sum index.html atlas_data.json municipal_geometry.json | sha256sum | cut -c1-12)"
