@@ -3,8 +3,10 @@
 if(window.ATLAS_INDICATOR_DISPLAY_INSTALLED)return;
 window.ATLAS_INDICATOR_DISPLAY_INSTALLED=true;
 const css=document.createElement('style');css.id='atlas-municipal-five-class-style';css.textContent='.map-workspace.has-result .map-legend-card.municipal-five-active{display:block}.municipal-five-active .municipal-five-class{align-items:flex-start}.municipal-five-active .dot{flex-shrink:0;margin-top:3px}.municipal-five-active small{white-space:nowrap}.municipal-five-active .municipal-five-class>span:last-child{min-width:0;overflow-wrap:anywhere;line-height:1.2}@media(max-width:760px){body.imazon-atlas .map-legend-card.municipal-five-active,body.imazon-atlas .map-workspace.has-result .map-legend-card.municipal-five-active{top:60px;bottom:auto;left:54px;right:14px;max-width:none;font-size:11px;padding:6px 8px}.map-legend-card.municipal-five-active .map-legend-items{grid-template-columns:minmax(0,1fr);gap:2px}.municipal-five-active .map-partial-key,.municipal-five-active .herd-map-note{grid-column:1/-1;max-width:none}.municipal-five-active .herd-map-note,.municipal-five-active .map-partial-key{font-size:9px;line-height:1.2;margin-top:0}.municipal-five-active .map-partial-key:before{height:9px;width:12px;top:1px}body.imazon-atlas .map-workspace.municipal-five-map-active .map-result-panel .map-mini-row{padding:3px 0}body.imazon-atlas .map-workspace.municipal-five-map-active .map-drought-value>span:first-child{font-size:11px;line-height:1.2}body.imazon-atlas .map-workspace.municipal-five-map-active .map-drought-coverage{font-size:10px;line-height:1.25;margin:3px 0}body.imazon-atlas .municipal-five-map-active #map-open-diagnosis{position:sticky;bottom:0;z-index:1}}';document.head.appendChild(css);
-const colors=['#c40000','#ff7510','#ffff30','#9ae713','#2fcd00'];
-const herd=['#d9d9d9','#facc15','#fb923c','#ea580c','#b91c1c'];
+const colors=['#a63d40','#ad5a17','#9b7415','#3f7d55','#176348'];
+const blues=['#dce8f1','#b4ccdf','#86adc9','#557f9f','#305d7d'];
+const palette=id=>id==='1'?herd:(id==='2'||id==='opportunity'?blues:colors);
+const herd=['#e0e3e1','#bac1bd','#909b95','#66776e','#394e43'];
 const missing='#b7bdb8',patterns=new Map();let overrides={},queued=false,ready=false;
 const finite=v=>typeof v==='number'&&Number.isFinite(v);
 const en=()=>/^en\b/i.test(document.documentElement.lang);
@@ -25,7 +27,7 @@ function classify(m,id){
   const i=id==='opportunity'?2:Number(id);score=i===1?m.context_score_informative:m['ind'+String(i).padStart(2,'0')+'_score'];
   index=finite(score)?Math.max(0,Math.min(4,Math.ceil(score/20)-1)):null;
  }
- return{index,color:index===null?missing:(id==='1'?herd:colors)[index],partial,score:finite(score)?score:null};
+ return{index,color:index===null?missing:palette(id)[index],partial,score:finite(score)?score:null};
 }
 function hatch(color){
  if(!patterns.has(color)){const c=document.createElement('canvas');c.width=c.height=9;const x=c.getContext('2d');x.fillStyle=color;x.fillRect(0,0,9,9);x.strokeStyle='#26332e88';x.lineWidth=1.3;x.beginPath();x.moveTo(-2,2);x.lineTo(2,-2);x.moveTo(0,9);x.lineTo(9,0);x.moveTo(7,11);x.lineTo(11,7);x.stroke();patterns.set(color,x.createPattern(c,'repeat'));}
@@ -80,10 +82,10 @@ function apply(){
   if(included){if(c.index===null)absent++;else counts[c.index]++;if(c.partial)partialCount++;}
  });
  const target=document.getElementById('map-legend-items'),heading=document.getElementById('map-legend-title');
- if(target&&heading){target.closest('.map-legend-card')?.classList.add('municipal-five-active');heading.textContent=title(id);const labels=classLabels(id),palette=id==='1'?herd:colors;
-  target.innerHTML=labels.map((label,i)=>'<span class="herd-map-range municipal-five-class" data-class="'+i+'" data-color="'+palette[i]+'" data-count="'+counts[i]+'"><span class="dot" style="background:'+palette[i]+'"></span><span>'+esc(label)+' · '+esc(rangeLabel(id,i))+' <small>('+number(counts[i])+')</small></span></span>').join('')+'<span class="herd-map-range municipal-missing-key" data-count="'+absent+'"><span class="dot" style="background:'+missing+'"></span>'+tr('Sem nota calculável','No calculable score')+' ('+number(absent)+')</span>'+(id==='conditions'||id==='risk'?'<span class="map-partial-key">'+tr('Hachura = dados parciais; (n) = municípios.','Hatching = partial data; (n) = municipalities.')+'</span>':'<span class="herd-map-note">'+tr('(n) = municípios no recorte.','(n) = municipalities in scope.')+'</span>');
+ if(target&&heading){target.closest('.map-legend-card')?.classList.add('municipal-five-active');heading.textContent=title(id);const labels=classLabels(id),legendPalette=palette(id);
+  target.innerHTML=labels.map((label,i)=>'<span class="herd-map-range municipal-five-class" data-class="'+i+'" data-color="'+legendPalette[i]+'" data-count="'+counts[i]+'"><span class="dot" style="background:'+legendPalette[i]+'"></span><span>'+esc(label)+' · '+esc(rangeLabel(id,i))+' <small>('+number(counts[i])+')</small></span></span>').join('')+'<span class="herd-map-range municipal-missing-key" data-count="'+absent+'"><span class="dot" style="background:'+missing+'"></span>'+tr('Sem nota calculável','No calculable score')+' ('+number(absent)+')</span>'+(id==='conditions'||id==='risk'?'<span class="map-partial-key">'+tr('Hachura = dados parciais; (n) = municípios.','Hatching = partial data; (n) = municipalities.')+'</span>':'<span class="herd-map-note">'+tr('(n) = municípios no recorte.','(n) = municipalities in scope.')+'</span>');
  }
- syncResult();fitPanels();window.ATLAS_INDICATOR_DISPLAY_ACTIVE=true;window.ATLAS_INDICATOR_DISPLAY_STATE={theme:id,state,counts,missing:absent,partial:partialCount,municipal_paths:paths,colors:(id==='1'?herd:colors).slice()};
+ syncResult();fitPanels();window.ATLAS_INDICATOR_DISPLAY_ACTIVE=true;window.ATLAS_INDICATOR_DISPLAY_STATE={theme:id,state,counts,missing:absent,partial:partialCount,municipal_paths:paths,colors:palette(id).slice()};
 }
 function schedule(){if(!queued){queued=true;requestAnimationFrame(apply);}}
 window.ATLAS_INDICATOR_DISPLAY_SET_CONFIG=function(config){const metrics=config?.metrics||config||{};for(const[id,v]of Object.entries(metrics)){if(v.cuts&&(!Array.isArray(v.cuts)||v.cuts.length!==4||!v.cuts.every(finite)||v.cuts.some((x,i)=>i&&x<v.cuts[i-1])))throw new Error('Four ordered finite display cuts are required');if(v.labels&&v.labels.length!==5)throw new Error('Five display labels are required');overrides[id]={...overrides[id],...v};}schedule();};
