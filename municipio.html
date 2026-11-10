@@ -772,6 +772,34 @@ html[data-atlas-page=municipality] .lab-result{padding-top:6px;padding-bottom:6p
 html[data-atlas-page=municipality] .raw-value-space{height:26px}
 html[data-atlas-page=municipality] .group{margin-top:10px}
 html[data-atlas-page=municipality] .municipal-switch .search-band{display:block!important;padding-left:0;padding-right:0}
+
+html[data-atlas-page=municipality] .group-heading{font-size:17px;padding-top:16px;border-top:1px solid #dce4df;line-height:1.4}
+html[data-atlas-page=municipality] .raw-score-caption{font:11px/1.4 Arial,sans-serif;color:#4b5563;margin:3px 0 10px}
+html[data-atlas-page=municipality] .summary-title{font-weight:700;font-size:14px;line-height:1.4}
+html[data-atlas-page=municipality] .municipal-block-title{margin-top:22px!important}
+
+#municipal-scale-guide{border-top:1px solid #b8c8bd;border-bottom:1px solid #b8c8bd;padding:12px 0;margin:14px 0;font:12px/1.5 Arial,sans-serif;color:#374151}
+#municipal-scale-guide p{margin:5px 0}
+.scale-key{display:inline-block;width:10px;height:10px;margin-right:5px}
+.scale-bad{background:#c40000}.scale-good{background:#2fcd00}.scale-context{background:#737373}
+.opportunity-meaning{font:12px/1.45 Arial,sans-serif;color:#486b8a;margin-top:8px}
+html[data-atlas-page=municipality] .territory-chart-track>span{background:#737373}
+
+html[data-atlas-page=municipality] .municipal-question{max-width:1120px;margin:12px auto;border-top:1px solid #b8c8bd;padding:0 16px}
+html[data-atlas-page=municipality] .municipal-question>summary{font:700 17px/1.4 Arial,sans-serif;color:#124734;cursor:pointer;padding:16px 0;min-height:48px;box-sizing:border-box}
+html[data-atlas-page=municipality] .municipal-question>summary::marker{color:#486b8a}
+html[data-atlas-page=municipality] .municipal-question [hidden]{display:none!important}
+html[data-atlas-page=municipality] .municipal-question #indicadores{padding-top:0}
+html[data-atlas-page=municipality] .municipal-question .municipal-facts{margin-bottom:8px}
+html[data-atlas-page=municipality] .municipal-question .municipal-info{margin-bottom:8px}
+
+html[data-atlas-page=municipality] #municipal-diagnosis-title[hidden]{display:none!important}
+html[data-atlas-page=municipality] .summary-card[data-topic=opportunity] .summary-coverage{display:none}
+html[data-atlas-page=municipality] .municipal-question .summary-coverage{font-size:11px}
+
+.municipal-summary-list{padding-left:18px;margin:5px 0;font:12px/1.5 Arial,sans-serif}
+.municipal-summary-list li{margin:4px 0}
+html[data-atlas-page=municipality] .summary-card .summary-coverage[hidden]{display:none!important}
 </style><style id="atlas-embargo-classification-style">.embargo-official-classification{padding:10px 0 16px;border-bottom:1px solid #dce4df;margin-bottom:12px}.embargo-official-classification h3{font-size:14px;margin:0 0 10px}.embargo-class-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:12px;padding:10px 0;border-top:1px solid #edf0ee}.embargo-class-row b{display:block;font-size:13px;line-height:1.4}.embargo-class-row small{display:block;font-size:11px;line-height:1.5;color:#4b5563;margin-top:4px}.embargo-class-row>strong{font-size:20px;color:#124734}.embargo-class-anonymous,.embargo-class-definition p{font-size:11px;line-height:1.5;color:#4b5563;margin:7px 0}.embargo-class-definition>summary{font-size:12px;min-height:44px;display:flex;align-items:center;color:#006f35;cursor:pointer}.embargo-class-definition a{font-size:12px}.embargo-ranking-disclosure{margin:10px 0}.embargo-ranking-disclosure>summary{min-height:44px;display:flex;align-items:center;font-size:13px;font-weight:600;color:#006f35;cursor:pointer}.embargo-ranking-disclosure label{display:block;font-size:12px;margin:8px 0}.embargo-ranking-disclosure select{font-size:13px;max-width:100%;min-height:44px;padding:7px;border:1px solid #bcc8c0;border-radius:4px;background:#fff}.embargo-ranking-disclosure .territory-chart-track>span{background:#59636b}</style><style id="atlas-edgecase-layout">
 .municipal-density-caution{font-size:12px;line-height:1.45;color:#73511a;background:#fff7dd;padding:9px;margin-top:10px}.municipal-visible-coverage{display:block!important;margin-top:5px!important;font-size:12px!important}.map-base-status{max-width:calc(100% - 24px)!important;bottom:48px!important;white-space:normal!important;line-height:1.35!important}@media(max-width:680px){html[data-atlas-page=municipality] .summary-card{display:block!important}.municipal-risk-band-note{max-width:none!important;margin-top:6px}}
 </style><style id="atlas-map-note-stack">.map-footer-notes{position:absolute;z-index:600;bottom:50px;left:12px;right:12px;display:flex;flex-direction:column;align-items:flex-end;gap:4px;pointer-events:none}.map-footer-notes .map-base-status,.map-footer-notes .map-source-caption{position:static!important;max-width:100%!important;pointer-events:auto;text-align:left;margin:0;background:#fff8ed;padding:3px 6px;font-size:10px;line-height:1.3}.map-footer-notes .map-source-caption{background:#ffffffe8}.map-footer-notes .map-base-status[hidden]{display:none!important}.s9-scope-note{font-size:12px;line-height:1.45;color:#4b5563;margin-top:8px}@media(max-width:760px){body.imazon-atlas .basemap-unavailable .map-result-panel{bottom:122px!important}}</style><style id="atlas-municipal-beef-context-style">.beef-context{margin-top:16px;border-top:1px solid #dde5df;padding-top:12px}.beef-context h3{font-size:14px;margin:0 0 8px}.beef-distance{display:flex;gap:12px;justify-content:space-between;align-items:baseline;font-size:13px;margin:8px 0}.beef-distance strong{white-space:nowrap}.beef-context .beef-note{font-size:11px;line-height:1.5;color:#4b5563}.beef-details{margin:10px 0;border-top:1px solid #edf0ee}.beef-details summary{min-height:44px;display:flex;align-items:center;font-size:13px;font-weight:600;color:#006f35;cursor:pointer}.beef-details p{font-size:12px;line-height:1.5;overflow-wrap:anywhere}.beef-context a{color:#006f35}</style><style id="atlas-connected-navigation">:root{--imz-primary:#00843e;--imz-primary-dark:#007a33;--imz-deep:#003a34;--imz-text:#161616;--imz-text-2:#374151;--imz-border:#e5e7eb;--imz-bg-alt:#f5f6f0;--imz-font:'Nunito Sans',ui-sans-serif,-apple-system,'Segoe UI',Roboto,sans-serif}
@@ -803,7 +831,16 @@ body.imazon-atlas .map-base-status{left:14px;right:auto;z-index:600}
 
 /* Section hierarchy */
 .section>.step-label,.section>.section-head>div>.step-label{font-family:Arial,sans-serif;font-size:24px!important;line-height:1.25!important;font-weight:700!important;color:#005c30!important;padding:12px 16px!important;margin:0 0 16px!important;border-left:5px solid #00833e;background:#f0f6f2;letter-spacing:0!important}.section>.section-head{align-items:flex-start}#indicadores #indicators-title{font-size:17px!important;font-weight:400!important;line-height:1.4!important;margin:0 0 10px!important;color:#374151!important}@media(max-width:600px){.section>.step-label,.section>.section-head>div>.step-label{font-size:21px!important;padding:12px!important;border-left-width:4px}#indicadores #indicators-title{font-size:15px!important}}
-</style><script id="atlas-page-bootstrap">document.documentElement.dataset.atlasPage=location.pathname.split("/").pop()==="municipio.html"?"municipality":"map";</script><style id="atlas-progressive-loading">#atlas-load-status{font-size:12px;line-height:1.4;max-width:1280px;padding:6px 24px;margin:0 auto;color:#374151;background:#f5f6f0}html[data-atlas-load=core][data-atlas-page=municipality] #resumo,html[data-atlas-load=core][data-atlas-page=municipality] #indicadores{visibility:hidden}html[data-atlas-load=core] #map-workspace{visibility:hidden}html[data-atlas-page=map][data-atlas-load=core] #map-workspace,html[data-atlas-page=map][data-atlas-load=secondary] #map-workspace{height:calc(100dvh - 134px - var(--atlas-status-height,0px))}@media(min-width:681px){html[data-atlas-page=map][data-atlas-load=core] #map-workspace,html[data-atlas-page=map][data-atlas-load=secondary] #map-workspace{height:calc(100dvh - 130px - var(--atlas-status-height,0px))}}@media(max-width:680px){#atlas-load-status{padding-left:18px;padding-right:18px}}</style><script id="atlas-file-font-fallback">if(location.protocol==="file:"){const s=document.createElement("script");s.src="assets/atlas_runtime_72498f1f1a76eb49.js";document.head.append(s);}</script></head><body class="imazon-atlas">
+</style><script id="atlas-page-bootstrap">document.documentElement.dataset.atlasPage=location.pathname.split("/").pop()==="municipio.html"?"municipality":"map";</script><style id="atlas-progressive-loading">#atlas-load-status{font-size:12px;line-height:1.4;max-width:1280px;padding:6px 24px;margin:0 auto;color:#374151;background:#f5f6f0}html[data-atlas-load=core][data-atlas-page=municipality] #resumo,html[data-atlas-load=core][data-atlas-page=municipality] #indicadores{visibility:hidden}html[data-atlas-load=core] #map-workspace{visibility:hidden}html[data-atlas-page=map][data-atlas-load=core] #map-workspace,html[data-atlas-page=map][data-atlas-load=secondary] #map-workspace{height:calc(100dvh - 134px - var(--atlas-status-height,0px))}@media(min-width:681px){html[data-atlas-page=map][data-atlas-load=core] #map-workspace,html[data-atlas-page=map][data-atlas-load=secondary] #map-workspace{height:calc(100dvh - 130px - var(--atlas-status-height,0px))}}@media(max-width:680px){#atlas-load-status{padding-left:18px;padding-right:18px}}</style><script id="atlas-file-font-fallback">if(location.protocol==="file:"){const s=document.createElement("script");s.src="assets/atlas_runtime_72498f1f1a76eb49.js";document.head.append(s);}</script>
+
+
+
+
+
+
+
+<link data-atlas-clarity rel="stylesheet" href="assets/atlas_clarity_958598404dbec129.css">
+</head><body class="imazon-atlas">
 <header><div class="wrap masthead"><div class="imazon-brand-group"><img class="imazon-logo" src="assets/imazon_logo_d3341e207f39ce3c.png" alt="Logotipo do Imazon" width="1698" height="525"><a class="brand" href="#map-workspace" data-i18n="brand">Atlas da Pecuária</a></div><div class="language" aria-label="Idioma"><button id="lang-pt" aria-pressed="true">PT</button><button id="lang-en" aria-pressed="false">EN</button></div></div><div class="wrap search-band"><label for="municipality-search" class="search-label" data-i18n="choose">Escolha um município</label><div class="search-box"><input id="municipality-search" class="search-input" type="search" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="municipality-results" aria-autocomplete="list" placeholder="Nome, estado ou código IBGE"><button class="search-clear" id="clear-search" aria-label="Buscar outro município" title="Buscar outro município">×</button><div class="search-results" id="municipality-results" role="listbox" hidden></div></div><p class="visually-hidden" id="search-announcement" role="status"></p></div></header><nav class="stepnav" aria-label="Passos de leitura"><div class="wrap"><a href="#map-workspace"><span class="num">1</span><span data-i18n="navSummary">Resumo</span></a><a href="#indicadores"><span class="num">2</span><span data-i18n="navIndicators">Indicadores</span></a><a data-ranking-tab="true" href="ranking.html">Ranking</a><a href="#evidencias"><span class="num">3</span><span data-i18n="navEvidence">Fontes</span></a><a href="#metodo"><span class="num">4</span><span data-i18n="navMethod">Método</span></a></div></nav>
 
 <section class="map-workspace" id="map-workspace" aria-label="Mapa dos indicadores municipais"><aside class="map-sidebar" id="map-sidebar"><h2 id="map-sidebar-title">Explorar o mapa</h2><div class="map-search-slot"></div><label id="map-theme-label" for="map-theme">O que mostrar</label><select id="map-theme"></select><label id="map-state-label" for="map-state">Estado</label><select id="map-state"><option value="">Todos os estados</option></select><p class="map-side-help" id="map-side-help">Toque em um município para ver o diagnóstico.</p><div class="map-side-links"><a href="#metodo">Método</a><a href="#indicadores" data-current-analysis>Mais análises</a></div></aside><div class="map-canvas-area"><div id="atlas-entry-map" role="region" aria-label="Mapa interativo dos municípios brasileiros"></div><span class="map-loading" id="map-loading" role="status">Carregando o mapa…</span><button class="map-panel-toggle" id="map-panel-toggle" aria-controls="map-sidebar" aria-expanded="false">Buscar e filtrar</button><button class="map-reset" id="map-reset">Ver Brasil</button><div class="map-legend-card"><h3 id="map-legend-title"></h3><div class="map-legend-items" id="map-legend-items"></div></div><aside class="map-result-panel" id="map-result-panel" aria-live="polite" hidden><button class="map-result-close" id="map-result-close" aria-label="Fechar diagnóstico">×</button><h3 id="map-result-name"></h3><div id="map-result-values"></div><button class="button primary" id="map-open-diagnosis">Ver diagnóstico completo</button></aside><p class="map-source-caption">Limites IBGE 2024 · Exibição EPSG:3857 · Fontes e períodos no diagnóstico</p></div></section><main class="wrap" id="main">
@@ -1029,7 +1066,25 @@ body.imazon-atlas{font-family:var(--imz-font);color:var(--imz-text);background:#
 
 
 
-<script class="atlas-progressive-bootstrap" src="assets/atlas_runtime_e04d264c8cd381d1.js"></script>
+<script class="atlas-progressive-bootstrap" src="assets/atlas_runtime_a9bacebfdd1fa109.js"></script>
 <script data-chain-extension="municipio.html" src="assets/chain_access_27UF/manifest.js"></script>
 <script data-chain-extension="municipio.html" src="assets/chain_access/chain_access_distances.js"></script>
 <script data-chain-extension="municipio.html" src="assets/chain_access/supply_chain_navigation.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-atlas-clarity src="assets/atlas_clarity_f6248132e1919343.js"></script>
