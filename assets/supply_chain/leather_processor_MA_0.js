@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("leather_processor_MA_0",[{"id":"c2bff3e78b917704a6fd","name":"Maranhao Industria De Couros Ltda","category":"leather_processor","municipality":"2104552","lat":-5.74757,"lon":-47.35962,"source":"Trase","place":"Governador Edison Lobão · MA","radar_verde_plant_id":null}]);

@@ -1,0 +1,17 @@
+(function(){
+const municipal=location.pathname.split('/').pop()==='municipio.html';document.documentElement.dataset.atlasPage=municipal?'municipality':'map';
+function url(file,anchor=''){const p=new URLSearchParams();p.set('lang',lang);if(window.ATLAS_SELECTED_CODE)p.set('municipio',window.ATLAS_SELECTED_CODE);return file+'?'+p.toString()+(anchor?'#'+anchor:'');}
+function links(){
+ const nav=document.querySelectorAll('.stepnav a:not([data-ranking-tab])');if(nav.length===4){nav[0].href=url('Atlas.html','map-workspace');nav[1].href=municipal?'#indicadores':url('municipio.html','resumo');nav[2].href=url('Atlas.html','evidencias');nav[3].href=url('Atlas.html','metodo');nav.forEach((a,i)=>{a.removeAttribute('aria-current');if(i===(municipal?1:location.hash==='#evidencias'?2:location.hash==='#metodo'?3:0))a.setAttribute('aria-current','page');});nav[1].querySelector('[data-i18n]').textContent=tr('Resultados','Results');}
+ for(const key of ['methodsAction','reviewAction']){const a=document.querySelector('[data-i18n="'+key+'"]');if(a)a.href=url('Atlas.html','metodo');}
+ const more=document.querySelector('[data-current-analysis]');if(more){more.href=url('municipio.html','indicadores');more.textContent=tr('Ver resultados do município','View municipal results');}
+ const action=document.getElementById('map-open-diagnosis');action.textContent=tr('Ver resultados','View results');action.onclick=()=>{location.href=url('municipio.html','resumo');};
+ const mapLink=document.getElementById('map-link');if(mapLink)mapLink.href=url('Atlas.html','map-workspace');const brand=document.querySelector('a.brand');if(brand)brand.href=url('Atlas.html','map-workspace');
+ document.querySelectorAll('a[href="#current-embargo-summary"]').forEach(a=>{if(!municipal)a.href=url('municipio.html','current-embargo-summary');});document.querySelectorAll('a[href="#metodo"],a[href="#evidencias"]').forEach(a=>{if(municipal)a.href=url('Atlas.html',a.getAttribute('href').slice(1));});document.querySelectorAll('a[href="#indicadores"]').forEach(a=>{if(!municipal)a.href=url('municipio.html','indicadores');});
+ if(municipal){const next=new URL(location.href);next.searchParams.set('municipio',window.ATLAS_SELECTED_CODE);next.searchParams.set('lang',lang);history.replaceState(null,'',next);document.title=(byCode.get(String(window.ATLAS_SELECTED_CODE))?.nome||tr('Município','Municipality'))+' · '+tr('Atlas da Pecuária','Cattle and Pasture Atlas');}
+}
+if(municipal){const search=document.querySelector('#map-sidebar .search-band');if(search)document.querySelector('header').append(search);const back=document.createElement('a');back.className='municipality-back';back.id='municipality-back';document.getElementById('resumo').prepend(back);}
+const previousSelection=setMunicipality;setMunicipality=function(...args){const out=previousSelection(...args);links();if(municipal){const a=document.getElementById('municipality-back');a.href=url('Atlas.html','map-workspace');a.textContent=tr('Voltar ao mapa','Back to the map');}return out;};const previousLanguage=setLanguage;setLanguage=function(...args){const out=previousLanguage(...args);links();return out;};links();if(municipal){const a=document.getElementById('municipality-back');a.href=url('Atlas.html','map-workspace');a.textContent=tr('Voltar ao mapa','Back to the map');}
+window.addEventListener('hashchange',links);
+window.ATLAS_PAGE_READY=municipal?'municipality':'map';
+})();

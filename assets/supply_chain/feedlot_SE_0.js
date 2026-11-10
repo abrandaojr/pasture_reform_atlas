@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("feedlot_SE_0",[{"id":"3987cc5702d1c879e861","name":"Confinamento Nossa Senhora Aparecida","category":"feedlot","municipality":"2804508","lat":-10.1753722,"lon":-37.4624376,"source":"Google Maps","place":"Nossa Senhora da Glória · SE","radar_verde_plant_id":null}]);

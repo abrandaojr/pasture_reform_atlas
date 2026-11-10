@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("tannery_RR_0",[{"id":"db667c23bb34909b7ac1","name":"Curtume Santa Fé","category":"tannery","municipality":"1400100","lat":2.7698518,"lon":-60.7104721,"source":"Google Maps","place":"Boa Vista · RR","radar_verde_plant_id":null}]);

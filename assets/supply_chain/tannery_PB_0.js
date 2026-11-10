@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("tannery_PB_0",[{"id":"23dad7d752afb10c423d","name":"Curtume Miguel de Sousa Meira","category":"tannery","municipality":"2503100","lat":-7.426208099999999,"lon":-36.3727592,"source":"Google Maps","place":"Cabaceiras · PB","radar_verde_plant_id":null}]);

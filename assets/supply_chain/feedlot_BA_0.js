@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("feedlot_BA_0",[{"id":"c250630b5ea8d683b9bc","name":"NB Confinamento","category":"feedlot","municipality":"2919553","lat":-12.3102506,"lon":-45.8698863,"source":"Google Maps","place":"Luís Eduardo Magalhães · BA","radar_verde_plant_id":null}]);

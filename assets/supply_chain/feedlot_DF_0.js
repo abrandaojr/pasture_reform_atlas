@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("feedlot_DF_0",[{"id":"8cd50d5914a37cfa179a","name":"Confinamento DGP","category":"feedlot","municipality":"5300108","lat":-16.0217803,"lon":-48.138038099999996,"source":"Google Maps","place":"Brasília · DF","radar_verde_plant_id":null}]);

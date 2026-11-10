@@ -1,0 +1,330 @@
+{
+  "version": "atlas_municipal_share_S11_preview_20261109",
+  "status": "local_reconciliation_source_limits_disclosed",
+  "comparison": "national",
+  "source_document": "Metodologia_Atlas_V4.docx",
+  "internal_document_version": "Version 5, 16 September 2026",
+  "municipalities": 5571,
+  "final_typology_enabled": false,
+  "references": {
+    "assistencia_tecnica_pct": {
+      "n": 5563,
+      "cuts": [
+        6.473189607600001,
+        15.394695396000003,
+        28.962189428,
+        49.597858816000006
+      ]
+    },
+    "escolaridade_medio_pct": {
+      "n": 5561,
+      "cuts": [
+        11.041629444345183,
+        16.70258620689655,
+        23.66412213740458,
+        34.80441323971916
+      ]
+    },
+    "seca_freq_pct": {
+      "n": 4939,
+      "p50": 3.3773397982840034,
+      "cuts": null,
+      "p50_role": "Context only; does not define S4."
+    },
+    "supressao_media_ha_ano": {
+      "n": 5558,
+      "cuts": [
+        19.31795495402019,
+        60.769218176269554,
+        206.18324716674806,
+        758.8477693949377
+      ],
+      "p50": 109.50805894165072
+    },
+    "native_loss_rate": {
+      "n": 5569,
+      "cuts": [
+        0.0035976888384425774,
+        0.006304988942738374,
+        0.010266395535055891,
+        0.01791740250432273
+      ],
+      "source": "Observed 2022 native cohort outside current mapped TI and integral UC union, common valid 2023–2025 coverage; recomputed national quintiles",
+      "unit": "fraction per year"
+    },
+    "native_to_pasture_observed_raw_area_ha": {
+      "n": 5411,
+      "cuts": [
+        21.51,
+        101.25,
+        442.17,
+        1652.6699999999998
+      ],
+      "role": "legacy_reference_not_used_for_current_municipal_share_score"
+    },
+    "conversao_pct_supressao": {
+      "n": 5411,
+      "cuts": [
+        12.728995578016423,
+        28.86588971995129,
+        48.72810675562969,
+        68.03837459729812
+      ],
+      "role": "legacy_reference_not_used_for_current_municipal_share_score"
+    },
+    "pressao_floresta_publica_ha": {
+      "n": 449,
+      "cuts": [
+        9.684000000000008,
+        47.14200000000001,
+        124.16400000000003,
+        388.0980000000001
+      ],
+      "role": "legacy_reference_not_used_for_current_municipal_share_score"
+    },
+    "pressao_floresta_publica_pct": {
+      "n": 495,
+      "cuts": [
+        0.09533037242314087,
+        0.49826358343700217,
+        1.052005951877149,
+        1.9678960732517667
+      ],
+      "unit": "%",
+      "municipality_weights": "equal",
+      "observed_zeros_included": true,
+      "boundary_side": "right",
+      "role": "active_score_reference"
+    },
+    "embargos_numero": {
+      "n": 3781,
+      "cuts": [
+        2.0,
+        5.0,
+        14.0
+      ],
+      "quantiles": [
+        0.25,
+        0.5,
+        0.75
+      ],
+      "zero_is_separate": true
+    },
+    "embargo_area_ha": {
+      "n": 2674,
+      "cuts": [
+        3.3492423468691053,
+        19.92406230233898,
+        94.99744939304328,
+        525.2554145387606
+      ],
+      "quantiles": [
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ],
+      "zero_is_separate": true,
+      "role": "legacy_reference_not_used_for_current_municipal_share_score"
+    },
+    "participacao_baixo_medio_pct": {
+      "n": 5448,
+      "cuts": [
+        29.901438305016836,
+        50.419028805669136,
+        68.49783856412472,
+        82.97320173959868
+      ],
+      "unit": "%",
+      "municipality_weights": "equal",
+      "observed_zeros_included": true,
+      "boundary_side": "right",
+      "role": "active_score_reference"
+    },
+    "ind08_scored_ratio_pct": {
+      "n": 5461,
+      "cuts": [
+        12.59351620947631,
+        28.832166651932457,
+        48.655829500328544,
+        67.89309714462267
+      ],
+      "unit": "%",
+      "municipality_weights": "equal",
+      "observed_zeros_included": true,
+      "boundary_side": "right",
+      "role": "active_score_reference"
+    },
+    "s11_administrative_municipal_ratio_pct": {
+      "n": 4426,
+      "cuts": [
+        0.0,
+        1.3120509498953713e-05,
+        0.022087816731617187,
+        0.19835686018879153
+      ],
+      "unit": "%",
+      "municipality_weights": "equal",
+      "observed_zeros_included": true,
+      "boundary_side": "right",
+      "role": "active_score_reference"
+    }
+  },
+  "formulas": {
+    "context_and_opportunity": "S1 remains national cumulative mass of absolute cattle counts. S2 uses equal-municipality quintiles of low-plus-medium vigor pasture share.",
+    "conditions": "Conditions = 200 times the product of the observed factors S3/100, S4/100 and mean(observed S5,S6)/100. Omit an unavailable factor; report how many of S3 to S6 are observed. If all are missing, the result is missing.",
+    "risk": "Risk points = 5 times the mean of observed scores S7 to S11. Higher points mean lower observed pressure. Report component coverage; missing components can change comparability.",
+    "S4": "100-HDF",
+    "S11": "Inverse equal-municipality quintile of 100 * existing administrative embargo hectares / matched municipal territory hectares in BR_BDC_2. Unknown overlaps and declared hectares without usable polygons remain; this is an administrative ratio, not deduplicated spatial coverage. Missing administrative area stays missing.",
+    "S7": "S7 = inverse national quintile of 100 × mean annual first official native-vegetation loss 2023–2025 / observed 2022 native stock, both outside the union of mapped Indigenous lands and integral-protection conservation units and using the same pixels observed in all three years. Recomputed national cuts; larger rates receive lower notes.",
+    "S10": "S10 = cumulative mass (Pareto) of identified terms in descending order: 0 to 20% receives 20, above 20 to 40% receives 40, above 40 to 60% receives 60, above 60 to 80% receives 80, above 80% and zero terms receive 100. Team sheet of 21 October 2026.",
+    "opportunity": "S2 score from existing municipal percentage; missing share remains missing.",
+    "S2": "100 * low-and-medium-vigor pasture hectares / mapped pasture hectares; observed municipal percentages scored by unweighted national quintiles.",
+    "S8": "Inverse equal-municipality quintile of ind08_scored_ratio_pct, outside Pampa; hectares retained as context; no minimum with an area subscore.",
+    "S9": "Inverse equal-municipality quintile of pressao_floresta_publica_pct in mapped OPGT footprint; hectares retained as context; no minimum with an area subscore.",
+    "S7_whole_context": "100*(first official native loss 2023–2025 from the fully observed native 2022 cohort /3)/same fully observed native 2022 stock, whole municipality; outside TI/integral UC remains the active S7 score."
+  },
+  "adaptations": [
+    "The Word risk table has ambiguous direction. Inverse pressure scores preserve its stated risk meaning. This adaptation requires method acceptance.",
+    "Drought uses observed historical HDF as a proxy; S4 = 100 - HDF. Annual extent and cumulative exposure remain unavailable.",
+    "HDF coverage is diagnostic under the existing owner-approved no-coverage-gate rule. Do not reintroduce the Word 80% coverage threshold.",
+    "Distance retains the validated mesoregional pixel rule. National scoring comparisons do not replace this geographic distance benchmark.",
+    "Public forest uses observed conversion as a proxy for the unavailable union of all suppression and conversion.",
+    "No final typology is produced, following Word comment 1 and the launch workbook Version 2.",
+    "Support uses national empirical Q20/Q40/Q60/Q80. Each band includes its lower limit, as in Table 10 of the methodology.",
+    "Historical owner decision of 5 November 2026, already incorporated in the current topic formulas. Observed components are used and their coverage is reported. In conditions, an unavailable multiplicative factor is omitted, equivalent to 1, as stated in formulas.conditions. Risk uses five times the mean of observed S7–S11 scores. This note introduces no separate override. Credit and association results remain supplementary.",
+    "S2/S8/S9/S11 now use municipal percentage references with equal municipality weights; absolute hectares remain contextual. Explicit zero and missing rules apply."
+  ],
+  "independent_review": {
+    "status": "method_consultation_received",
+    "scope": "Consultation on supplied evidence only; not a raw-source recheck, human review or approval. Source reconstruction and spatial checks are separate evidence."
+  },
+  "editorial_update": {
+    "date": "2026-10-26",
+    "source_document": "Metodologia_Atlas_V5",
+    "url": "https://docs.google.com/document/d/13gR-xd1qYSc_PTTGMHsa8mbMTsp-JqeVbjVS2LGbhn8/edit",
+    "active_scores_recalculated": false,
+    "credit_role": "supplementary",
+    "risk_band_0_99_reachable": false,
+    "independent_review_of_new_edits": "unavailable"
+  },
+  "vigor_update": {
+    "date": "2026-10-27",
+    "collection": 11,
+    "year": 2025,
+    "other_component_scores_recalculated": false,
+    "page": "https://brasil.mapbiomas.org/downloads/mapas-para-download-geotiff/",
+    "url": "https://storage.googleapis.com/mapbiomas-public/initiatives/brazil/lulc/collection_11/pasture_vigor/pasture_vigor-brazil_classification_2025.tif",
+    "source_sha256": "6fb37123238eb853e00cafc4c2fee3decf115f97aadf80ec8dac1596c01fb70c",
+    "municipal_csv": "vigor2025_municipal.csv",
+    "credit_denominator": "Preserved 2024 low- and medium-vigor area",
+    "independent_review": "UNAVAILABLE for this update; earlier review scope is unchanged"
+  },
+  "previous_score_build_source_sha256": {
+    "outputs/05_final/municipal_observations.csv": "5f0774d836144d205ef39ef8670f55d5a25afa62bed2cd853ecdd81fce29ec7a",
+    "references/Metodologia_Atlas_V4.docx": "10053ce04b2560578cab8aa2d319e0bbf4542060316d944dfe6e657b5e4cc6b5",
+    "references/launch_schedule_20261019.xlsx": "3a3b2de55a2d4defb54dc598ac5c89906684d02295f63dafeb14f59410ee4af8",
+    "references/indicator_verification_20260916.xlsx": "d6a7fa98bbfe5371ce9e79445aa3f584dbe2a7fa3fca97a3d8bc4b481cd00ecf"
+  },
+  "active_data_sha256": {
+    "data/atlas_municipal_share_S11_active_preview_20261109.csv": "4262d94c835a62539057aff20018bf38d4010ffb41d9a42a06183689f9b1258d",
+    "assets/atlas_runtime_a5278779f66a0756.js": "a5278779f66a075693106dd8c76c1659922fc75fc4247d7ac7c4f35d5cf8e938"
+  },
+  "closure_20261030": {
+    "source_dates": {
+      "herd": 2025,
+      "vigor": 2025,
+      "census": 2017,
+      "landcover_transitions": "2022–2025",
+      "embargo": "2026-10-21"
+    },
+    "public_forest_absence": "structural non-applicability; no numeric score assigned",
+    "incomplete_embargo": "Administrative screening sum retained with unknown overlap, not a guaranteed spatial lower bound",
+    "vigor_parity": "Native versus analytical-grid differences quantified; exact agreement with an unspecified provider table is not claimed.",
+    "independent_review": "not requested; author validation only"
+  },
+  "review_20261103": {
+    "distance": "Observed area-weighted Q25/Q50/Q75 bands in each territory. S3 is the continuous area share in first two mesoregion bands. State, biome, municipal and national comparisons are separate; no binary 80% rule",
+    "embargo_count": "Historical review note. All environmental groups and positive distinct identifiers remain the source scope; unidentified rows remain separate. Current S10 follows formulas.S10 and the retained active eligibility and missing-data rules. This historical entry does not override active scoring or automatically withhold every incomplete count.",
+    "embargo_area": "Historical review note, superseded for active scoring by formulas.S11 and current_municipal_share_rules. The mapped polygon union remains contextual evidence. Active S11 uses the administrative-area/municipal-area ratio, with unknown overlap and declared hectares without usable polygons; it is not deduplicated mapped coverage.",
+    "public_forest": "Both 2025 pasture stock and unique new conversion 2022–2025, within OPGT GPFPND only. S9 keeps existing conversion definition; no extra weight",
+    "condition_bands": "Existing bands preserved as provisional; national transition matrix reports effects of continuous S3. Limits and first-two-band choice are implemented for owner review.",
+    "independent_review": "Two read-only automated model reviews and an assembly consultation received. These do not constitute human review, owner approval or national source certification."
+  },
+  "method_resolution_20261104": {
+    "S2": "GDAL exact transformation, identical national counts at 4096 and 2048 read windows with fixed internal warp blocks; no separate warp-block layout test; credit denominator 2024 preserved",
+    "S3": "Within mesoregional P50 favorable share; self-only references retain observation but no score; equal-width condition bands retained; relative access only",
+    "S4": "S4 = 100 - HDF. HDF is the mean, over every valid pixel of the FAO pasture layer (LC-G) at the 30% threshold (AL30) in the municipality, of the higher value of seasons 1 and 2. FAO marks the other pixels as outside its grassland mask, so a municipality without any valid pixel has no S4. Coverage is reported.",
+    "S8": "Superseded for current scores by current_municipal_share_rules and formulas; historical source scope remains in the bound audit.",
+    "S9": "Superseded for current scores by current_municipal_share_rules and formulas; historical source scope remains in the bound audit.",
+    "S10": "S10 = cumulative mass (Pareto) of identified terms in descending order: 0 to 20% receives 20, above 20 to 40% receives 40, above 40 to 60% receives 60, above 60 to 80% receives 80, above 80% and zero terms receive 100. Team sheet of 21 October 2026.",
+    "S11": "Superseded for current scores by current_municipal_share_rules and formulas; historical source scope remains in the bound audit.",
+    "risk": "Risk points = 5 times the mean of observed scores S7 to S11. Higher points mean lower observed pressure. Report component coverage; missing components can change comparability.",
+    "S7": "S7 = inverse national quintile of 100 × mean annual first official native-vegetation loss 2023–2025 / observed 2022 native stock, both outside the union of mapped Indigenous lands and integral-protection conservation units and using the same pixels observed in all three years. Recomputed national cuts; larger rates receive lower notes."
+  },
+  "owner_decisions_20261105": {
+    "S4": "FAO pasture layer only, at the 30% threshold.",
+    "topics": "A missing subitem does not make the topic result missing. The result is proportional.",
+    "S11": "The absence of S11 was an error. Use the embargo data that exist."
+  },
+  "conditions_partial_coverage": {
+    "missing_product_factor": "Equivalent to a factor of one; partial values can be structurally elevated. Missing factors must be named and cannot be described as equivalent to full coverage.",
+    "owner_method_clarification": "Requested comparison completed separately. Normalization was not adopted; existing formula retained."
+  },
+  "reconciliation_20261105": {
+    "s7_restored": 1,
+    "s8_corrected": 38,
+    "s10_integer_source_count_differences": 0,
+    "s5_s6_raw_sidra_reconstruction": "PASS",
+    "s2_municipal_lineage": "PASS_frozen_raster_aggregation",
+    "s2_external_provider_table": "not_obtained",
+    "embargo_area_label": "administrative_sum_overlap_unknown"
+  },
+  "document_review_20261106": {
+    "source": "Material de revisão - texto revisado.docx",
+    "S1": "Informative class score only; excluded from topic aggregates.",
+    "S2_S4_S5_S6": "Reviewed values preserved. Acceptance for this review is not independent source certification.",
+    "S3": "Worked calculation supplied; mesoregional pixel reference preserved.",
+    "S7": "Annual native-loss rate with recomputed national quintile thresholds for the revised S7 cohort.",
+    "S8_S9": "Superseded for current scores by current_municipal_share_rules and formulas; historical source scope remains in the bound audit.",
+    "S10": "Identified integer terms and tied-block Pareto cumulative mass.",
+    "S11": "Superseded for current scores by current_municipal_share_rules and formulas; historical source scope remains in the bound audit."
+  },
+  "native_loss_observed_cohort": {
+    "cuts_fraction": [
+      0.0035976888384425774,
+      0.006304988942738374,
+      0.010266395535055891,
+      0.01791740250432273
+    ],
+    "cuts_pct_year": [
+      0.35976888384425776,
+      0.6304988942738374,
+      1.0266395535055892,
+      1.7917402504322728
+    ],
+    "n_rate": 5569,
+    "method": "100*(first official loss outside fixed TI/integral UC mask among native2022 pixels observed in all2023–25/3)/same observed native2022 stock",
+    "time_mask": "Current all mapped Funai phases2026 and active integral UCs2025 mask, not historical enforcement or legal permission",
+    "risk_formula": "5*mean(observed S7–S11 notes); original document class intervals0–99,100–199,200–299,300–399,400–500 retained"
+  },
+  "historical_before_municipal_shares_20261109": {
+    "version": "atlas_document_review_20261106",
+    "active_data_sha256": {
+      "outputs/05_final/municipal_observations.csv": "fa254c97b4e8445e4d686e7064e7a16c2a041e645b0994fd08c0c94bd4257465",
+      "github_pages_repo/atlas_data.json": "ada4eb592197d98837b332e2218ea2ebb7ec4b58024777fbc20a06041ddd6872"
+    }
+  },
+  "active_preview_csv": "data/atlas_municipal_share_S11_active_preview_20261109.csv",
+  "current_municipal_share_rules": {
+    "date": "2026-11-09",
+    "zeros": "Observed zeros enter references. S2 zero receives 20; S8/S9/S11 zero receives 100.",
+    "ties": "Equal values share scores; boundaries use right-side insertion; tied cuts can leave empty bands.",
+    "missing": "No imputation. S2 has 123 missing ratios; S11 has 1145 missing administrative areas. Current eligibility scopes retained.",
+    "S7": "Two comparable rates use native 2022 common observed cohort; 5569 valid municipalities; outside TI/integralUC remains active.",
+    "S11_scope": "Unchanged all-flag administrative measure including recovered polygons and declared area, unknown overlap; no D-only filter.",
+    "S1_S10": "Absolute cattle and embargo-term counts unchanged.",
+    "FAO": "Original source display retains seven bands; municipal scoring display has five classes; S4 data unchanged.",
+    "preview_only": true
+  }
+}

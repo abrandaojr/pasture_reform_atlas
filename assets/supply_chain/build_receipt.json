@@ -1,0 +1,80 @@
+{
+  "status": "author_functional_checks_pass",
+  "page": "/home/abrandaojr/Amintas/imazon/02_projects/atlas_pasture/outputs/04_audits/corn_supply_chain_20261109/preview/cadeia.html",
+  "page_sha256": "25458be07b9b8bade48e7913d0f418e7a758ff73468b25a7f9e7c72700415385",
+  "source_core_csv_sha256": "569c777bc25677f60a4eda598fd34083b5cc1fb76b00a466f5e5759954e8846e",
+  "core_csv_unchanged": true,
+  "municipal_fields": [
+    "codigo_ibge",
+    "nome",
+    "uf",
+    "lon",
+    "lat"
+  ],
+  "municipalities": 5571,
+  "IBGE_border_geometry_source": "/home/abrandaojr/Amintas/imazon/02_projects/atlas_pasture/outputs/04_audits/corn_supply_chain_20261109/preview/assets/atlas_runtime_e578266e6684b54c.js",
+  "IBGE_border_geometry_source_sha256": "e578266e6684b54c8ac403a96b6d2f74bd33fd32579b3bba10cf04d64ece0b2f",
+  "border_coordinates_unchanged": true,
+  "business_rows": 66156,
+  "agency_rows": 1057,
+  "lazy_chunks": 226,
+  "lazy_records": 67213,
+  "initial_categories": [
+    "feedlot",
+    "boitel"
+  ],
+  "no_supermarkets_initially": true,
+  "source_files": {
+    "/home/abrandaojr/Amintas/imazon/02_projects/atlas_pasture/outputs/01_processing/municipal_context_20261106/business_entities.parquet": "5a838aa3777ce5ed6e9675c24db95d5f5152f7ffc9be73576027dee72fefad9b",
+    "/home/abrandaojr/Amintas/imazon/02_projects/atlas_pasture/outputs/04_audits/corn_supply_chain_20261109/distances/agency_points.parquet": "61eed594de3202b11553ae8fff6fac289a4a8f1163c210c6c80b24b7eeee4949"
+  },
+  "written_files": [
+    "/home/abrandaojr/Amintas/imazon/02_projects/atlas_pasture/outputs/04_audits/corn_supply_chain_20261109/preview/cadeia.html",
+    "/home/abrandaojr/Amintas/imazon/02_projects/atlas_pasture/outputs/04_audits/corn_supply_chain_20261109/preview/assets/supply_chain"
+  ],
+  "no_canonical_html_or_addon_changed": true,
+  "radar_zones": 172,
+  "radar_membership_join": "Exact source radar_verde source_id to plant_id,172one-to-one entities",
+  "radar_visual_generalization_m": 250,
+  "radar_analytical_geometry_unchanged": true,
+  "source_zone_metrics_not_inferred_from_display": true,
+  "stats80": "External pipeline addon byplant_id; placeholder explicitly retained until data are loaded.",
+  "qa": {
+    "file_widths": [
+      360,
+      390
+    ],
+    "http_widths": [
+      1280
+    ],
+    "Radar_URL75_PT_EN_mobile": [
+      360,
+      390
+    ],
+    "zero_page_errors": true,
+    "no_horizontal_overflow": true,
+    "supermarkets_not_loaded_initially": true,
+    "category_hide_show_pass": true,
+    "author_checks": true
+  },
+  "hooks": [
+    "window.ATLAS_SELECT_SLAUGHTERHOUSE(record)",
+    "atlas:slaughterhouse-selected",
+    "window.ATLAS_RADAR_SELECT_ZONE(plant_id)",
+    "atlas:radar-zone-selected",
+    "atlas:radar-zones-visibility",
+    "window.ATLAS_RADAR_ZONE_MAP",
+    "#radar-zone-metrics",
+    "#radar-zone-property-lines"
+  ],
+  "functional_check_evidence": [
+    "outputs/04_audits/corn_supply_chain_20261109/supply_page_checks/browser_functional_checks.json",
+    "outputs/04_audits/corn_supply_chain_20261109/supply_page_checks/radar_visual_functional_checks.json"
+  ],
+  "component_sha256": {
+    "cadeia.html": "25458be07b9b8bade48e7913d0f418e7a758ff73468b25a7f9e7c72700415385",
+    "assets/supply_chain/supply_chain_page.js": "55ecb84aa0a65b9523bedcfb6a3ad91655961e89551bd17ea6d03f0986ea2f94",
+    "assets/supply_chain_zones/supply_chain_radar_zones.js": "ca4f5e8010a0a342d494a3d7a0036931f353a0ae56e5301ecd7947adaf62fccc",
+    "assets/supply_chain_zones/manifest.js": "34145616e53d05e96ccc091eb5bd8c115adc49006ec51df4015b9659b8b93306"
+  }
+}

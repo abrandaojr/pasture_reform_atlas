@@ -1,0 +1,40 @@
+{
+  "steps": [
+    {
+      "command": [
+        "python3",
+        "shared/tools/ai_trace_guard.py",
+        "scan",
+        "imazon/02_projects/atlas_pasture/outputs/04_audits/corn_supply_chain_20261109/preview/cadeia.html"
+      ],
+      "returncode": 0,
+      "stdout": "\n1 files checked, 0 with findings.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "shared/tools/ai_trace_guard.py",
+        "clean",
+        "imazon/02_projects/atlas_pasture/outputs/04_audits/corn_supply_chain_20261109/preview/cadeia.html",
+        "--apply"
+      ],
+      "returncode": 0,
+      "stdout": "\n1 files checked, 0 changed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "shared/tools/ai_trace_guard.py",
+        "scan",
+        "imazon/02_projects/atlas_pasture/outputs/04_audits/corn_supply_chain_20261109/preview/cadeia.html"
+      ],
+      "returncode": 0,
+      "stdout": "\n1 files checked, 0 with findings.\n",
+      "stderr": ""
+    }
+  ],
+  "fix_step": "Initial scan zero findings; no repair needed.",
+  "scope": "HTML supported and checked. No coverage claim for JS/JSON/CSV."
+}

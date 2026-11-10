@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("leather_processor_MG_0",[{"id":"71e96318d2865ef8840d","name":"M M Lacerda Ratinho Couros Eireli Epp","category":"leather_processor","municipality":"3144706","lat":-19.75693,"lon":-43.01992,"source":"Trase","place":"Nova Era · MG","radar_verde_plant_id":null}]);

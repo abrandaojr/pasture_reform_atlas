@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("leather_processor_TO_0",[{"id":"08a275d6fac9ff39481b","name":"Durlicouros Industria E Comercio De Couros Ltda","category":"leather_processor","municipality":"1722081","lat":-6.92246,"lon":-48.00103,"source":"Trase","place":"Wanderlândia · TO","radar_verde_plant_id":null}]);

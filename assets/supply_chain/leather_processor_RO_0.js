@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("leather_processor_RO_0",[{"id":"63da064cc2a66e62e3c3","name":"Bluamerica Industria E Comercio De Couros Ltda","category":"leather_processor","municipality":"1100254","lat":-11.06288,"lon":-61.92897,"source":"Trase","place":"Presidente Médici · RO","radar_verde_plant_id":null}]);
