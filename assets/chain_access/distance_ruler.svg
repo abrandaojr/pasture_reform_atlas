@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg preserveAspectRatio="none" xmlns:xlink="http://www.w3.org/1999/xlink" width="524.454803pt" height="36.895748pt" viewBox="0 0 524.454803 36.895748" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-10T22:42:51.042570</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 36.895748 
+L 524.454803 36.895748 
+L 524.454803 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="line2d_1">
+    <path d="M 1.44 18.447874 
+L 523.014803 18.447874 
+" clip-path="url(#p2d6a4f82d1)" style="fill: none; stroke: #dce5df; stroke-width: 0.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 1.44 23.550236 
+L 1.44 13.345512 
+" clip-path="url(#p2d6a4f82d1)" style="fill: none; stroke: #dce5df; stroke-width: 0.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 131.833701 23.550236 
+L 131.833701 13.345512 
+" clip-path="url(#p2d6a4f82d1)" style="fill: none; stroke: #dce5df; stroke-width: 0.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 262.227402 23.550236 
+L 262.227402 13.345512 
+" clip-path="url(#p2d6a4f82d1)" style="fill: none; stroke: #dce5df; stroke-width: 0.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_5">
+    <path d="M 392.621102 23.550236 
+L 392.621102 13.345512 
+" clip-path="url(#p2d6a4f82d1)" style="fill: none; stroke: #dce5df; stroke-width: 0.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_6">
+    <path d="M 523.014803 23.550236 
+L 523.014803 13.345512 
+" clip-path="url(#p2d6a4f82d1)" style="fill: none; stroke: #dce5df; stroke-width: 0.5; stroke-linecap: square"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p2d6a4f82d1">
+   <rect x="1.44" y="1.44" width="521.574803" height="34.015748"/>
+  </clipPath>
+ </defs>
+</svg>
