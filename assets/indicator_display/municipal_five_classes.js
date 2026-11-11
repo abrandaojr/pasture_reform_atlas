@@ -36,7 +36,8 @@ function hatch(color){
 function classLabels(id){
  if(overrides[id]?.labels)return overrides[id].labels.map(v=>typeof v==='object'?(en()?v.en:v.pt):v);
  if(id==='1')return[tr('Muito pequeno','Very small'),tr('Pequeno','Small'),tr('Médio','Medium'),tr('Grande','Large'),tr('Muito grande','Very large')];
- if(id==='conditions'||id==='4')return[tr('Muito desfavorável','Very unfavorable'),tr('Desfavorável','Unfavorable'),tr('Intermediária','Intermediate'),tr('Favorável','Favorable'),tr('Muito favorável','Very favorable')];
+ if(id==='4')return[tr('Exposição muito alta','Very high exposure'),tr('Exposição alta','High exposure'),tr('Exposição média','Medium exposure'),tr('Exposição baixa','Low exposure'),tr('Exposição muito baixa','Very low exposure')];
+ if(id==='conditions')return[tr('Muito desfavorável','Very unfavorable'),tr('Desfavorável','Unfavorable'),tr('Intermediária','Intermediate'),tr('Favorável','Favorable'),tr('Muito favorável','Very favorable')];
  if(id==='risk'||Number(id)>=7)return[tr('Muito alta','Very high'),tr('Alta','High'),tr('Média','Medium'),tr('Baixa','Low'),tr('Muito baixa','Very low')];
  return[tr('Muito baixa','Very low'),tr('Baixa','Low'),tr('Média','Medium'),tr('Alta','High'),tr('Muito alta','Very high')];
 }
@@ -83,7 +84,8 @@ function apply(){
  });
  const target=document.getElementById('map-legend-items'),heading=document.getElementById('map-legend-title');
  if(target&&heading){target.closest('.map-legend-card')?.classList.add('municipal-five-active');heading.textContent=title(id);const labels=classLabels(id),legendPalette=palette(id);
-  target.innerHTML=labels.map((label,i)=>'<span class="herd-map-range municipal-five-class" data-class="'+i+'" data-color="'+legendPalette[i]+'" data-count="'+counts[i]+'"><span class="dot" style="background:'+legendPalette[i]+'"></span><span>'+esc(label)+' · '+esc(rangeLabel(id,i))+' <small>('+number(counts[i])+')</small></span></span>').join('')+'<span class="herd-map-range municipal-missing-key" data-count="'+absent+'"><span class="dot" style="background:'+missing+'"></span>'+tr('Sem nota calculável','No calculable score')+' ('+number(absent)+')</span>'+(id==='conditions'||id==='risk'?'<span class="map-partial-key">'+tr('Hachura = dados parciais; (n) = municípios.','Hatching = partial data; (n) = municipalities.')+'</span>':'<span class="herd-map-note">'+tr('(n) = municípios no recorte.','(n) = municipalities in scope.')+'</span>');
+  target.innerHTML=labels.map((label,i)=>'<span class="herd-map-range municipal-five-class" data-class="'+i+'" data-color="'+legendPalette[i]+'" data-count="'+counts[i]+'"><span class="dot" style="background:'+legendPalette[i]+'"></span><span>'+esc(label)+' <small>('+number(counts[i])+')</small></span></span>').join('')+'<span class="herd-map-range municipal-missing-key" data-count="'+absent+'"><span class="dot" style="background:'+missing+'"></span>'+tr('Sem nota calculável','No calculable score')+' ('+number(absent)+')</span>'+(id==='conditions'||id==='risk'?'<span class="map-partial-key">'+tr('Hachura = dados parciais; (n) = municípios.','Hatching = partial data; (n) = municipalities.')+'</span>':'<span class="herd-map-note">'+tr('(n) = municípios no recorte.','(n) = municipalities in scope.')+'</span>');
+  const detail=document.createElement('details');detail.className='map-class-limits';detail.innerHTML='<summary>'+tr('Limites das classes','Class boundaries')+'</summary>'+labels.map((name,i)=>'<p>'+esc(name)+' · '+esc(rangeLabel(id,i))+'</p>').join('');target.append(detail);
  }
  syncResult();fitPanels();window.ATLAS_INDICATOR_DISPLAY_ACTIVE=true;window.ATLAS_INDICATOR_DISPLAY_STATE={theme:id,state,counts,missing:absent,partial:partialCount,municipal_paths:paths,colors:palette(id).slice()};
 }

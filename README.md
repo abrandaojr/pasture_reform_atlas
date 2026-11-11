@@ -12,6 +12,6 @@ A publicação usa arquivos estáticos na raiz da branch main e .nojekyll. index
 
 ## Leitura dos indicadores
 
-Revisão de 10 de novembro de 2026. O valor observado aparece com sua unidade, separado da nota. O comprimento da barra representa a nota de 0 a 100. Maior nota indica condição mais favorável ou menor pressão; azul indica potencial de reforma. Rebanho é contexto, sem nota ambiental. Dados e cálculos permanecem os da edição de 9 de novembro.
+Revisão de 10 de novembro de 2026. Valores observados aparecem arredondados, com unidade e precisão disponível nos detalhes. Cinco segmentos indicam a intensidade da classe original: pressão muito alta preenche cinco; muito baixa, um. Segmentos não representam porcentagem de perda. A nota original fica nos detalhes. Rebanho é contexto. Distâncias são em linha reta e não comprovam fornecimento. GTAs representam cabeças declaradas em guias emitidas, com cobertura e limitações explícitas. Dados e cálculos permanecem os da edição de 9 de novembro.
 
 Verificação local realizada nas quatro páginas, em desktop e celular, com troca de município e idioma. Casos de zero, ausência, limites de classe e notas fracionárias foram verificados.

@@ -7,7 +7,7 @@
   const escape = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const english = () => typeof lang !== 'undefined' ? lang === 'en' : document.documentElement.lang.startsWith('en');
   const tr = (pt, en) => english() ? en : pt;
-  const format = (v, n = 1) => Number.isFinite(Number(v)) && v !== null ? Number(v).toLocaleString(english() ? 'en-US' : 'pt-BR', {minimumFractionDigits:n, maximumFractionDigits:n}) : '—';
+  const format = (v, n = 1) => {if(v===null||v===undefined||!Number.isFinite(Number(v)))return tr('Sem dado','No data');const value=Number(v);if(n!==0&&value>0&&value<.1)return '<'+(.1).toLocaleString(english()?'en-US':'pt-BR');return value.toLocaleString(english()?'en-US':'pt-BR',{maximumFractionDigits:n===0?0:Math.abs(value)<10?1:0});};
   const displayLabel = value => value.replaceAll('locais deduplicados','cadastros consolidados').replaceAll('deduplicated locations','consolidated listings');
   const label = (kind, key) => {const x = manifest.labels[kind][key]; return x ? displayLabel(x[english() ? 'en' : 'pt']) : tr('Categoria sem rótulo disponível', 'Category label unavailable');};
   const sourceLabel = key => {const value=manifest.source_labels[key]?.[english() ? 'en' : 'pt'];return value?displayLabel(value):tr('Fonte sem rótulo disponível','Source label unavailable');};
@@ -36,6 +36,12 @@
     node.innerHTML = (all ? '<option value="'+all[0]+'">'+escape(all[1])+'</option>' : '') + choices.map(k => '<option value="' + escape(k) + '">' + escape(label(node.id === 'chain-access-origin' ? 'origins' : 'references', k)) + '</option>').join('');
     if (choices.includes(value) || all && value === all[0]) node.value = value;
   }
+  function distanceOverview(rows) {
+    const available=rows.filter(r=>r.n_distance>0&&r.mean_distance_km!==null&&r.sd_population_km!==null&&r.status!=='origin_state_without_complete_processed_CAR_cohort');
+    if(!available.length)return '';
+    const ordered=[...available].sort((a,b)=>b.mean_distance_km-a.mean_distance_km),shown=ordered.slice(0,5),maximum=Math.max(...available.map(r=>r.mean_distance_km));
+    return '<section class="distance-overview"><h3>'+tr('O que está mais longe, em média?','What is farther away, on average?')+'</h3><p>'+tr('Distância média de cada origem ao ponto disponível mais próximo do tipo escolhido. Mais linha = mais quilômetros.','Mean distance from each origin to the nearest available point of the chosen type. A longer line means more kilometres.')+'</p><div class="distance-axis"><span>0 km</span><span>'+format(maximum)+' km</span></div>'+shown.map(r=>'<article class="distance-comparison" data-mean-km="'+r.mean_distance_km+'" data-distance-count="'+r.n_distance+'"><div class="distance-pair"><span>'+escape(label('origins',stratum(r)))+'</span><span>'+escape(label('references',r.reference_group))+'</span></div><div class="distance-comparison-track" aria-hidden="true"><span style="width:'+(maximum>0?100*r.mean_distance_km/maximum:0)+'%"></span></div><p class="distance-reading"><strong>'+format(r.mean_distance_km)+' km</strong> '+tr('em média · ','on average · ')+format(r.n_distance,0)+tr(' origens com cálculo',' origins calculated')+(r.n_missing?' · '+format(r.n_missing,0)+tr(' sem cálculo',' not calculated'):'')+'</p><small>'+escape(sourceLabel(r.reference_source))+'</small></article>').join('')+'<p class="reading-footnote">'+(ordered.length>5?tr('As cinco maiores médias dos filtros atuais. Todas as comparações estão na tabela abaixo. ','The five largest means for the current filters. All comparisons are in the table below. '):'')+tr('Linha reta, sem estimar estrada ou tempo de viagem. Proximidade não demonstra compra, fornecimento ou atendimento.','Straight line, with no road route or travel-time estimate. Proximity does not establish purchasing, supply or service.')+'</p></section>';
+  }
   function distanceTable(rows) {
     const titles=[tr('Origem','From'),tr('Destino mais próximo','Nearest destination'),tr('Média (km)','Mean (km)'),tr('Desvio padrão populacional (km)','Population standard deviation (km)'),tr('Registros com cálculo (n)','Records calculated (n)'),tr('Sem cálculo (n)','Not calculated (n)'),tr('Fonte do destino','Destination source')];
     const available=rows.filter(r=>r.n_distance>0 && r.mean_distance_km!==null && r.sd_population_km!==null && r.status!=='origin_state_without_complete_processed_CAR_cohort');
@@ -55,11 +61,11 @@
       return '<li>'+escape(label('origins',stratum(row)))+' → '+escape(label('references',row.reference_group))+(row.reference_source==='none'?'':' · '+escape(sourceLabel(row.reference_source)))+'. '+reason+'</li>';
     }).join('');
     const missing=unavailable.length?'<details class="chain-distance-missing"><summary>'+tr('Comparações sem cálculo disponível','Comparisons without a calculation')+' ('+unavailable.length+')</summary><ul>'+missingItems+'</ul></details>':'';
-    return table+missing;
+    return distanceOverview(rows)+'<details class="distance-full-table"><summary>'+tr('Ver todas as distâncias, fontes e detalhes','View all distances, sources and details')+'</summary>'+table+missing+'</details>';
   }
   function rowCard(row, heading) {
     if (!row || !row.n_distance || row.status === 'origin_state_without_complete_processed_CAR_cohort' || row.mean_distance_km === null || row.sd_population_km === null) return '<article class="chain-access-card"><h3>' + escape(heading) + '</h3><p>' + (row?.status === 'origin_state_without_complete_processed_CAR_cohort' ? tr('Coorte CAR incompleta neste estado; média e desvio padrão não publicados.', 'Incomplete CAR cohort in this state; mean and standard deviation are withheld.') : tr('Sem distância calculável neste recorte.', 'No calculable distance in this scope.')) + '</p>' + (row ? '<p>' + tr('Origens consideradas: ', 'Origins considered: ') + format(row.n_origins,0) + tr(' · sem distância: ', ' · missing distance: ') + format(row.n_missing,0) + '</p>' : '') + '</article>';
-    return '<article class="chain-access-card"><h3>' + escape(heading) + '</h3><p class="chain-access-value">' + format(row.mean_distance_km) + ' <span>± ' + format(row.sd_population_km) + ' km</span></p><p>' + tr('Média ± desvio padrão populacional', 'Mean ± population standard deviation') + '</p><p>' + tr('Origens com distância: ', 'Origins with a distance: ') + format(row.n_distance, 0) + (row.n_missing ? tr(' · sem distância: ', ' · missing distance: ') + format(row.n_missing, 0) : '') + '</p></article>';
+    return '<article class="chain-access-card"><h3>' + escape(heading) + '</h3><p class="chain-access-value">' + format(row.mean_distance_km) + ' <span>km</span></p><p>' + tr('Distância média em linha reta ao ponto disponível mais próximo','Mean straight-line distance to the nearest available point') + '</p><p>' + format(row.n_distance,0)+tr(' origens com cálculo',' origins calculated')+(row.n_missing?' · '+format(row.n_missing,0)+tr(' sem cálculo',' not calculated'):'')+'</p><details class="reading-detail"><summary>'+tr('Variação entre os locais e valor exato','Variation across locations and exact value')+'</summary><p>'+tr('Média','Mean')+': '+Number(row.mean_distance_km).toLocaleString(english()?'en-US':'pt-BR',{maximumFractionDigits:6})+' km. '+tr('Desvio padrão','Standard deviation')+': '+format(row.sd_population_km)+' km. '+tr('Descreve quanto as distâncias variam entre locais, não um limite mínimo ou máximo.','Describes variation among locations, not a minimum or maximum.')+'</p></details></article>';
   }
   async function render() {
     if (!container) return;
@@ -69,8 +75,8 @@
     container.querySelector('h2').textContent = tr('Distâncias na cadeia produtiva', 'Supply-chain distances');
     container.querySelector('[data-chain-intro]').textContent = tr('Distâncias em linha reta entre pontos mapeados. Cada origem é comparada ao ponto mapeado mais próximo do tipo selecionado.', 'Straight-line distances between mapped points. Each origin is compared with the nearest mapped point of the selected type.');
     container.querySelector('[for=chain-access-scope]').textContent = tr('Recorte', 'Scope');
-    container.querySelector('[for=chain-access-origin]').textContent = tr('Origem', 'From');
-    container.querySelector('[for=chain-access-destination]').textContent = tr('Destino', 'Destination');
+    container.querySelector('[for=chain-access-origin]').textContent = tr('Partindo de que tipo de local?', 'Starting from which type of location?');
+    container.querySelector('[for=chain-access-destination]').textContent = tr('Procurando o que por perto?', 'Looking for what nearby?');
     const scopeSelect = container.querySelector('#chain-access-scope');
     scopeSelect.innerHTML = [['municipality',tr('Município: ','Municipality: ')+placeName],['uf',tr('Estado: ','State: ')+(uf || tr('não selecionado','not selected'))],['covered_brazil',tr('Brasil com dados disponíveis','Brazil with available data')]].map(([v,t]) => '<option value="'+v+'">'+escape(t)+'</option>').join('');
     scopeSelect.value = scope;
