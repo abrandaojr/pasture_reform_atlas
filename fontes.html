@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-atlas-tab="sources" lang="pt-BR"><script id="atlas-language-bootstrap">(function(){const p=new URLSearchParams(location.search),file=location.pathname.split('/').pop();let saved='pt';try{saved=localStorage.getItem('atlas-language')||'pt';}catch{}const language=p.get('lang')||(file.endsWith('_en.html')?'en':saved.startsWith('en')?'en':'pt');window.ATLAS_PREFERRED_LANGUAGE=language==='en'?'en':'pt';try{localStorage.setItem('atlas-language',language==='en'?'en':'pt-BR');}catch{}if(file.startsWith('methodology_')||file.startsWith('review_response_')){let target=file;if(language==='en'&&!file.endsWith('_en.html'))target=file.replace('.html','_en.html');if(language!=='en'&&file.endsWith('_en.html'))target=file.replace('_en.html','.html');if(target!==file){const url=new URL(location.href);url.pathname=url.pathname.slice(0,-file.length)+target;url.searchParams.set('lang',language);location.replace(url.href);}}})();</script><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="Amintas Brandao Jr"><meta name="theme-color" content="#00843e"><title>Atlas da Pecuária</title>
+<html data-atlas-tab="sources" lang="pt-BR"><script id="atlas-language-bootstrap">(function(){const u=new URL(location.href);let saved='en';try{saved=localStorage.getItem('atlas-language')||'en';}catch{}const choice=u.searchParams.get('lang')||(saved.startsWith('pt')?'pt':'en');window.ATLAS_PREFERRED_LANGUAGE=choice;u.searchParams.set('lang',choice);history.replaceState(null,'',u);document.documentElement.lang=choice==='pt'?'pt-BR':'en';try{localStorage.setItem('atlas-language',choice);}catch{}})();</script><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="Amintas Brandao Jr"><meta name="theme-color" content="#00843e"><title>Atlas da Pecuária</title>
 <style>
 /* ===== Leaflet 1.9.4 (embutido) ===== */
 /* required styles */
@@ -900,7 +900,12 @@ body.imazon-atlas .map-base-status{left:14px;right:auto;z-index:600}
 
 
 
-<link data-atlas-clarity rel="stylesheet" href="assets/atlas_clarity_78e9a81cf0695b15.css">
+
+
+
+
+
+<link data-atlas-clarity rel="stylesheet" href="assets/atlas_clarity_0ea03a2916822547.css">
 </head><body class="imazon-atlas">
 <header><div class="wrap masthead"><div class="imazon-brand-group"><img class="imazon-logo" src="assets/imazon_logo_d3341e207f39ce3c.png" alt="Logotipo do Imazon" width="1698" height="525"><a class="brand" href="#map-workspace" data-i18n="brand">Atlas da Pecuária</a></div><div class="language" aria-label="Idioma"><button id="lang-pt" aria-pressed="true">PT</button><button id="lang-en" aria-pressed="false">EN</button></div></div><div class="wrap search-band"><label for="municipality-search" class="search-label" data-i18n="choose">Escolha um município</label><div class="search-box"><input id="municipality-search" class="search-input" type="search" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="municipality-results" aria-autocomplete="list" placeholder="Nome, estado ou código IBGE"><button class="search-clear" id="clear-search" aria-label="Buscar outro município" title="Buscar outro município">×</button><div class="search-results" id="municipality-results" role="listbox" hidden></div></div><p class="visually-hidden" id="search-announcement" role="status"></p></div></header><nav class="stepnav" aria-label="Passos de leitura"><div class="wrap"><a href="#map-workspace"><span class="num">1</span><span data-i18n="navSummary">Resumo</span></a><a href="#indicadores"><span class="num">2</span><span data-i18n="navIndicators">Indicadores</span></a><a data-ranking-tab="true" href="ranking.html">Ranking</a><a href="#evidencias"><span class="num">3</span><span data-i18n="navEvidence">Fontes</span></a><a href="#metodo"><span class="num">4</span><span data-i18n="navMethod">Método</span></a></div></nav>
 
@@ -1271,4 +1276,14 @@ body.imazon-atlas{font-family:var(--imz-font);color:var(--imz-text);background:#
 
 
 
-<script data-atlas-clarity src="assets/atlas_clarity_642b4a3fa7f2168a.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-atlas-clarity src="assets/atlas_clarity_763152898aa19de6.js"></script>
