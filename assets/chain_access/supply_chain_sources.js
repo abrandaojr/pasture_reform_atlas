@@ -53,7 +53,7 @@
   function render() {
     if (!panel?.isConnected) return;
     const english = en();
-    panel.innerHTML = '<h3>' + (english ? 'Supply-chain sources and dates' : 'Fontes e datas da cadeia produtiva') + '</h3><div class="chain-source-list">' + sources.map(row => '<article><h4><a href="' + escape(row[6]) + '" target="_blank" rel="noopener">' + escape(row[english ? 1 : 0]) + '</a></h4><p class="chain-source-year">' + escape(row[english ? 3 : 2]) + '</p><p>' + escape(row[english ? 5 : 4]) + '</p></article>').join('') + '</div>';
+    panel.innerHTML = '<h3>' + (english ? 'Supply-chain sources and dates' : 'Fontes e datas da cadeia produtiva') + '</h3><div class="atlas-table-scroll"><table class="atlas-data-table"><thead><tr><th>'+(english?'Source':'Fonte')+'</th><th>'+(english?'Date or period':'Data ou período')+'</th><th>'+(english?'What the source provides':'O que a fonte informa')+'</th></tr></thead><tbody>'+sources.map(row=>'<tr><th scope="row"><a href="'+escape(row[6])+'" target="_blank" rel="noopener">'+escape(row[english?1:0])+'</a></th><td>'+escape(row[english?3:2])+'</td><td>'+escape(row[english?5:4])+'</td></tr>').join('')+'</tbody></table></div>';
   }
   function init() {
     if (document.getElementById('chain-source-catalogue')) return true;
