@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-11-12T07:53:36.286342</dc:date>
+    <dc:date>2026-11-12T07:54:57.817254</dc:date>
     <dc:format>image/svg+xml</dc:format>
    </cc:Work>
   </rdf:RDF>
@@ -30,7 +30,7 @@ L 327.28252 113.627008
 L 327.28252 142.209685 
 L 18.589606 142.209685 
 z
-" clip-path="url(#p7a7e1d43b8)" style="fill: #dce4df"/>
+" clip-path="url(#pffa4bb9275)" style="fill: #dce4df"/>
    </g>
    <g id="patch_3">
     <path d="M 18.589606 113.627008 
@@ -38,7 +38,7 @@ L 203.805354 113.627008
 L 203.805354 142.209685 
 L 18.589606 142.209685 
 z
-" clip-path="url(#p7a7e1d43b8)" style="fill: #b47b22"/>
+" clip-path="url(#pffa4bb9275)" style="fill: #b47b22"/>
    </g>
    <g id="patch_4">
     <path d="M 18.589606 368.727402 
@@ -46,7 +46,7 @@ L 327.28252 368.727402
 L 327.28252 397.310079 
 L 18.589606 397.310079 
 z
-" clip-path="url(#p7a7e1d43b8)" style="fill: #dce4df"/>
+" clip-path="url(#pffa4bb9275)" style="fill: #dce4df"/>
    </g>
    <g id="patch_5">
     <path d="M 18.589606 368.727402 
@@ -54,7 +54,7 @@ L 111.19748 368.727402
 L 111.19748 397.310079 
 L 18.589606 397.310079 
 z
-" clip-path="url(#p7a7e1d43b8)" style="fill: #287e9a"/>
+" clip-path="url(#pffa4bb9275)" style="fill: #287e9a"/>
    </g>
    <g id="patch_6">
     <path d="M 35.739213 640.977402 
@@ -67,7 +67,7 @@ C 22.314424 663.780074 20.733307 659.96292 20.733307 655.983307
 C 20.733307 652.003694 22.314424 648.186541 25.128435 645.37253 
 C 27.942446 642.558518 31.7596 640.977402 35.739213 640.977402 
 z
-" clip-path="url(#p7a7e1d43b8)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
+" clip-path="url(#pffa4bb9275)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
    </g>
    <g id="patch_7">
     <path d="M 104.337638 640.977402 
@@ -80,7 +80,7 @@ C 90.912849 663.780074 89.331732 659.96292 89.331732 655.983307
 C 89.331732 652.003694 90.912849 648.186541 93.72686 645.37253 
 C 96.540871 642.558518 100.358025 640.977402 104.337638 640.977402 
 z
-" clip-path="url(#p7a7e1d43b8)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
+" clip-path="url(#pffa4bb9275)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
    </g>
    <g id="patch_8">
     <path d="M 172.936063 640.977402 
@@ -93,7 +93,7 @@ C 159.511274 663.780074 157.930157 659.96292 157.930157 655.983307
 C 157.930157 652.003694 159.511274 648.186541 162.325285 645.37253 
 C 165.139297 642.558518 168.95645 640.977402 172.936063 640.977402 
 z
-" clip-path="url(#p7a7e1d43b8)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
+" clip-path="url(#pffa4bb9275)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
    </g>
    <g id="patch_9">
     <path d="M 241.534488 640.977402 
@@ -106,7 +106,7 @@ C 228.1097 663.780074 226.528583 659.96292 226.528583 655.983307
 C 226.528583 652.003694 228.1097 648.186541 230.923711 645.37253 
 C 233.737722 642.558518 237.554876 640.977402 241.534488 640.977402 
 z
-" clip-path="url(#p7a7e1d43b8)" style="fill: #ffffff; stroke: #85968d; stroke-linejoin: miter"/>
+" clip-path="url(#pffa4bb9275)" style="fill: #ffffff; stroke: #85968d; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
     <path d="M 310.132913 640.977402 
@@ -119,22 +119,22 @@ C 296.708125 663.780074 295.127008 659.96292 295.127008 655.983307
 C 295.127008 652.003694 296.708125 648.186541 299.522136 645.37253 
 C 302.336147 642.558518 306.153301 640.977402 310.132913 640.977402 
 z
-" clip-path="url(#p7a7e1d43b8)" style="fill: #ffffff; stroke: #85968d; stroke-linejoin: miter"/>
+" clip-path="url(#pffa4bb9275)" style="fill: #ffffff; stroke: #85968d; stroke-linejoin: miter"/>
    </g>
    <g id="line2d_1">
     <path d="M 18.589606 258.684094 
 L 327.28252 258.684094 
-" clip-path="url(#p7a7e1d43b8)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
+" clip-path="url(#pffa4bb9275)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
    </g>
    <g id="line2d_2">
     <path d="M 18.589606 542.367165 
 L 327.28252 542.367165 
-" clip-path="url(#p7a7e1d43b8)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
+" clip-path="url(#pffa4bb9275)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
    </g>
    <g id="line2d_3">
     <path d="M 18.589606 823.191969 
 L 327.28252 823.191969 
-" clip-path="url(#p7a7e1d43b8)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
+" clip-path="url(#pffa4bb9275)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
    </g>
    <g id="text_1">
     <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="16.909258" transform="rotate(-0 18.589606 16.909258)">Illustrative example · one municipality</text>
@@ -197,66 +197,69 @@ L 327.28252 823.191969
     <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="188.370709" y="461.910139" transform="rotate(-0 188.370709 461.910139)">distance</text>
    </g>
    <g id="text_21">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="487.808864" transform="rotate(-0 18.589606 487.808864)">The reference is the regional median distance to</text>
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="487.808864" transform="rotate(-0 18.589606 487.808864)">Also check drought, technical assistance and</text>
    </g>
    <g id="text_22">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="503.243509" transform="rotate(-0 18.589606 503.243509)">a slaughterhouse, measured in a straight line.</text>
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="503.243509" transform="rotate(-0 18.589606 503.243509)">farmer education. Distances are measured in a</text>
    </g>
    <g id="text_23">
-    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="573.658777" transform="rotate(-0 18.589606 573.658777)">C</text>
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="518.678155" transform="rotate(-0 18.589606 518.678155)">straight line.</text>
    </g>
    <g id="text_24">
-    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="572.196497" transform="rotate(-0 38.59748 572.196497)">How many signals need</text>
+    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="573.658777" transform="rotate(-0 18.589606 573.658777)">C</text>
    </g>
    <g id="text_25">
-    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="594.3838" transform="rotate(-0 38.59748 594.3838)">attention?</text>
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="572.196497" transform="rotate(-0 38.59748 572.196497)">How many signals need</text>
    </g>
    <g id="text_26">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="616.042226" transform="rotate(-0 18.589606 616.042226)">Five environmental indicators</text>
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="594.3838" transform="rotate(-0 38.59748 594.3838)">attention?</text>
    </g>
    <g id="text_27">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="35.739213" y="658.333213" transform="rotate(-0 35.739213 658.333213)">1</text>
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="616.042226" transform="rotate(-0 18.589606 616.042226)">Five environmental indicators</text>
    </g>
    <g id="text_28">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="104.337638" y="658.333213" transform="rotate(-0 104.337638 658.333213)">2</text>
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="35.739213" y="658.333213" transform="rotate(-0 35.739213 658.333213)">1</text>
    </g>
    <g id="text_29">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="172.936063" y="658.333213" transform="rotate(-0 172.936063 658.333213)">3</text>
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="104.337638" y="658.333213" transform="rotate(-0 104.337638 658.333213)">2</text>
    </g>
    <g id="text_30">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #53675e" x="241.534488" y="658.333213" transform="rotate(-0 241.534488 658.333213)">4</text>
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="172.936063" y="658.333213" transform="rotate(-0 172.936063 658.333213)">3</text>
    </g>
    <g id="text_31">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #53675e" x="310.132913" y="658.333213" transform="rotate(-0 310.132913 658.333213)">5</text>
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #53675e" x="241.534488" y="658.333213" transform="rotate(-0 241.534488 658.333213)">4</text>
    </g>
    <g id="text_32">
-    <text style="font-weight: 700; font-size: 21.437008px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="701.601846" transform="rotate(-0 18.589606 701.601846)">3 of 5</text>
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #53675e" x="310.132913" y="658.333213" transform="rotate(-0 310.132913 658.333213)">5</text>
    </g>
    <g id="text_33">
-    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="725.89119" transform="rotate(-0 18.589606 725.89119)">in the very high pressure class</text>
+    <text style="font-weight: 700; font-size: 21.437008px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="701.601846" transform="rotate(-0 18.589606 701.601846)">3 of 5</text>
    </g>
    <g id="text_34">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="766.489966" transform="rotate(-0 18.589606 766.489966)">Each circle is one indicator. This count</text>
+    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="725.89119" transform="rotate(-0 18.589606 725.89119)">in the very high pressure class</text>
    </g>
    <g id="text_35">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="781.924612" transform="rotate(-0 18.589606 781.924612)">describes signals, not hectares or farms.</text>
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="766.489966" transform="rotate(-0 18.589606 766.489966)">Each circle is one indicator. This count</text>
    </g>
    <g id="text_36">
-    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="847.887792" transform="rotate(-0 18.589606 847.887792)">Next step</text>
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="781.924612" transform="rotate(-0 18.589606 781.924612)">describes signals, not hectares or farms.</text>
    </g>
    <g id="text_37">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="871.857186" transform="rotate(-0 18.589606 871.857186)">Assess the 60 ha in the field, considering</text>
+    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="847.887792" transform="rotate(-0 18.589606 847.887792)">Next step</text>
    </g>
    <g id="text_38">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="889.221163" transform="rotate(-0 18.589606 889.221163)">local conditions and environmental</text>
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="871.857186" transform="rotate(-0 18.589606 871.857186)">Assess the 60 ha in the field, considering</text>
    </g>
    <g id="text_39">
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="889.221163" transform="rotate(-0 18.589606 889.221163)">local conditions and environmental</text>
+   </g>
+   <g id="text_40">
     <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="906.585139" transform="rotate(-0 18.589606 906.585139)">pressure.</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="p7a7e1d43b8">
+  <clipPath id="pffa4bb9275">
    <rect x="1.44" y="1.44" width="342.992126" height="943.228346"/>
   </clipPath>
  </defs>
