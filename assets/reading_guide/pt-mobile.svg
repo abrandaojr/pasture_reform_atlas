@@ -1,1 +1,257 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 1160" role="img"><style>text{font-family:Arial,Helvetica,sans-serif;fill:#193d32}.q{font-size:23px;font-weight:700}.body{font-size:19px}.big{font-size:40px;font-weight:700}.small{font-size:16px;fill:#53675e}</style><text x="24" y="34" class="q">Quanto pasto pode melhorar?</text><text x="24" y="100" class="body">100 ha de pasto</text><rect x="24" y="125" width="259.2" height="44" fill="#b47b22"/><rect x="283.2" y="125" width="172.8" height="44" fill="#dce6dd"/><text x="24" y="221" class="big">60 ha</text><text x="24" y="252" class="body">vigor baixo ou médio</text><text x="295.2" y="221" class="big">40 ha</text><text x="295.2" y="252" class="body">alto vigor</text><text x="24" y="299" class="body">60% do pasto merece uma avaliação</text><text x="24" y="326" class="body">mais próxima.</text><path d="M24 355L456 355" fill="none" stroke="#c9d7ce" stroke-width="1"/><text x="24" y="390" class="q">O que ajudaria os produtores a</text><text x="24" y="417" class="q">melhorar o pasto?</text><text x="24" y="484" class="body">30 de 100 ha próximos de</text><text x="24" y="511" class="body">frigorífico</text><text x="24" y="537" class="small">Confira também seca, assistência técnica</text><text x="24" y="564" class="small">e escolaridade.</text><text x="24" y="650" class="q">Quais pressões ambientais exigem</text><text x="24" y="677" class="q">atenção?</text><text x="24" y="744" class="body">3 de 5 indicadores mostram pressão</text><text x="24" y="771" class="body">muito alta</text><text x="24" y="797" class="small">São três sinais de atenção, não 60% do</text><text x="24" y="824" class="small">território.</text><path d="M24 930L456 930" fill="none" stroke="#00833e" stroke-width="2"/><text x="24" y="965" class="q">Por onde começar?</text><text x="24" y="1005" class="body">Visite os 60 ha, converse com os</text><text x="24" y="1032" class="body">produtores e use as duas avaliações</text><text x="24" y="1059" class="body">para planejar o apoio.</text></svg>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="345.872126pt" height="946.108346pt" viewBox="0 0 345.872126 946.108346" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-12T07:53:36.750242</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 946.108346 
+L 345.872126 946.108346 
+L 345.872126 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 18.589606 113.627008 
+L 327.28252 113.627008 
+L 327.28252 142.209685 
+L 18.589606 142.209685 
+z
+" clip-path="url(#paff1f5f51d)" style="fill: #dce4df"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 18.589606 113.627008 
+L 203.805354 113.627008 
+L 203.805354 142.209685 
+L 18.589606 142.209685 
+z
+" clip-path="url(#paff1f5f51d)" style="fill: #b47b22"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 18.589606 368.727402 
+L 327.28252 368.727402 
+L 327.28252 397.310079 
+L 18.589606 397.310079 
+z
+" clip-path="url(#paff1f5f51d)" style="fill: #dce4df"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 18.589606 368.727402 
+L 111.19748 368.727402 
+L 111.19748 397.310079 
+L 18.589606 397.310079 
+z
+" clip-path="url(#paff1f5f51d)" style="fill: #287e9a"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 35.739213 640.977402 
+C 39.718825 640.977402 43.535979 642.558518 46.34999 645.37253 
+C 49.164001 648.186541 50.745118 652.003694 50.745118 655.983307 
+C 50.745118 659.96292 49.164001 663.780074 46.34999 666.594085 
+C 43.535979 669.408096 39.718825 670.989213 35.739213 670.989213 
+C 31.7596 670.989213 27.942446 669.408096 25.128435 666.594085 
+C 22.314424 663.780074 20.733307 659.96292 20.733307 655.983307 
+C 20.733307 652.003694 22.314424 648.186541 25.128435 645.37253 
+C 27.942446 642.558518 31.7596 640.977402 35.739213 640.977402 
+z
+" clip-path="url(#paff1f5f51d)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 104.337638 640.977402 
+C 108.31725 640.977402 112.134404 642.558518 114.948415 645.37253 
+C 117.762426 648.186541 119.343543 652.003694 119.343543 655.983307 
+C 119.343543 659.96292 117.762426 663.780074 114.948415 666.594085 
+C 112.134404 669.408096 108.31725 670.989213 104.337638 670.989213 
+C 100.358025 670.989213 96.540871 669.408096 93.72686 666.594085 
+C 90.912849 663.780074 89.331732 659.96292 89.331732 655.983307 
+C 89.331732 652.003694 90.912849 648.186541 93.72686 645.37253 
+C 96.540871 642.558518 100.358025 640.977402 104.337638 640.977402 
+z
+" clip-path="url(#paff1f5f51d)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 172.936063 640.977402 
+C 176.915676 640.977402 180.732829 642.558518 183.546841 645.37253 
+C 186.360852 648.186541 187.941969 652.003694 187.941969 655.983307 
+C 187.941969 659.96292 186.360852 663.780074 183.546841 666.594085 
+C 180.732829 669.408096 176.915676 670.989213 172.936063 670.989213 
+C 168.95645 670.989213 165.139297 669.408096 162.325285 666.594085 
+C 159.511274 663.780074 157.930157 659.96292 157.930157 655.983307 
+C 157.930157 652.003694 159.511274 648.186541 162.325285 645.37253 
+C 165.139297 642.558518 168.95645 640.977402 172.936063 640.977402 
+z
+" clip-path="url(#paff1f5f51d)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 241.534488 640.977402 
+C 245.514101 640.977402 249.331255 642.558518 252.145266 645.37253 
+C 254.959277 648.186541 256.540394 652.003694 256.540394 655.983307 
+C 256.540394 659.96292 254.959277 663.780074 252.145266 666.594085 
+C 249.331255 669.408096 245.514101 670.989213 241.534488 670.989213 
+C 237.554876 670.989213 233.737722 669.408096 230.923711 666.594085 
+C 228.1097 663.780074 226.528583 659.96292 226.528583 655.983307 
+C 226.528583 652.003694 228.1097 648.186541 230.923711 645.37253 
+C 233.737722 642.558518 237.554876 640.977402 241.534488 640.977402 
+z
+" clip-path="url(#paff1f5f51d)" style="fill: #ffffff; stroke: #85968d; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 310.132913 640.977402 
+C 314.112526 640.977402 317.92968 642.558518 320.743691 645.37253 
+C 323.557702 648.186541 325.138819 652.003694 325.138819 655.983307 
+C 325.138819 659.96292 323.557702 663.780074 320.743691 666.594085 
+C 317.92968 669.408096 314.112526 670.989213 310.132913 670.989213 
+C 306.153301 670.989213 302.336147 669.408096 299.522136 666.594085 
+C 296.708125 663.780074 295.127008 659.96292 295.127008 655.983307 
+C 295.127008 652.003694 296.708125 648.186541 299.522136 645.37253 
+C 302.336147 642.558518 306.153301 640.977402 310.132913 640.977402 
+z
+" clip-path="url(#paff1f5f51d)" style="fill: #ffffff; stroke: #85968d; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 18.589606 258.684094 
+L 327.28252 258.684094 
+" clip-path="url(#paff1f5f51d)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 18.589606 542.367165 
+L 327.28252 542.367165 
+" clip-path="url(#paff1f5f51d)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 18.589606 823.191969 
+L 327.28252 823.191969 
+" clip-path="url(#paff1f5f51d)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="16.909258" transform="rotate(-0 18.589606 16.909258)">Exemplo ilustrativo · um município</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="54.168619" transform="rotate(-0 18.589606 54.168619)">A</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="52.706339" transform="rotate(-0 38.59748 52.706339)">Quanto pasto merece uma</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="74.893642" transform="rotate(-0 38.59748 74.893642)">avaliação?</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="100.787468" transform="rotate(-0 18.589606 100.787468)">Área total de pasto · 100 ha</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 21.437008px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="171.393185" transform="rotate(-0 18.589606 171.393185)">60 ha · 60%</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="194.967962" transform="rotate(-0 18.589606 194.967962)">Vigor baixo ou médio</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 17.149606px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="209.52189" y="168.271839" transform="rotate(-0 209.52189 168.271839)">40 ha · 40%</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="209.52189" y="194.967962" transform="rotate(-0 209.52189 194.967962)">Alto vigor</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12.147638px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="230.377307" transform="rotate(-0 18.589606 230.377307)">O vigor observado por satélite ajuda a</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12.147638px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="246.769738" transform="rotate(-0 18.589606 246.769738)">escolher áreas para visitar.</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="294.977675" transform="rotate(-0 18.589606 294.977675)">B</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="293.515394" transform="rotate(-0 38.59748 293.515394)">O mercado está perto?</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="330.215454" transform="rotate(-0 18.589606 330.215454)">Pasto com distância calculada · 100 ha</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 20.007874px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="422.594862" transform="rotate(-0 18.589606 422.594862)">30 ha · 30%</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 20.007874px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="188.370709" y="422.594862" transform="rotate(-0 188.370709 422.594862)">70 ha · 70%</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="444.546163" transform="rotate(-0 18.589606 444.546163)">Até a distância</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="461.910139" transform="rotate(-0 18.589606 461.910139)">regional</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="188.370709" y="444.546163" transform="rotate(-0 188.370709 444.546163)">Além dessa</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="188.370709" y="461.910139" transform="rotate(-0 188.370709 461.910139)">distância</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="487.808864" transform="rotate(-0 18.589606 487.808864)">A referência é a distância mediana regional até</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="503.243509" transform="rotate(-0 18.589606 503.243509)">um frigorífico, em linha reta.</text>
+   </g>
+   <g id="text_23">
+    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="573.658777" transform="rotate(-0 18.589606 573.658777)">C</text>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="572.196497" transform="rotate(-0 38.59748 572.196497)">Quantos sinais exigem atenção?</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="616.042226" transform="rotate(-0 18.589606 616.042226)">Cinco indicadores ambientais</text>
+   </g>
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="35.739213" y="658.333213" transform="rotate(-0 35.739213 658.333213)">1</text>
+   </g>
+   <g id="text_27">
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="104.337638" y="658.333213" transform="rotate(-0 104.337638 658.333213)">2</text>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="172.936063" y="658.333213" transform="rotate(-0 172.936063 658.333213)">3</text>
+   </g>
+   <g id="text_29">
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #53675e" x="241.534488" y="658.333213" transform="rotate(-0 241.534488 658.333213)">4</text>
+   </g>
+   <g id="text_30">
+    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #53675e" x="310.132913" y="658.333213" transform="rotate(-0 310.132913 658.333213)">5</text>
+   </g>
+   <g id="text_31">
+    <text style="font-weight: 700; font-size: 21.437008px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="701.601846" transform="rotate(-0 18.589606 701.601846)">3 de 5</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="725.89119" transform="rotate(-0 18.589606 725.89119)">na classe de pressão muito alta</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="766.489966" transform="rotate(-0 18.589606 766.489966)">Cada círculo é um indicador. A contagem descreve</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="781.924612" transform="rotate(-0 18.589606 781.924612)">sinais, não hectares ou fazendas.</text>
+   </g>
+   <g id="text_35">
+    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="847.887792" transform="rotate(-0 18.589606 847.887792)">Próximo passo</text>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="871.857186" transform="rotate(-0 18.589606 871.857186)">Avalie os 60 ha em campo, considerando as</text>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="889.221163" transform="rotate(-0 18.589606 889.221163)">condições locais e a pressão ambiental.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="paff1f5f51d">
+   <rect x="1.44" y="1.44" width="342.992126" height="943.228346"/>
+  </clipPath>
+ </defs>
+</svg>
