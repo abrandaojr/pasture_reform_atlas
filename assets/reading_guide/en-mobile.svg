@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="345.872126pt" height="946.108346pt" viewBox="0 0 345.872126 946.108346" xmlns="http://www.w3.org/2000/svg" version="1.1">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="345.872126pt" height="731.738268pt" viewBox="0 0 345.872126 731.738268" xmlns="http://www.w3.org/2000/svg" version="1.1">
  <metadata>
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-11-12T07:54:57.817254</dc:date>
+    <dc:date>2026-11-12T10:19:23.882630</dc:date>
     <dc:format>image/svg+xml</dc:format>
    </cc:Work>
   </rdf:RDF>
@@ -16,251 +16,111 @@
  </defs>
  <g id="figure_1">
   <g id="patch_1">
-   <path d="M 0 946.108346 
-L 345.872126 946.108346 
-L 345.872126 0 
-L 0 0 
+   <path d="M 0 731.738268 
+L 345.872126 731.738268 
+L 345.872126 -0 
+L 0 -0 
 z
 " style="fill: #ffffff"/>
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M 18.589606 113.627008 
-L 327.28252 113.627008 
-L 327.28252 142.209685 
-L 18.589606 142.209685 
+    <path d="M 18.589606 137.207717 
+L 327.28252 137.207717 
+L 327.28252 161.502992 
+L 18.589606 161.502992 
 z
-" clip-path="url(#pffa4bb9275)" style="fill: #dce4df"/>
+" clip-path="url(#pe3e40bd47a)" style="fill: #dce4df"/>
    </g>
    <g id="patch_3">
-    <path d="M 18.589606 113.627008 
-L 203.805354 113.627008 
-L 203.805354 142.209685 
-L 18.589606 142.209685 
+    <path d="M 18.589606 137.207717 
+L 217.109914 137.207717 
+L 217.109914 161.502992 
+L 18.589606 161.502992 
 z
-" clip-path="url(#pffa4bb9275)" style="fill: #b47b22"/>
+" clip-path="url(#pe3e40bd47a)" style="fill: #b47b22"/>
    </g>
    <g id="patch_4">
-    <path d="M 18.589606 368.727402 
-L 327.28252 368.727402 
-L 327.28252 397.310079 
-L 18.589606 397.310079 
+    <path d="M 18.589606 444.471496 
+L 327.28252 444.471496 
+L 327.28252 468.766772 
+L 18.589606 468.766772 
 z
-" clip-path="url(#pffa4bb9275)" style="fill: #dce4df"/>
+" clip-path="url(#pe3e40bd47a)" style="fill: #dce4df"/>
    </g>
    <g id="patch_5">
-    <path d="M 18.589606 368.727402 
-L 111.19748 368.727402 
-L 111.19748 397.310079 
-L 18.589606 397.310079 
+    <path d="M 18.589606 444.471496 
+L 80.984002 444.471496 
+L 80.984002 468.766772 
+L 18.589606 468.766772 
 z
-" clip-path="url(#pffa4bb9275)" style="fill: #287e9a"/>
-   </g>
-   <g id="patch_6">
-    <path d="M 35.739213 640.977402 
-C 39.718825 640.977402 43.535979 642.558518 46.34999 645.37253 
-C 49.164001 648.186541 50.745118 652.003694 50.745118 655.983307 
-C 50.745118 659.96292 49.164001 663.780074 46.34999 666.594085 
-C 43.535979 669.408096 39.718825 670.989213 35.739213 670.989213 
-C 31.7596 670.989213 27.942446 669.408096 25.128435 666.594085 
-C 22.314424 663.780074 20.733307 659.96292 20.733307 655.983307 
-C 20.733307 652.003694 22.314424 648.186541 25.128435 645.37253 
-C 27.942446 642.558518 31.7596 640.977402 35.739213 640.977402 
-z
-" clip-path="url(#pffa4bb9275)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
-   </g>
-   <g id="patch_7">
-    <path d="M 104.337638 640.977402 
-C 108.31725 640.977402 112.134404 642.558518 114.948415 645.37253 
-C 117.762426 648.186541 119.343543 652.003694 119.343543 655.983307 
-C 119.343543 659.96292 117.762426 663.780074 114.948415 666.594085 
-C 112.134404 669.408096 108.31725 670.989213 104.337638 670.989213 
-C 100.358025 670.989213 96.540871 669.408096 93.72686 666.594085 
-C 90.912849 663.780074 89.331732 659.96292 89.331732 655.983307 
-C 89.331732 652.003694 90.912849 648.186541 93.72686 645.37253 
-C 96.540871 642.558518 100.358025 640.977402 104.337638 640.977402 
-z
-" clip-path="url(#pffa4bb9275)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
-   </g>
-   <g id="patch_8">
-    <path d="M 172.936063 640.977402 
-C 176.915676 640.977402 180.732829 642.558518 183.546841 645.37253 
-C 186.360852 648.186541 187.941969 652.003694 187.941969 655.983307 
-C 187.941969 659.96292 186.360852 663.780074 183.546841 666.594085 
-C 180.732829 669.408096 176.915676 670.989213 172.936063 670.989213 
-C 168.95645 670.989213 165.139297 669.408096 162.325285 666.594085 
-C 159.511274 663.780074 157.930157 659.96292 157.930157 655.983307 
-C 157.930157 652.003694 159.511274 648.186541 162.325285 645.37253 
-C 165.139297 642.558518 168.95645 640.977402 172.936063 640.977402 
-z
-" clip-path="url(#pffa4bb9275)" style="fill: #b2383d; stroke: #b2383d; stroke-linejoin: miter"/>
-   </g>
-   <g id="patch_9">
-    <path d="M 241.534488 640.977402 
-C 245.514101 640.977402 249.331255 642.558518 252.145266 645.37253 
-C 254.959277 648.186541 256.540394 652.003694 256.540394 655.983307 
-C 256.540394 659.96292 254.959277 663.780074 252.145266 666.594085 
-C 249.331255 669.408096 245.514101 670.989213 241.534488 670.989213 
-C 237.554876 670.989213 233.737722 669.408096 230.923711 666.594085 
-C 228.1097 663.780074 226.528583 659.96292 226.528583 655.983307 
-C 226.528583 652.003694 228.1097 648.186541 230.923711 645.37253 
-C 233.737722 642.558518 237.554876 640.977402 241.534488 640.977402 
-z
-" clip-path="url(#pffa4bb9275)" style="fill: #ffffff; stroke: #85968d; stroke-linejoin: miter"/>
-   </g>
-   <g id="patch_10">
-    <path d="M 310.132913 640.977402 
-C 314.112526 640.977402 317.92968 642.558518 320.743691 645.37253 
-C 323.557702 648.186541 325.138819 652.003694 325.138819 655.983307 
-C 325.138819 659.96292 323.557702 663.780074 320.743691 666.594085 
-C 317.92968 669.408096 314.112526 670.989213 310.132913 670.989213 
-C 306.153301 670.989213 302.336147 669.408096 299.522136 666.594085 
-C 296.708125 663.780074 295.127008 659.96292 295.127008 655.983307 
-C 295.127008 652.003694 296.708125 648.186541 299.522136 645.37253 
-C 302.336147 642.558518 306.153301 640.977402 310.132913 640.977402 
-z
-" clip-path="url(#pffa4bb9275)" style="fill: #ffffff; stroke: #85968d; stroke-linejoin: miter"/>
-   </g>
-   <g id="line2d_1">
-    <path d="M 18.589606 258.684094 
-L 327.28252 258.684094 
-" clip-path="url(#pffa4bb9275)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
-   </g>
-   <g id="line2d_2">
-    <path d="M 18.589606 542.367165 
-L 327.28252 542.367165 
-" clip-path="url(#pffa4bb9275)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
-   </g>
-   <g id="line2d_3">
-    <path d="M 18.589606 823.191969 
-L 327.28252 823.191969 
-" clip-path="url(#pffa4bb9275)" style="fill: none; stroke: #dce4df; stroke-width: 0.65; stroke-linecap: square"/>
+" clip-path="url(#pe3e40bd47a)" style="fill: #287e9a"/>
    </g>
    <g id="text_1">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="16.909258" transform="rotate(-0 18.589606 16.909258)">Illustrative example · one municipality</text>
+    <text style="font-size: 12.147638px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="18.858616" transform="rotate(-0 18.589606 18.858616)">Brazil · actual Atlas data</text>
    </g>
    <g id="text_2">
-    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="54.168619" transform="rotate(-0 18.589606 54.168619)">A</text>
+    <text style="font-weight: 700; font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="45.180009" transform="rotate(-0 18.589606 45.180009)">A</text>
    </g>
    <g id="text_3">
-    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="52.706339" transform="rotate(-0 38.59748 52.706339)">How much pasture needs a</text>
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="39.312047" y="44.131536" transform="rotate(-0 39.312047 44.131536)">How much pasture needs a</text>
    </g>
    <g id="text_4">
-    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="74.893642" transform="rotate(-0 38.59748 74.893642)">closer look?</text>
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="39.312047" y="66.318839" transform="rotate(-0 39.312047 66.318839)">closer look?</text>
    </g>
    <g id="text_5">
-    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="98.501426" transform="rotate(-0 18.589606 98.501426)">Total pasture area · 100 ha</text>
+    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="97.072292" transform="rotate(-0 18.589606 97.072292)">165.6 million hectares of pasture · 2025</text>
    </g>
    <g id="text_6">
-    <text style="font-weight: 700; font-size: 21.437008px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="171.393185" transform="rotate(-0 18.589606 171.393185)">60 ha · 60%</text>
+    <text style="font-weight: 700; font-size: 20.007874px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="190.36061" transform="rotate(-0 18.589606 190.36061)">106.5 million ha</text>
    </g>
    <g id="text_7">
-    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="194.967962" transform="rotate(-0 18.589606 194.967962)">Low or medium vigor</text>
+    <text style="font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="215.49606" transform="rotate(-0 18.589606 215.49606)">About 64 of every 100 ha have low or</text>
    </g>
    <g id="text_8">
-    <text style="font-weight: 700; font-size: 17.149606px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="209.52189" y="168.271839" transform="rotate(-0 209.52189 168.271839)">40 ha · 40%</text>
+    <text style="font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="234.789367" transform="rotate(-0 18.589606 234.789367)">medium vigor.</text>
    </g>
    <g id="text_9">
-    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="209.52189" y="194.967962" transform="rotate(-0 209.52189 194.967962)">High vigor</text>
+    <text style="font-size: 12.147638px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="266.098773" transform="rotate(-0 18.589606 266.098773)">The satellite helps locate pasture to</text>
    </g>
    <g id="text_10">
-    <text style="font-size: 12.147638px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="230.370427" transform="rotate(-0 18.589606 230.370427)">Satellite-observed vigor helps select</text>
+    <text style="font-size: 12.147638px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="282.498084" transform="rotate(-0 18.589606 282.498084)">assess in the field. It does not tell us</text>
    </g>
    <g id="text_11">
-    <text style="font-size: 12.147638px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="246.769738" transform="rotate(-0 18.589606 246.769738)">areas for a field visit.</text>
+    <text style="font-size: 12.147638px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="298.897395" transform="rotate(-0 18.589606 298.897395)">the cost of recovery.</text>
    </g>
    <g id="text_12">
-    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="294.977675" transform="rotate(-0 18.589606 294.977675)">B</text>
+    <text style="font-weight: 700; font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="370.307962" transform="rotate(-0 18.589606 370.307962)">B</text>
    </g>
    <g id="text_13">
-    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="293.515394" transform="rotate(-0 38.59748 293.515394)">How close is the market?</text>
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="39.312047" y="369.259489" transform="rotate(-0 39.312047 369.259489)">How many farms received</text>
    </g>
    <g id="text_14">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="330.215454" transform="rotate(-0 18.589606 330.215454)">Pasture with distances calculated · 100 ha</text>
+    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="39.312047" y="391.446792" transform="rotate(-0 39.312047 391.446792)">advice?</text>
    </g>
    <g id="text_15">
-    <text style="font-weight: 700; font-size: 20.007874px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="422.594862" transform="rotate(-0 18.589606 422.594862)">30 ha · 30%</text>
+    <text style="font-weight: 700; font-size: 20.007874px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="498.338957" transform="rotate(-0 18.589606 498.338957)">About 20 in every 100</text>
    </g>
    <g id="text_16">
-    <text style="font-weight: 700; font-size: 20.007874px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="188.370709" y="422.594862" transform="rotate(-0 188.370709 422.594862)">70 ha · 70%</text>
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="526.72136" transform="rotate(-0 18.589606 526.72136)">received technical advice in 2017. This</text>
    </g>
    <g id="text_17">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="444.546163" transform="rotate(-0 18.589606 444.546163)">Within the regional</text>
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="544.085336" transform="rotate(-0 18.589606 544.085336)">covers all agricultural establishments,</text>
    </g>
    <g id="text_18">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="461.910139" transform="rotate(-0 18.589606 461.910139)">distance</text>
+    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="561.449312" transform="rotate(-0 18.589606 561.449312)">not only cattle farms.</text>
    </g>
    <g id="text_19">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="188.370709" y="444.546163" transform="rotate(-0 188.370709 444.546163)">Beyond that</text>
+    <text style="font-weight: 700; font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="590.317816" transform="rotate(-0 18.589606 590.317816)">Check today’s support before planning</text>
    </g>
    <g id="text_20">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="188.370709" y="461.910139" transform="rotate(-0 188.370709 461.910139)">distance</text>
-   </g>
-   <g id="text_21">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="487.808864" transform="rotate(-0 18.589606 487.808864)">Also check drought, technical assistance and</text>
-   </g>
-   <g id="text_22">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="503.243509" transform="rotate(-0 18.589606 503.243509)">farmer education. Distances are measured in a</text>
-   </g>
-   <g id="text_23">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="518.678155" transform="rotate(-0 18.589606 518.678155)">straight line.</text>
-   </g>
-   <g id="text_24">
-    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="18.589606" y="573.658777" transform="rotate(-0 18.589606 573.658777)">C</text>
-   </g>
-   <g id="text_25">
-    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="572.196497" transform="rotate(-0 38.59748 572.196497)">How many signals need</text>
-   </g>
-   <g id="text_26">
-    <text style="font-weight: 700; font-size: 16.435039px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="38.59748" y="594.3838" transform="rotate(-0 38.59748 594.3838)">attention?</text>
-   </g>
-   <g id="text_27">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="616.042226" transform="rotate(-0 18.589606 616.042226)">Five environmental indicators</text>
-   </g>
-   <g id="text_28">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="35.739213" y="658.333213" transform="rotate(-0 35.739213 658.333213)">1</text>
-   </g>
-   <g id="text_29">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="104.337638" y="658.333213" transform="rotate(-0 104.337638 658.333213)">2</text>
-   </g>
-   <g id="text_30">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="172.936063" y="658.333213" transform="rotate(-0 172.936063 658.333213)">3</text>
-   </g>
-   <g id="text_31">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #53675e" x="241.534488" y="658.333213" transform="rotate(-0 241.534488 658.333213)">4</text>
-   </g>
-   <g id="text_32">
-    <text style="font-weight: 700; font-size: 15.005906px; font-family: 'Arial'; text-anchor: middle; fill: #53675e" x="310.132913" y="658.333213" transform="rotate(-0 310.132913 658.333213)">5</text>
-   </g>
-   <g id="text_33">
-    <text style="font-weight: 700; font-size: 21.437008px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="701.601846" transform="rotate(-0 18.589606 701.601846)">3 of 5</text>
-   </g>
-   <g id="text_34">
-    <text style="font-size: 13.576772px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="725.89119" transform="rotate(-0 18.589606 725.89119)">in the very high pressure class</text>
-   </g>
-   <g id="text_35">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="766.489966" transform="rotate(-0 18.589606 766.489966)">Each circle is one indicator. This count</text>
-   </g>
-   <g id="text_36">
-    <text style="font-size: 11.433071px; font-family: 'Arial'; text-anchor: start; fill: #53675e" x="18.589606" y="781.924612" transform="rotate(-0 18.589606 781.924612)">describes signals, not hectares or farms.</text>
-   </g>
-   <g id="text_37">
-    <text style="font-weight: 700; font-size: 14.291339px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="847.887792" transform="rotate(-0 18.589606 847.887792)">Next step</text>
-   </g>
-   <g id="text_38">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="871.857186" transform="rotate(-0 18.589606 871.857186)">Assess the 60 ha in the field, considering</text>
-   </g>
-   <g id="text_39">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="889.221163" transform="rotate(-0 18.589606 889.221163)">local conditions and environmental</text>
-   </g>
-   <g id="text_40">
-    <text style="font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="906.585139" transform="rotate(-0 18.589606 906.585139)">pressure.</text>
+    <text style="font-weight: 700; font-size: 12.862205px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="18.589606" y="607.681793" transform="rotate(-0 18.589606 607.681793)">pasture recovery.</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pffa4bb9275">
-   <rect x="1.44" y="1.44" width="342.992126" height="943.228346"/>
+  <clipPath id="pe3e40bd47a">
+   <rect x="1.44" y="1.44" width="342.992126" height="728.858268"/>
   </clipPath>
  </defs>
 </svg>
