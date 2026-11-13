@@ -1,4 +1,4 @@
-# Enabling conditions — 11 September 2026 edition
+# Enabling conditions, 11 September 2026 edition
 
 This edition defines the previously missing market and drought criteria. It supports comparative municipal screening, not farm certification, agronomic tolerance limits, road travel times or economic feasibility assessments.
 

@@ -1,4 +1,4 @@
-# Condições para produzir — edição de 11 de setembro de 2026
+# Condições para produzir, edição de 11 de setembro de 2026
 
 Esta versão completa os critérios de mercado e seca que estavam em aberto no Atlas. É uma metodologia de triagem relativa entre municípios. Não define viabilidade econômica, distância rodoviária aceitável, certificação de imóveis ou tolerância agronômica à seca.
 

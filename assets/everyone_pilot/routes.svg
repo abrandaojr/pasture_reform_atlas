@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="414.537019pt" height="64.108346pt" viewBox="0 0 414.537019 64.108346" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-12T11:15:29.456199</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 64.108346 
+L 414.537019 64.108346 
+L 414.537019 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="text_1">
+    <text style="font-size: 14px; font-family: 'Arial'; fill: #193d32" transform="translate(1.44 28.058431)">São Félix</text>
+    <text style="font-size: 14px; font-family: 'Arial'; fill: #193d32" transform="translate(1.44 43.295736)">do Xingu</text>
+   </g>
+   <g id="patch_2">
+    <path d="M 105.254243 31.586415 
+Q 145.753451 21.849566 185.056895 12.400203 
+" style="fill: none; stroke: #287e9a; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 182.007207 11.693518 
+L 185.056895 12.400203 
+L 182.661734 14.415942 
+" style="fill: none; stroke: #287e9a; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 18px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="194.990457" y="16.302928" transform="rotate(-0 194.990457 16.302928)">Tucumã · 140 mil</text>
+   </g>
+   <g id="patch_3">
+    <path d="M 105.311237 32.054173 
+Q 145.754792 32.054173 184.968509 32.054173 
+" style="fill: none; stroke: #287e9a; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 182.168509 30.654173 
+L 184.968509 32.054173 
+L 182.168509 33.454173 
+" style="fill: none; stroke: #287e9a; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 18px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="194.990457" y="36.712201" transform="rotate(-0 194.990457 36.712201)">Xinguara · 128 mil</text>
+   </g>
+   <g id="patch_4">
+    <path d="M 105.254243 32.521931 
+Q 145.753451 42.258781 185.056895 51.708144 
+" style="fill: none; stroke: #287e9a; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 182.661734 49.692404 
+L 185.056895 51.708144 
+L 182.007207 52.414829 
+" style="fill: none; stroke: #287e9a; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 18px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="194.990457" y="58.63706" transform="rotate(-0 194.990457 58.63706)">Água Azul do Norte · 84 mil</text>
+   </g>
+  </g>
+ </g>
+</svg>
