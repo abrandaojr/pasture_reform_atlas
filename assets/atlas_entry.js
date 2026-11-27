@@ -292,9 +292,9 @@ const ZP=()=>[['farms_plants','cow','factory',tr('Fazendas','Ranches'),tr('Frigo
 ['farms_offices','cow','shield',tr('Fazendas','Ranches'),tr('Defesa sanitária','Animal health'),tr('Que área cada escritório atende','The area each office serves'),tr('fazendas','ranches')],
 ['plants_tanneries','factory','layers',tr('Frigoríficos','Slaughterhouses'),tr('Curtumes','Tanneries'),tr('De onde cada curtume pode receber couro','Where each tannery can source hides'),tr('frigoríficos','slaughterhouses')],
 ['farms_feedlots','cow','feed',tr('Fazendas','Ranches'),tr('Confinamentos','Feedlots'),tr('De onde cada confinamento pode receber gado','Where each feedlot can draw cattle from'),tr('fazendas','ranches')],
-['plants_offices','factory','shield',tr('Frigoríficos','Slaughterhouses'),tr('Defesa sanitária','Animal health'),tr('Que escritório atende cada frigorífico','Which office serves each slaughterhouse'),tr('frigoríficos','slaughterhouses')],
+
 ['corn_feedlots','grass','feed',tr('Milho e ração','Corn and feed'),tr('Confinamentos','Feedlots'),tr('De onde cada confinamento pode comprar ração','Where each feedlot can buy feed'),tr('pontos de milho e ração','corn and feed sites')],
-['corn_plants','grass','factory',tr('Milho e ração','Corn and feed'),tr('Frigoríficos','Slaughterhouses'),tr('Que fontes de ração cercam cada frigorífico','Which feed sources surround each slaughterhouse'),tr('pontos de milho e ração','corn and feed sites')]];
+];
 const draw=async()=>{const my=++busy,P=ZP().find(x=>x[0]===sel),z=await D.file('assets/farms/zones_'+sel).catch(()=>null);if(my!==busy)return;if(grp)grp.remove();grp=L.layerGroup().addTo(map);scopeOutline(map,grp,record.uf,'muni',code);
 const body=pane.querySelector('.zn-body');if(!z){body.innerHTML='<p class="fm-sub">'+tr('Sem dados para esta área.','No data for this area.')+'</p>';return;}
 let ids=new Set(),stats=new Map(),mins=[],fitPts=[];const add=(k,m,w)=>{ids.add(k);const o=stats.get(k)||{k,n:0,w:0};o.n++;o.w+=w;stats.set(k,o);mins.push(m);};
