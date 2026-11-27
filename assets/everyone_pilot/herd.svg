@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="342.442205pt" height="89.960315pt" viewBox="0 0 342.442205 89.960315" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-12T11:15:29.320359</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 89.960315 
+L 342.442205 89.960315 
+L 342.442205 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 1.44 34.757686 
+L 334.210961 34.757686 
+L 334.210961 28.699925 
+L 1.44 28.699925 
+z
+" clip-path="url(#p4c092f9db8)" style="fill: #52675e"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 1.44 72.618692 
+L 163.186605 72.618692 
+L 163.186605 66.560931 
+L 1.44 66.560931 
+z
+" clip-path="url(#p4c092f9db8)" style="fill: #b7c2ba"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 18px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="1.44" y="23.13548" transform="rotate(-0 1.44 23.13548)">São Félix do Xingu</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 18px; font-family: 'Arial'; text-anchor: end; fill: #193d32" x="334.210961" y="23.135656" transform="rotate(-0 334.210961 23.135656)">2,7 milhões</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 18px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="1.44" y="60.996663" transform="rotate(-0 1.44 60.996663)">Marabá</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 18px; font-family: 'Arial'; text-anchor: end; fill: #193d32" x="334.210961" y="60.996663" transform="rotate(-0 334.210961 60.996663)">1,3 milhões</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p4c092f9db8">
+   <rect x="1.44" y="1.44" width="339.562205" height="87.080315"/>
+  </clipPath>
+ </defs>
+</svg>

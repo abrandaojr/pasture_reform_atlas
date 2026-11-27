@@ -1,0 +1,7 @@
+Atlas da Pecuária
+
+Abra Atlas.html para começar pelo mapa. Use Resultados para a ficha municipal, Ranking para comparar municípios e Cadeia produtiva para estabelecimentos e distâncias.
+
+No VS Code, abra esta pasta e use um servidor local, como Live Server. O mapa-base OpenStreetMap precisa de conexão à internet. A abertura direta do HTML mantém as camadas locais, mas não solicita o mapa-base.
+
+Mantenha assets, data e methods junto aos arquivos HTML. As explicações do método e das fontes estão na própria interface. O detalhamento de concentração de pastagem inclui somente as oito zonas auditadas. As linhas entre imóveis e frigoríficos são esquemáticas e não comprovam fornecimento.

@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("tannery_AL_0",[{"id":"f1bccc0049888fefbbc1","name":"Curtume,Porto De Pedras-AL","category":"tannery","municipality":"2707404","lat":-9.1750119,"lon":-35.3044796,"source":"Google Maps","place":"Porto de Pedras · AL","radar_verde_plant_id":null}]);

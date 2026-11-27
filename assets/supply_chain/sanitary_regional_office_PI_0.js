@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("sanitary_regional_office_PI_0",[{"id":"agency_0x7ec310000f84a41:0x11494f36f1ca945b","name":"Regional ADAPI - Parnaíba","category":"sanitary_regional_office","municipality":"2207702","lat":-2.9155995,"lon":-41.7763102,"source":"Google Maps · unidade e funcionamento não verificados","place":"Parnaíba · PI","radar_verde_plant_id":null}]);

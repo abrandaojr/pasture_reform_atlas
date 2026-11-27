@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><script id="atlas-one-decimal">(function(){
+// Display rule of 13 November 2026: every displayed number has at most one decimal place.
+// Data files keep full precision; only formatting changes.
+if(window.ATLAS_ONE_DECIMAL)return;window.ATLAS_ONE_DECIMAL=true;
+var NF=Intl.NumberFormat,toLocale=Number.prototype.toLocaleString;
+function clamp(o){o=o&&typeof o==='object'?Object.assign({},o):{};
+ if(o.style==='percent'){var pm=o.maximumFractionDigits==null?0:o.maximumFractionDigits;o.maximumFractionDigits=Math.min(pm,1);}
+ else{var m=o.maximumFractionDigits==null?3:o.maximumFractionDigits;o.maximumFractionDigits=Math.min(m,1);}
+ if(o.minimumFractionDigits!=null)o.minimumFractionDigits=Math.min(o.minimumFractionDigits,o.maximumFractionDigits);
+ delete o.maximumSignificantDigits;delete o.minimumSignificantDigits;return o;}
+function tiny(v,locales,o){var n=Number(v);if(o.style==='percent')n*=100;
+ if(!(n!==0&&Math.abs(n)<0.05&&o.maximumFractionDigits===1))return null;
+ var pt=String(locales||document.documentElement.lang||'').toLowerCase().indexOf('pt')===0;
+ return (n<0?'> -':'< ')+(pt?'0,1':'0.1')+(o.style==='percent'?'%':'');}
+function Format(locales,options){var o=clamp(options),f=new NF(locales,o),base=f.format.bind(f);
+ Object.defineProperty(f,'format',{value:function(v){return tiny(v,locales,o)||base(v);}});return f;}
+Format.prototype=NF.prototype;Format.supportedLocalesOf=NF.supportedLocalesOf.bind(NF);Intl.NumberFormat=Format;
+Number.prototype.toLocaleString=function(locales,options){var o=clamp(options);return tiny(this,locales,o)||toLocale.call(this,locales,o);};
+})();</script><head><meta charset="utf-8"><title>Pasture Optimization Score</title><script>location.replace("fontes.html"+location.search)</script><meta http-equiv="refresh" content="0;url=fontes.html"></head><body><a href="fontes.html">Sources</a></body></html>

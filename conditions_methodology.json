@@ -1,0 +1,49 @@
+{
+  "version": "conditions_v2026_09_11",
+  "reference_date": "2026-09-11",
+  "reference_sha256": "4486aa561767750b137fb46e76961ec2aaff61b3ff920a7ae22a57751cdbeed3",
+  "quantile_method": "Linear interpolation at (n-1)*p; finite observed values; fixed thresholds for this edition",
+  "market_variable": "distancia_p80_qualquer_km",
+  "market_km": {
+    "p50": 38.6,
+    "p75": 65.5,
+    "n": 5461
+  },
+  "drought_variable": "seca_freq_pct",
+  "drought_percent_years_by_biome": {
+    "Amazônia": {
+      "p50": 6.6046325,
+      "p75": 11.84966425,
+      "n": 482
+    },
+    "Caatinga": {
+      "p50": 11.878049,
+      "p75": 16.914773,
+      "n": 1101
+    },
+    "Cerrado": {
+      "p50": 5.0,
+      "p75": 10.017284,
+      "n": 1045
+    },
+    "Mata Atlântica": {
+      "p50": 1.877623,
+      "p75": 5.0,
+      "n": 2373
+    },
+    "Pantanal": {
+      "p50": 2.1077820000000003,
+      "p75": 7.665570000000001,
+      "n": 8
+    }
+  },
+  "component_scoring": "value <= P50: 100; P50 < value <= P75: 50; value > P75: 0",
+  "aggregation": "(drought + existing extension + existing education scores) * market score / 100",
+  "classes": {
+    "Adequadas": ">240",
+    "Intermediárias": "150–240 inclusive",
+    "Limitadas": "<150"
+  },
+  "missing_policy": "Missing support contributes no points; all support missing or market missing leaves unclassified. Imputed drought is excluded. Partial coverage is explicitly labelled.",
+  "scope": "Municipal comparative screening; not farm certification or agronomic/transport viability thresholds; credit excluded as in the existing rules."
+}

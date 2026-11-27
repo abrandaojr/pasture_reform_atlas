@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("sanitary_regional_office_MT_0",[{"id":"agency_0x9379c83901c54031:0x18aa284eb64638e0","name":"INDEA-MT - Regional","category":"sanitary_regional_office","municipality":"5107602","lat":-16.4722243,"lon":-54.632931899999996,"source":"Google Maps · unidade e funcionamento não verificados","place":"Rondonópolis · MT","radar_verde_plant_id":null}]);

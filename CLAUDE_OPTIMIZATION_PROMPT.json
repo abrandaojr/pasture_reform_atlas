@@ -1,0 +1,149 @@
+{
+  "role": "You are a senior web performance, geospatial visualization, accessibility, and data-product engineer reviewing the Pasture Improvement Atlas.",
+  "repository": "https://github.com/abrandaojr/pasture_reform_atlas",
+  "production_url": "https://abrandaojr.github.io/pasture_reform_atlas/",
+  "objective": "Optimize the Atlas so it loads quickly, remains responsive, and preserves every required interaction on desktop and mobile. Diagnose with measurements before changing code, implement fixes, and verify the deployed behavior rather than only inspecting source code.",
+  "mobile_first_mandate": {
+    "principle": "Treat mobile navigation as the primary experience, not as a reduced desktop layout.",
+    "devices": "Support current Android Chrome and iOS Safari on modest devices with limited memory and CPU.",
+    "networks": "Remain usable on throttled Fast 3G and Slow 4G connections after the static assets have been optimized and cached.",
+    "interaction": "All map, search, filter, comparison, market, scorecard, back-navigation, accordion, tooltip, and PDF actions must work with touch and without hover.",
+    "layout": "Support portrait and landscape orientations, safe-area insets, browser address-bar resizing, and on-screen keyboards without hiding controls.",
+    "map": "Panning and pinch zoom must remain smooth; a tap on a municipality must open the correct municipal scorecard and must not be mistaken for a drag.",
+    "content": "Prioritize readable hierarchy, short labels, progressive disclosure, and compact infographics instead of long lists."
+  },
+  "architecture": {
+    "hosting": "Static GitHub Pages",
+    "source_of_truth": "Google Sheets",
+    "browser_data_source": "A compact, preprocessed atlas_data.json committed to GitHub",
+    "data_refresh": "GitHub Actions checks Google Sheets daily and commits atlas_data.json only when its content changes",
+    "municipal_data": "5,571 Brazilian municipalities",
+    "geometry": "municipal_geometry.json with matching simplified municipal geometries",
+    "map_library": "Leaflet with a custom single-Canvas municipal renderer"
+  },
+  "non_negotiable_requirements": [
+    "The Atlas must open with all 5,571 municipalities already visible.",
+    "Clicking a municipality polygon must open that municipality's scorecard.",
+    "The browser must never fetch Google Sheets during normal page loading.",
+    "Google Sheets must remain the upstream source of truth through the preprocessing workflow.",
+    "Do not embed the complete municipal dataset inside index.html.",
+    "Do not recreate thousands of Leaflet layer objects or DOM nodes.",
+    "Keep the entire public interface in English.",
+    "Preserve Map, Ranking, Compare, Markets, methodology, filters, PDF scorecard, and municipality search.",
+    "Preserve mobile compatibility and touch interactions.",
+    "Mobile users must be able to complete every principal Atlas task without switching to desktop mode.",
+    "Do not replace observed data with invented values or silent fallbacks."
+  ],
+  "priority_problems": [
+    {
+      "priority": 1,
+      "problem": "Chrome has displayed Page Unresponsive while the national municipal map is visible.",
+      "required_outcome": "No long main-thread task should make the page unresponsive during initial draw, pan, zoom, filter changes, layer changes, or municipality selection."
+    },
+    {
+      "priority": 2,
+      "problem": "Municipality click behavior regressed during Canvas optimization.",
+      "required_outcome": "Use efficient spatial hit testing, preferably a precomputed bounding-box or spatial index followed by point-in-polygon testing, and prove that a real pointer click opens the correct scorecard."
+    },
+    {
+      "priority": 3,
+      "problem": "Large JSON parsing and geometry drawing may block the main thread.",
+      "required_outcome": "Profile parsing, derived-metric calculation, indexing, and rendering. Move expensive work to a Web Worker or chunk it across frames when measurements justify it."
+    },
+    {
+      "priority": 4,
+      "problem": "Mobile layouts have previously overflowed horizontally.",
+      "required_outcome": "No horizontal page overflow at widths 320, 360, 390, 412, 768, 1024, 1440, and 1920 CSS pixels. Mobile controls must remain visible when the virtual keyboard or browser chrome changes the visual viewport."
+    },
+    {
+      "priority": 5,
+      "problem": "Cache-version checks previously caused duplicate downloads and rendering.",
+      "required_outcome": "Resolve versioning before loading large assets; fetch index.html, atlas_data.json, and municipal_geometry.json no more than once per cold visit."
+    }
+  ],
+  "implementation_guidance": [
+    "Begin with a performance profile and network waterfall; identify long tasks and duplicate work.",
+    "Keep the national municipality renderer as one Canvas or another demonstrably lightweight primitive.",
+    "Build the municipality spatial index once and reuse it for clicks, hover, filters, and redraws.",
+    "Avoid rebuilding all derived municipality objects or geometry paths on every zoom or pan.",
+    "Cache projected paths by zoom when beneficial, and invalidate only when necessary.",
+    "Consider requestIdleCallback, requestAnimationFrame chunking, OffscreenCanvas, or a Web Worker based on browser support and measured benefit.",
+    "Use progressive rendering only if the map still visibly opens with all municipalities without misleading the user.",
+    "Retain keyboard-accessible municipality search as an alternative to map clicking.",
+    "Make failures explicit and recoverable; never leave an indefinite loading screen.",
+    "Keep changes maintainable in the generator and publication workflow, not only in generated index.html."
+  ],
+  "required_tests": {
+    "data_integrity": [
+      "atlas_data.json contains exactly 5,571 valid municipality records after exclusions.",
+      "Every municipal code has a matching geometry and every geometry maps to a valid municipal code.",
+      "Required columns and numeric fields are validated before rendering."
+    ],
+    "interaction": [
+      "Use browser automation to perform actual pointer clicks near the representative point of at least 30 municipalities across all Brazilian biomes.",
+      "For every tested click, assert that the opened scorecard IBGE code equals the clicked polygon's code.",
+      "Test clicks after pan, zoom, filter, map-layer change, and returning from a scorecard.",
+      "Repeat the click tests with touch events and a mobile viewport; distinguish taps from pan and pinch gestures.",
+      "Verify municipality search, state view, biome view, comparison, and market navigation."
+    ],
+    "performance": [
+      "Test an uncached production-like load on a mid-range desktop and emulated mid-range mobile device.",
+      "Run mobile profiles with 4x CPU slowdown, constrained memory where supported, Fast 3G, and Slow 4G network throttling.",
+      "Report transferred bytes, DOMContentLoaded, first usable map, total blocking time, longest main-thread task, and peak JavaScript heap.",
+      "Run at least 50 simultaneous static-site visits and report errors plus p50, p95, and maximum latency.",
+      "Keep the interface responsive for at least 60 seconds of repeated pan, zoom, filters, and municipality clicks.",
+      "Confirm there are no duplicate requests for the large JSON assets."
+    ],
+    "responsive_accessibility": [
+      "Test 320, 360, 390, 412, 768, 1024, 1440, and 1920 pixel viewports.",
+      "Assert document.scrollWidth is not greater than document.documentElement.clientWidth.",
+      "Test portrait and landscape orientation at representative phone and tablet sizes.",
+      "Test opening and closing the on-screen keyboard while using municipality search and comparison inputs.",
+      "Verify that sticky headers, bottom navigation, dialogs, tooltips, menus, and scorecard actions respect safe-area insets.",
+      "Check touch targets of at least 44 by 44 CSS pixels, visible focus, keyboard navigation, reduced motion, labels, and color contrast."
+    ],
+    "regression": [
+      "Capture screenshots of the map, one municipal scorecard, Compare, Markets, and mobile navigation.",
+      "Fail the build on uncaught JavaScript errors, unhandled promise rejections, missing assets, indefinite loading, or Portuguese interface text."
+    ]
+  },
+  "acceptance_targets": {
+    "municipality_click_accuracy": "100% for the automated sample",
+    "uncaught_javascript_errors": 0,
+    "missing_geometry_records": 0,
+    "horizontal_overflow_viewports": 0,
+    "duplicate_large_asset_requests": 0,
+    "simultaneous_visit_http_errors": 0,
+    "maximum_single_main_thread_task_ms": 200,
+    "target_first_usable_map_seconds_desktop": 4,
+    "target_first_usable_map_seconds_mobile": 7,
+    "mobile_touch_task_completion": "100% for Map, Search, Scorecard, Compare, Markets, and Back navigation",
+    "minimum_touch_target_css_px": 44
+  },
+  "deliverables": [
+    "A concise diagnosis supported by profiler evidence.",
+    "Implemented source changes, including updates to the generator when applicable.",
+    "Automated browser tests for real municipality clicks and core navigation.",
+    "Before-and-after performance measurements.",
+    "A list of remaining risks or limitations without claiming success for untested behavior.",
+    "A clean Git commit ready for GitHub Pages deployment."
+  ],
+  "working_rules": [
+    "Preserve unrelated user changes.",
+    "Do not commit generated or temporary diagnostic files unless required by the project.",
+    "Use no more than 50 percent of the host computer's aggregate processing capacity.",
+    "Do not state that the task is complete until real browser interactions have passed.",
+    "If an acceptance target cannot be met, explain the measured blocker and provide the safest fallback."
+  ],
+  "final_response_format": {
+    "sections": [
+      "Root causes",
+      "Changes implemented",
+      "Measured results",
+      "Automated interaction results",
+      "Remaining limitations",
+      "Commit and deployment URL"
+    ],
+    "style": "Concise, evidence-based, and explicit about what was actually tested."
+  }
+}

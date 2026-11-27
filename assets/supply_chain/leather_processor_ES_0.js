@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("leather_processor_ES_0",[{"id":"1cfe72e0f648871f4ce9","name":"Capixaba Couros Ltda","category":"leather_processor","municipality":"3200805","lat":-19.52283,"lon":-41.00237,"source":"Trase","place":"Baixo Guandu · ES","radar_verde_plant_id":null}]);

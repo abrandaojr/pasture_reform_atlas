@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("feedlot_ES_0",[{"id":"819e025601ea631026f8","name":"MLR Pecuária- Confinamento de Gado de leite e corte. @mlrpecuaria","category":"feedlot","municipality":"3204559","lat":-20.1352738,"lon":-40.8861209,"source":"Google Maps","place":"Santa Maria de Jetibá · ES","radar_verde_plant_id":null}]);

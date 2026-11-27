@@ -1,0 +1,34 @@
+{
+ "display_only": true,
+ "zoom": [
+  4,
+  9
+ ],
+ "definitions": "codes/export_municipal_source_maps.py",
+ "layers": {
+  "4": {
+   "tiles": 3462,
+   "bytes": 9706095
+  },
+  "2": {
+   "tiles": 2044,
+   "bytes": 27276789
+  },
+  "3": {
+   "tiles": 1999,
+   "bytes": 15887750
+  },
+  "8": {
+   "tiles": 2044,
+   "bytes": 25125093
+  },
+  "9": {
+   "tiles": 730,
+   "bytes": 1401665
+  },
+  "7": {
+   "tiles": 2227,
+   "bytes": 21959209
+  }
+ }
+}

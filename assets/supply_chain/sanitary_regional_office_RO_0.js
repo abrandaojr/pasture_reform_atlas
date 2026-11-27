@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("sanitary_regional_office_RO_0",[{"id":"agency_0x93cbeb23cfebf50f:0x2a3f767f775c8c8a","name":"IDARON - Regional de Jaru","category":"sanitary_regional_office","municipality":"1100114","lat":-10.4417113,"lon":-62.4717992,"source":"Google Maps · unidade e funcionamento não verificados","place":"Jaru · RO","radar_verde_plant_id":null}]);

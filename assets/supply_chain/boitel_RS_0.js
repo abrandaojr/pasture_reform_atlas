@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("boitel_RS_0",[{"id":"73a47da0cc9a4f0eea32","name":"BOITEL NOSSA SENHORA APARECIDA","category":"boitel","municipality":"4321329","lat":-27.4029664,"lon":-53.4946043,"source":"Google Maps","place":"Taquaruçu do Sul · RS","radar_verde_plant_id":null}]);

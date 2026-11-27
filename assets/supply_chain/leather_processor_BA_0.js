@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("leather_processor_BA_0",[{"id":"ceae107b4a0954793543","name":"Gjm Indústria De Couros Eireli-Me","category":"leather_processor","municipality":"2900702","lat":-12.13397,"lon":-38.42112,"source":"Trase","place":"Alagoinhas · BA","radar_verde_plant_id":null}]);

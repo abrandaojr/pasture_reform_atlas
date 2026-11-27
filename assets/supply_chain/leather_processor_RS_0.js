@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("leather_processor_RS_0",[{"id":"4296ef65190249c8bb40","name":"Cbr Indústria E Comércio De Couros Ltda","category":"leather_processor","municipality":"4315800","lat":-29.28689,"lon":-51.87652,"source":"Trase","place":"Roca Sales · RS","radar_verde_plant_id":null}]);

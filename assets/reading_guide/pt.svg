@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="524.454803pt" height="311.083293pt" viewBox="0 0 524.454803 311.083293" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-12T10:19:24.062494</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 311.083293 
+L 524.454803 311.083293 
+L 524.454803 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 12.819814 67.822248 
+L 511.634989 67.822248 
+L 511.634989 83.943651 
+L 12.819814 83.943651 
+z
+" clip-path="url(#pa00de00dff)" style="fill: #dce4df"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 12.819814 67.822248 
+L 333.607684 67.822248 
+L 333.607684 83.943651 
+L 12.819814 83.943651 
+z
+" clip-path="url(#pa00de00dff)" style="fill: #b47b22"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 12.819814 199.638425 
+L 511.634989 199.638425 
+L 511.634989 215.759828 
+L 12.819814 215.759828 
+z
+" clip-path="url(#pa00de00dff)" style="fill: #dce4df"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 12.819814 199.638425 
+L 113.642574 199.638425 
+L 113.642574 215.759828 
+L 12.819814 215.759828 
+z
+" clip-path="url(#pa00de00dff)" style="fill: #287e9a"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 8.060702px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="12.819814" y="12.998318" transform="rotate(-0 12.819814 12.998318)">Brasil · dados reais do Atlas</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 8.53486px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="12.819814" y="30.464175" transform="rotate(-0 12.819814 30.464175)">A</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 10.905655px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="26.570422" y="29.768448" transform="rotate(-0 26.570422 29.768448)">Quanto pasto merece uma avaliação?</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 9.009019px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="12.819814" y="53.043909" transform="rotate(-0 12.819814 53.043909)">165,6 milhões de hectares de pasto · 2025</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 13.27645px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="12.819814" y="103.092447" transform="rotate(-0 12.819814 103.092447)">106,5 milhões ha</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9.483178px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="12.819814" y="119.771357" transform="rotate(-0 12.819814 119.771357)">Cerca de 64 de cada 100 ha têm vigor baixo ou médio.</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 8.060702px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="12.819814" y="153.353922" transform="rotate(-0 12.819814 153.353922)">O satélite ajuda a localizar pasto para avaliar em campo. Ele não informa o custo da recuperação.</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 8.53486px; font-family: 'Arial'; text-anchor: start; fill: #222222" x="12.819814" y="175.082643" transform="rotate(-0 12.819814 175.082643)">B</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 10.905655px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="26.570422" y="174.386916" transform="rotate(-0 26.570422 174.386916)">Quantos estabelecimentos recebiam orientação?</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 13.27645px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="12.819814" y="235.382784" transform="rotate(-0 12.819814 235.382784)">Cerca de 20 de cada 100</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 8.53486px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="12.819814" y="254.22108" transform="rotate(-0 12.819814 254.22108)">recebiam orientação técnica em 2017. O dado inclui todos os estabelecimentos agropecuários, não só</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 8.53486px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="12.819814" y="265.738308" transform="rotate(-0 12.819814 265.738308)">os de pecuária.</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 8.53486px; font-family: 'Arial'; text-anchor: start; fill: #193d32" x="12.819814" y="296.416389" transform="rotate(-0 12.819814 296.416389)">Confira o apoio disponível hoje antes de planejar a recuperação.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pa00de00dff">
+   <rect x="1.44" y="1.44" width="521.574803" height="308.203293"/>
+  </clipPath>
+ </defs>
+</svg>

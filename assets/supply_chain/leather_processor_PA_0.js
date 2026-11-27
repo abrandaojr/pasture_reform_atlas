@@ -1,0 +1,1 @@
+window.ATLAS_SUPPLY_CHUNK("leather_processor_PA_0",[{"id":"c1069b1f371e473317d0","name":"Durlicouros Ind E Com De Couros, Exp E Importaçãoltda","category":"leather_processor","municipality":"1508407","lat":-7.10876,"lon":-49.94453,"source":"Trase","place":"Xinguara · PA","radar_verde_plant_id":null}]);
