@@ -5,7 +5,7 @@
 <style>
 :root{--g:#00843E;--deep:#003A34;--acc:#94A625;--tint:#F4F6E9;--bg:#F5F6F0;--ink:#161616;--ink2:#374151;--mut:#6B7280;--line:#E5E7EB;--neg:#9B2C2C;--fs-xs:13px;--fs-s:15px;--fs-m:17px;--fs-l:21px;--fs-xl:27px;--fs-xxl:44px}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{margin:0;font:var(--fs-m)/1.55 Arial,Helvetica,sans-serif;color:var(--ink);background:#fff}
+body{margin:0;font:var(--fs-m)/1.55 'Nunito Sans',Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;color:var(--ink);background:#fff}
 a{color:#00703A}a:hover{color:var(--deep)}
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,3vw,40px)}
 header.top{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
@@ -47,7 +47,7 @@ p{max-width:72ch}
 .seg button[aria-pressed=true]{background:var(--deep);color:#fff}
 .chk{font-size:var(--fs-s);color:var(--ink2);display:flex;gap:8px;align-items:center;min-height:40px}
 .chk input{width:18px;height:18px;accent-color:var(--deep)}
-svg.forest{display:block;font-family:Arial,sans-serif;max-width:100%}
+svg.forest{display:block;font-family:'Nunito Sans',Arial,sans-serif;max-width:100%}
 .forest text{fill:var(--ink2);font-size:13px}.forest .lab{fill:var(--ink);font-size:14px}.forest .lab.p{font-weight:700}
 .forest .val{font-size:13px;fill:var(--ink2)}
 figcaption,.cap{font-size:var(--fs-s);color:var(--ink2);margin-top:10px;max-width:none}
@@ -120,9 +120,19 @@ footer{padding:20px 0;margin-top:24px}footer p{font-size:14px;margin:8px 0}
 @media(max-width:600px){.hero{padding:20px 0}h1{font-size:27px}.hero .lede{font-size:16px}.part{padding-top:24px}.step-picker{display:grid;grid-template-columns:1fr 1fr}.step-picker button{font-size:14px;padding:8px}.step-picker .ico{width:20px;height:20px}.teaching-figure{grid-template-columns:112px minmax(0,1fr)}.teaching-figure figcaption{font-size:14px}.teaching-figure .credit{font-size:13px}.top .wrap{height:auto;min-height:60px;flex-wrap:wrap;gap:0;padding-top:8px;padding-bottom:8px}.top nav{width:100%;margin:0}.top nav a{font-size:14px;padding:8px}}
 @media print{[hidden]{display:block!important}.step-picker,.load-more{display:none}}
 
+@font-face{font-family:'Nunito Sans';font-weight:400;font-display:swap;src:url(../assets/brand/nunito_sans_400.woff2) format('woff2')}
+@font-face{font-family:'Nunito Sans';font-weight:500 600;font-display:swap;src:url(../assets/brand/nunito_sans_500.woff2) format('woff2')}
+@font-face{font-family:'Nunito Sans';font-weight:700 900;font-display:swap;src:url(../assets/brand/nunito_sans_700.woff2) format('woff2')}
+:root{--fs-xs:13px;--fs-s:14px;--fs-m:16px;--fs-l:20px;--fs-xl:24px;--fs-xxl:40px}
+body{background:#F5F6F0}.brand img{display:block;height:32px;width:auto}
+h1,h2,h3{text-wrap:balance}h1{font-size:32px;letter-spacing:-.025em}h2{font-size:24px;letter-spacing:-.015em}.step h3{font-size:20px}.hero .lede{font-size:16px}.answer{font-size:18px}
+.card,.kpi,.stat,.gap,.howto div,.crop{border-radius:16px}.step{border-radius:24px;margin-bottom:16px}.prat,.scope{border-radius:10px}
+.step-picker button,.load-more{border-radius:999px;font-size:14px}.forest text,.forest .val{font-size:13px}.forest .lab{font-size:14px}
+.card,.step,.kpi{box-shadow:0 1px 2px rgba(0,40,30,.05),0 4px 12px rgba(0,40,30,.06);border-color:rgba(0,58,52,.08)}
+@media(max-width:600px){h1{font-size:28px}.brand img{height:26px}}
 @media print{header.top,.seg,.chk,.filters{display:none}.hero{background:#fff;color:var(--ink)}.hero .lede,.chain a{color:var(--ink)}details{display:block}details>*{display:block}}
 </style></head><body>
-<header class="top"><div class="wrap"><a class="brand" href="#inicio">Imazon</a><nav aria-label="Seções">
+<header class="top"><div class="wrap"><a class="brand" href="#inicio"><img src="../assets/imazon_logo_d3341e207f39ce3c.png" alt="Imazon" width="104" height="32"></a><nav aria-label="Seções">
 <a href="#restauracao">A restauração funciona?</a><a href="#medir-melhora">Como medir</a><a href="#lacunas">O que falta saber</a><a href="#fontes">As fontes</a></nav></div></header>
 <main id="inicio">
 <section class="hero"><div class="wrap">

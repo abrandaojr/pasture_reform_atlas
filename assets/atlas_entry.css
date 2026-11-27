@@ -1808,3 +1808,13 @@ hr{border:0;border-top:1px solid var(--ds-line)}
 @media(max-width:899px){.cm-grid,#ep-map .cm-grid{grid-template-columns:minmax(0,1fr)}.cm-side{min-width:0}#ep-map .cm-map,.cm-map{margin-left:0;margin-right:0}}
 .reading-card.map-hero{content-visibility:visible}main .cm-seg button{font-size:13px!important}
 @media print{*{content-visibility:visible!important}.question-group{opacity:1!important;transform:none!important}}
+/* Space and finish pass, 27 November 2026 */
+body{background:linear-gradient(180deg,#eaf1e8 0,#f5f6f0 420px) no-repeat,#f5f6f0}
+#summary-content .question-group>.reading-card{box-shadow:none!important;border:0!important;background:transparent!important;padding:0!important;margin-top:0!important;margin-left:0!important;margin-right:0!important}
+body[data-page=sobre] #reading-controls{background:none;box-shadow:none;padding:0;margin-bottom:0;justify-content:flex-end;min-height:0}
+@media(min-width:900px){body[data-page=sobre] #reading-controls{position:relative;height:0;overflow:visible;z-index:2}body[data-page=sobre] #view-controls{position:absolute;right:0;top:8px}body[data-page=sobre] #summary h1{max-width:calc(100% - 220px)}}
+main>footer,body>footer{margin:16px auto 24px;padding-top:12px;padding-bottom:0}
+main h1{margin-top:12px;margin-bottom:16px}
+.question-group{margin-top:16px!important}.question-group>h2.main-question{margin:0 0 12px!important}.question-group>.sub-chips{margin-bottom:16px!important}.question-group{display:flex;flex-direction:column;gap:0!important}
+main .component-chapter{margin-top:24px!important;margin-bottom:0!important}main .profile-overview+.component-chapter{margin-top:24px!important}
+@media(min-width:700px){main .component-chapter .cf-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
