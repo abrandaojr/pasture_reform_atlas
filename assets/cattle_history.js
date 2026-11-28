@@ -9,12 +9,12 @@ function periodPartial(p){return p.months?.length<12||/parcial|partial|lacuna|ga
 function chart(points,{max,compact=false,partners=0}={}){
  const mobile=innerWidth<650,W=compact||mobile?420:900,H=compact?235:330,L=72,R=24,T=35,B=48,years=points.map(p=>p.year),first=Math.min(...years),last=Math.max(...years),ceiling=max||Math.max(1,...points.flatMap(p=>p.v?[p.v[0],p.v[1]]:[])),unit=Math.pow(10,Math.floor(Math.log10(ceiling))),yMax=Math.ceil(ceiling/unit)*unit,x=y=>first===last?(W+L-R)/2:L+(y-first)*(W-L-R)/(last-first),y=v=>H-B-v*(H-T-B)/yMax;
  let out='<svg viewBox="0 0 '+W+' '+H+'" role="group" aria-label="'+t('Cabeças declaradas por ano','Declared cattle heads by year')+'" data-ymax="'+yMax+'"><text x="'+L+'" y="18">'+t('Cabeças declaradas','Declared cattle heads')+'</text>';
- for(let i=0;i<=4;i++){const yy=y(yMax*i/4);out+='<path d="M'+L+' '+yy+'H'+(W-R)+'" stroke="#e0e7e2"/><text x="'+(L-8)+'" y="'+(yy+5)+'" text-anchor="end">'+number(yMax*i/4)+'</text>';}
+ for(let i=0;i<=4;i++){const yy=y(yMax*i/4);out+='<path d="M'+L+' '+yy+'H'+(W-R)+'" stroke="#e0e7e3"/><text x="'+(L-8)+'" y="'+(yy+5)+'" text-anchor="end">'+number(yMax*i/4)+'</text>';}
  const tickYears=Array.from({length:last-first+1},(_,i)=>first+i);
  for(const yr of tickYears){const p=points.find(p=>p.year===yr);out+='<text x="'+x(yr)+'" y="'+(H-B+25)+'" text-anchor="middle">'+yr+(p?.partial?'*':'')+'</text>';}
  out+='<text x="'+(W-R)+'" y="'+(H-3)+'" text-anchor="end">'+t('Ano','Year')+'</text>';
  for(const series of [0,1,...(partners?[partners===5?2:4,partners===5?3:5]:[])]){
-  const incoming=series%2===0,color=incoming?'#287e9a':'#ae7420',sub=series>1;let prior=null;
+  const incoming=series%2===0,color=incoming?'#28769a':'#ae6220',sub=series>1;let prior=null;
   for(const p of points){if(!p.v){prior=null;continue;}const value=p.v[series],xx=x(p.year),yy=y(value);if(prior&&p.year===prior.year+1)out+='<path d="M'+x(prior.year)+' '+y(prior.v[series])+'L'+xx+' '+yy+'" stroke="'+color+'" stroke-width="'+(sub?2:2.8)+'" '+(sub?'stroke-dasharray="7 4"':'')+' fill="none"/>';
    const label=p.year+' · '+(incoming?t('Entradas','Inflows'):t('Saídas','Outflows'))+(sub?' · Top '+partners:'')+' · '+number(value)+t(' cabeças',' head')+(sub?' · '+share(value,p.v[incoming?0:1]):'')+' · '+p.period;
    out+='<circle tabindex="0" role="button" aria-label="'+esc(label)+'" data-history-point="'+esc(label)+'" data-year="'+p.year+'" data-series="'+series+'" data-value="'+value+'" cx="'+xx+'" cy="'+yy+'" r="'+(sub?3.8:5)+'" fill="'+(p.partial?'white':color)+'" stroke="'+color+'" stroke-width="2"><title>'+esc(label)+'</title></circle>';prior=p;
